@@ -14,7 +14,7 @@ const (
 	proxySinglePath = proxyBasePath + "/%s"
 )
 
-// ProxyPolicy represents a Proxy policy. Proxy policies provide access to DB
+// ProxyPolicy represents a proxy policy. Proxy policies provide access to DB
 // and Web targets.
 type ProxyPolicy struct {
 	// ID of the policy. Populated by the server

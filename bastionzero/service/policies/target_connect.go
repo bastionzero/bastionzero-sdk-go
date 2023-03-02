@@ -61,7 +61,7 @@ type TargetConnectPolicy struct {
 // ListTargetConnectPolicies lists all target connect policies
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#get-/api/v2/policies/target-connect
-func (s *PoliciesServiceOp) ListTargetConnectPolicies(ctx context.Context, opts *ListPolicyOptions) ([]TargetConnectPolicy, *http.Response, error) {
+func (s *PoliciesService) ListTargetConnectPolicies(ctx context.Context, opts *ListPolicyOptions) ([]TargetConnectPolicy, *http.Response, error) {
 	u := targetConnectBasePath
 	u, err := client.AddOptions(u, opts)
 	if err != nil {
@@ -85,7 +85,7 @@ func (s *PoliciesServiceOp) ListTargetConnectPolicies(ctx context.Context, opts 
 // CreateTargetConnectPolicy creates a new target connect policy
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#post-/api/v2/policies/target-connect
-func (s *PoliciesServiceOp) CreateTargetConnectPolicy(ctx context.Context, policy *TargetConnectPolicy) (*TargetConnectPolicy, *http.Response, error) {
+func (s *PoliciesService) CreateTargetConnectPolicy(ctx context.Context, policy *TargetConnectPolicy) (*TargetConnectPolicy, *http.Response, error) {
 	u := targetConnectBasePath
 	req, err := s.Client.NewRequest(ctx, http.MethodPost, u, policy)
 	if err != nil {
@@ -104,7 +104,7 @@ func (s *PoliciesServiceOp) CreateTargetConnectPolicy(ctx context.Context, polic
 // GetTargetConnectPolicy fetches the specified target connect policy
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#get-/api/v2/policies/target-connect/-id-
-func (s *PoliciesServiceOp) GetTargetConnectPolicy(ctx context.Context, policyID string) (*TargetConnectPolicy, *http.Response, error) {
+func (s *PoliciesService) GetTargetConnectPolicy(ctx context.Context, policyID string) (*TargetConnectPolicy, *http.Response, error) {
 	u := fmt.Sprintf(targetConnectSinglePath, policyID)
 	req, err := s.Client.NewRequest(ctx, http.MethodGet, u, nil)
 	if err != nil {
@@ -123,7 +123,7 @@ func (s *PoliciesServiceOp) GetTargetConnectPolicy(ctx context.Context, policyID
 // DeleteTargetConnectPolicy deletes the specified target connect policy
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#delete-/api/v2/policies/target-connect/-id-
-func (s *PoliciesServiceOp) DeleteTargetConnectPolicy(ctx context.Context, policyID string) (*http.Response, error) {
+func (s *PoliciesService) DeleteTargetConnectPolicy(ctx context.Context, policyID string) (*http.Response, error) {
 	u := fmt.Sprintf(targetConnectSinglePath, policyID)
 	req, err := s.Client.NewRequest(ctx, http.MethodDelete, u, nil)
 	if err != nil {
@@ -142,7 +142,7 @@ func (s *PoliciesServiceOp) DeleteTargetConnectPolicy(ctx context.Context, polic
 // fields are mutable except for policy.TimeExpires.
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#patch-/api/v2/policies/target-connect/-id-
-func (s *PoliciesServiceOp) ModifyTargetConnectPolicy(ctx context.Context, policyID string, policy *TargetConnectPolicy) (*TargetConnectPolicy, *http.Response, error) {
+func (s *PoliciesService) ModifyTargetConnectPolicy(ctx context.Context, policyID string, policy *TargetConnectPolicy) (*TargetConnectPolicy, *http.Response, error) {
 	u := fmt.Sprintf(targetConnectSinglePath, policyID)
 	req, err := s.Client.NewRequest(ctx, http.MethodPatch, u, policy)
 	if err != nil {

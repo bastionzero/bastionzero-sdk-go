@@ -79,7 +79,8 @@ type Client struct {
 	common client.Service // Reuse a single struct instead of allocating one for each service on the heap.
 
 	// Services used for talking to different parts of the BastionZero API.
-	Policies *policies.PoliciesServiceOp
+
+	Policies *policies.PoliciesService
 }
 
 // NewClient returns a new BastionZero API client, using the given http.Client
@@ -99,7 +100,7 @@ func NewClient(httpClient *http.Client) *Client {
 		headers:   make(map[string]string),
 	}
 	c.common.Client = c
-	c.Policies = (*policies.PoliciesServiceOp)(&c.common)
+	c.Policies = (*policies.PoliciesService)(&c.common)
 
 	return c
 }

@@ -14,11 +14,6 @@ const (
 	targetConnectSinglePath = targetConnectBasePath + "/%s"
 )
 
-// TargetUser refers to the Unix user that a target connect policy applies to
-type TargetUser struct {
-	Username string `json:"userName"`
-}
-
 // Verb refers to an action allowed by a target connect policy
 type Verb struct {
 	Type VerbType `json:"type"`
@@ -42,7 +37,7 @@ type TargetConnectPolicy struct {
 	// ID of the policy. Populated by the server
 	ID string `json:"id,omitempty"`
 
-	// User-initalized fields
+	// User-initialized fields
 
 	TimeExpires *service.Timestamp `json:"timeExpires,omitempty"`
 
@@ -54,11 +49,11 @@ type TargetConnectPolicy struct {
 	Groups       *[]PolicyGroup       `json:"groups,omitempty"`
 	Environments *[]PolicyEnvironment `json:"environments,omitempty"`
 	Targets      *[]PolicyTarget      `json:"targets,omitempty"`
-	TargetUsers  *[]TargetUser        `json:"targetUsers,omitempty"`
+	TargetUsers  *[]PolicyTargetUser  `json:"targetUsers,omitempty"`
 	Verbs        *[]Verb              `json:"verbs,omitempty"`
 }
 
-// ListTargetConnectPolicies lists all target connect policies
+// ListTargetConnectPolicies lists all target connect policies.
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#get-/api/v2/policies/target-connect
 func (s *PoliciesService) ListTargetConnectPolicies(ctx context.Context, opts *ListPolicyOptions) ([]TargetConnectPolicy, *http.Response, error) {
@@ -82,7 +77,7 @@ func (s *PoliciesService) ListTargetConnectPolicies(ctx context.Context, opts *L
 	return *policyList, resp, nil
 }
 
-// CreateTargetConnectPolicy creates a new target connect policy
+// CreateTargetConnectPolicy creates a new target connect policy.
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#post-/api/v2/policies/target-connect
 func (s *PoliciesService) CreateTargetConnectPolicy(ctx context.Context, policy *TargetConnectPolicy) (*TargetConnectPolicy, *http.Response, error) {
@@ -101,7 +96,7 @@ func (s *PoliciesService) CreateTargetConnectPolicy(ctx context.Context, policy 
 	return p, resp, nil
 }
 
-// GetTargetConnectPolicy fetches the specified target connect policy
+// GetTargetConnectPolicy fetches the specified target connect policy.
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#get-/api/v2/policies/target-connect/-id-
 func (s *PoliciesService) GetTargetConnectPolicy(ctx context.Context, policyID string) (*TargetConnectPolicy, *http.Response, error) {
@@ -120,7 +115,7 @@ func (s *PoliciesService) GetTargetConnectPolicy(ctx context.Context, policyID s
 	return policy, resp, nil
 }
 
-// DeleteTargetConnectPolicy deletes the specified target connect policy
+// DeleteTargetConnectPolicy deletes the specified target connect policy.
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#delete-/api/v2/policies/target-connect/-id-
 func (s *PoliciesService) DeleteTargetConnectPolicy(ctx context.Context, policyID string) (*http.Response, error) {

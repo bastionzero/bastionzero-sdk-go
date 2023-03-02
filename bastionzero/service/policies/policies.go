@@ -39,6 +39,13 @@ type PolicyEnvironment struct {
 	ID string `json:"id"`
 }
 
+// PolicyTargetUser refers to the user that a policy applies to. When used in a
+// target connect policy, it refers to a Unix username. When used in a proxy
+// policy, it refers to a database user.
+type PolicyTargetUser struct {
+	Username string `json:"userName"`
+}
+
 // PolicyType represents the type of policy
 type PolicyType string
 

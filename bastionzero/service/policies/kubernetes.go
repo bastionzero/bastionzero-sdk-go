@@ -38,7 +38,7 @@ type KubernetesPolicy struct {
 	// ID of the policy. Populated by the server
 	ID string `json:"id,omitempty"`
 
-	// User-initalized fields
+	// User-initialized fields
 
 	TimeExpires *service.Timestamp `json:"timeExpires,omitempty"`
 

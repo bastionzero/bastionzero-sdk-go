@@ -24,8 +24,8 @@ type EnvironmentsService client.Service
 type CreateEnvironmentRequest struct {
 	Name        *string `json:"name,omitempty"`
 	Description string  `json:"description"`
-	// The amount of time (in hours) to wait until offline targets are
-	// automatically removed by BastionZero.
+	// OfflineCleanupTimeoutHours is the amount of time (in hours) to wait until
+	// offline targets are automatically removed by BastionZero.
 	OfflineCleanupTimeoutHours *uint `json:"offlineCleanupTimeoutHours,omitempty"`
 }
 
@@ -38,8 +38,8 @@ type CreateEnvironmentResponse struct {
 // ModifyEnvironmentRequest is used to modify an environment
 type ModifyEnvironmentRequest struct {
 	Description *string `json:"description,omitempty"`
-	// The amount of time (in hours) to wait until offline targets are
-	// automatically removed by BastionZero.
+	// OfflineCleanupTimeoutHours is the amount of time (in hours) to wait until
+	// offline targets are automatically removed by BastionZero.
 	OfflineCleanupTimeoutHours *uint `json:"offlineCleanupTimeoutHours,omitempty"`
 }
 

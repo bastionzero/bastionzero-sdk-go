@@ -12,6 +12,7 @@ import (
 	"net/url"
 	"strings"
 
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/environments"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
@@ -80,7 +81,8 @@ type Client struct {
 
 	// Services used for talking to different parts of the BastionZero API.
 
-	Policies *policies.PoliciesService
+	Environments *environments.EnvironmentsService
+	Policies     *policies.PoliciesService
 }
 
 // NewClient returns a new BastionZero API client, using the given http.Client
@@ -100,6 +102,7 @@ func NewClient(httpClient *http.Client) *Client {
 		headers:   make(map[string]string),
 	}
 	c.common.Client = c
+	c.Environments = (*environments.EnvironmentsService)(&c.common)
 	c.Policies = (*policies.PoliciesService)(&c.common)
 
 	return c

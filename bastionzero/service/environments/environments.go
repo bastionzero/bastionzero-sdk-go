@@ -22,11 +22,11 @@ type EnvironmentsService client.Service
 
 // CreateEnvironmentRequest is used to create a new environment
 type CreateEnvironmentRequest struct {
-	Name        *string `json:"name,omitempty"`
-	Description string  `json:"description"`
+	Name        string  `json:"name"`
+	Description *string `json:"description,omitempty"`
 	// OfflineCleanupTimeoutHours is the amount of time (in hours) to wait until
 	// offline targets are automatically removed by BastionZero.
-	OfflineCleanupTimeoutHours *uint `json:"offlineCleanupTimeoutHours,omitempty"`
+	OfflineCleanupTimeoutHours uint `json:"offlineCleanupTimeoutHours"`
 }
 
 // CreateEnvironmentResponse is the response returned if an environment is

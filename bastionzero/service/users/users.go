@@ -22,13 +22,13 @@ type UsersService client.Service
 
 // User is a BastionZero user belonging to an organization
 type User struct {
-	ID             string            `json:"id"`
-	OrganizationID string            `json:"organizationId"`
-	FullName       string            `json:"fullName"`
-	Email          string            `json:"email"`
-	IsAdmin        bool              `json:"isAdmin"`
-	TimeCreated    service.Timestamp `json:"timeCreated"`
-	LastLogin      service.Timestamp `json:"lastLogin"`
+	ID             string             `json:"id"`
+	OrganizationID string             `json:"organizationId"`
+	FullName       string             `json:"fullName"`
+	Email          string             `json:"email"`
+	IsAdmin        bool               `json:"isAdmin"`
+	TimeCreated    service.Timestamp  `json:"timeCreated"`
+	LastLogin      *service.Timestamp `json:"lastLogin,omitempty"`
 }
 
 // ListUsers lists all users in your organization.

@@ -226,6 +226,12 @@ func checkResponse(r *http.Response) error {
 	return errorResponse
 }
 
+// Host returns the BastionZero server URL this client is configured to issue
+// API requests against.
+func (c *Client) Host() string {
+	return c.baseURL.String()
+}
+
 type clientOpt func(*Client) error
 
 // ClientOpt are options for New.

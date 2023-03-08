@@ -75,3 +75,26 @@ type ListPolicyOptions struct {
 	// policies to only those that contain the provided group(s).
 	Groups string `url:"groups,omitempty"`
 }
+
+// PolicyInterface lets you work with common policy attributes from any kind of
+// BastionZero policy
+type PolicyInterface interface {
+	// GetID returns the policy's unique ID.
+	GetID() string
+	// GetTimeExpires returns the policy's expiration if set. Otherwise, returns
+	// nil.
+	GetTimeExpires() *service.Timestamp
+	// GetName returns the the policy's name.
+	GetName() string
+	// GetDescription returns the policy's description if set. Otherwise,
+	// returns an empty string.
+	GetDescription() string
+	// GetSubjects returns the policy's list of subjects that a policy applies
+	// to if set. Otherwise, returns an empty slice.
+	GetSubjects() []PolicySubject
+	// GetGroups returns the policy's list of groups that a policy applies to if
+	// set. Otherwise, returns an empty slice.
+	GetGroups() []PolicyGroup
+	// GetPolicyType returns the policy's type.
+	GetPolicyType() PolicyType
+}

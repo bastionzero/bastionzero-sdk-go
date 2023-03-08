@@ -133,3 +133,33 @@ func (s *PoliciesService) ModifySessionRecordingPolicy(ctx context.Context, poli
 
 	return p, resp, nil
 }
+
+// Ensure SessionRecordingPolicy implementation satisfies the expected
+// interfaces.
+var (
+	// SessionRecordingPolicy implements PolicyInterface
+	_ PolicyInterface = &SessionRecordingPolicy{}
+)
+
+func (p *SessionRecordingPolicy) GetID() string                      { return p.ID }
+func (p *SessionRecordingPolicy) GetTimeExpires() *service.Timestamp { return p.TimeExpires }
+func (p *SessionRecordingPolicy) GetName() string                    { return p.Name }
+func (p *SessionRecordingPolicy) GetDescription() string {
+	if p.Description == nil {
+		return ""
+	}
+	return *p.Description
+}
+func (p *SessionRecordingPolicy) GetSubjects() []PolicySubject {
+	if p.Subjects == nil {
+		return []PolicySubject{}
+	}
+	return *p.Subjects
+}
+func (p *SessionRecordingPolicy) GetGroups() []PolicyGroup {
+	if p.Groups == nil {
+		return []PolicyGroup{}
+	}
+	return *p.Groups
+}
+func (p *SessionRecordingPolicy) GetPolicyType() PolicyType { return SessionRecording }

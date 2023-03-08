@@ -134,3 +134,32 @@ func (s *PoliciesService) ModifyProxyPolicy(ctx context.Context, policyID string
 
 	return p, resp, nil
 }
+
+// Ensure ProxyPolicy implementation satisfies the expected interfaces.
+var (
+	// ProxyPolicy implements PolicyInterface
+	_ PolicyInterface = &ProxyPolicy{}
+)
+
+func (p *ProxyPolicy) GetID() string                      { return p.ID }
+func (p *ProxyPolicy) GetTimeExpires() *service.Timestamp { return p.TimeExpires }
+func (p *ProxyPolicy) GetName() string                    { return p.Name }
+func (p *ProxyPolicy) GetDescription() string {
+	if p.Description == nil {
+		return ""
+	}
+	return *p.Description
+}
+func (p *ProxyPolicy) GetSubjects() []PolicySubject {
+	if p.Subjects == nil {
+		return []PolicySubject{}
+	}
+	return *p.Subjects
+}
+func (p *ProxyPolicy) GetGroups() []PolicyGroup {
+	if p.Groups == nil {
+		return []PolicyGroup{}
+	}
+	return *p.Groups
+}
+func (p *ProxyPolicy) GetPolicyType() PolicyType { return Proxy }

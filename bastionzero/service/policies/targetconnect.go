@@ -152,3 +152,32 @@ func (s *PoliciesService) ModifyTargetConnectPolicy(ctx context.Context, policyI
 
 	return p, resp, nil
 }
+
+// Ensure TargetConnectPolicy implementation satisfies the expected interfaces.
+var (
+	// TargetConnectPolicy implements PolicyInterface
+	_ PolicyInterface = &TargetConnectPolicy{}
+)
+
+func (p *TargetConnectPolicy) GetID() string                      { return p.ID }
+func (p *TargetConnectPolicy) GetTimeExpires() *service.Timestamp { return p.TimeExpires }
+func (p *TargetConnectPolicy) GetName() string                    { return p.Name }
+func (p *TargetConnectPolicy) GetDescription() string {
+	if p.Description == nil {
+		return ""
+	}
+	return *p.Description
+}
+func (p *TargetConnectPolicy) GetSubjects() []PolicySubject {
+	if p.Subjects == nil {
+		return []PolicySubject{}
+	}
+	return *p.Subjects
+}
+func (p *TargetConnectPolicy) GetGroups() []PolicyGroup {
+	if p.Groups == nil {
+		return []PolicyGroup{}
+	}
+	return *p.Groups
+}
+func (p *TargetConnectPolicy) GetPolicyType() PolicyType { return TargetConnect }

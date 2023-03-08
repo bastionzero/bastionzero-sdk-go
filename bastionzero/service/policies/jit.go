@@ -148,3 +148,32 @@ func (s *PoliciesService) ModifyJITPolicy(ctx context.Context, policyID string, 
 
 	return p, resp, nil
 }
+
+// Ensure JITPolicy implementation satisfies the expected interfaces.
+var (
+	// JITPolicy implements PolicyInterface
+	_ PolicyInterface = &JITPolicy{}
+)
+
+func (p *JITPolicy) GetID() string                      { return p.ID }
+func (p *JITPolicy) GetTimeExpires() *service.Timestamp { return p.TimeExpires }
+func (p *JITPolicy) GetName() string                    { return p.Name }
+func (p *JITPolicy) GetDescription() string {
+	if p.Description == nil {
+		return ""
+	}
+	return *p.Description
+}
+func (p *JITPolicy) GetSubjects() []PolicySubject {
+	if p.Subjects == nil {
+		return []PolicySubject{}
+	}
+	return *p.Subjects
+}
+func (p *JITPolicy) GetGroups() []PolicyGroup {
+	if p.Groups == nil {
+		return []PolicyGroup{}
+	}
+	return *p.Groups
+}
+func (p *JITPolicy) GetPolicyType() PolicyType { return JustInTime }

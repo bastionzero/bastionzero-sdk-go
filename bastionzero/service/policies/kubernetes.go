@@ -153,3 +153,32 @@ func (s *PoliciesService) ModifyKubernetesPolicy(ctx context.Context, policyID s
 
 	return p, resp, nil
 }
+
+// Ensure KubernetesPolicy implementation satisfies the expected interfaces.
+var (
+	// KubernetesPolicy implements PolicyInterface
+	_ PolicyInterface = &KubernetesPolicy{}
+)
+
+func (p *KubernetesPolicy) GetID() string                      { return p.ID }
+func (p *KubernetesPolicy) GetTimeExpires() *service.Timestamp { return p.TimeExpires }
+func (p *KubernetesPolicy) GetName() string                    { return p.Name }
+func (p *KubernetesPolicy) GetDescription() string {
+	if p.Description == nil {
+		return ""
+	}
+	return *p.Description
+}
+func (p *KubernetesPolicy) GetSubjects() []PolicySubject {
+	if p.Subjects == nil {
+		return []PolicySubject{}
+	}
+	return *p.Subjects
+}
+func (p *KubernetesPolicy) GetGroups() []PolicyGroup {
+	if p.Groups == nil {
+		return []PolicyGroup{}
+	}
+	return *p.Groups
+}
+func (p *KubernetesPolicy) GetPolicyType() PolicyType { return Kubernetes }

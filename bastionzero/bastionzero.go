@@ -22,8 +22,10 @@ import (
 )
 
 const (
-	libraryVersion   = "0.0.1"
-	defaultBaseURL   = "https://cloud.bastionzero.com/"
+	libraryVersion = "0.1.0"
+	// DefaultBaseURL is the default BastionZero API URL the Client communicates
+	// with
+	DefaultBaseURL   = "https://cloud.bastionzero.com/"
 	defaultUserAgent = "bastionzero-sdk-go/" + libraryVersion
 	mediaType        = "application/json"
 )
@@ -102,7 +104,7 @@ func NewClient(httpClient *http.Client) *Client {
 	}
 
 	// Set Client defaults here
-	baseURL, _ := url.Parse(defaultBaseURL)
+	baseURL, _ := url.Parse(DefaultBaseURL)
 	c := &Client{
 		client:    httpClient,
 		baseURL:   baseURL,

@@ -1,18 +1,20 @@
 package service
 
+//go:generate go run github.com/dmarkham/enumer -type=TargetType -json
+
 // TargetType represents the type of target
-type TargetType string
+type TargetType int
 
 const (
 	// Bzero represents a Bzero target
-	Bzero TargetType = "Bzero"
+	Bzero TargetType = iota
 	// Cluster represents a Kubernetes target
-	Cluster TargetType = "Cluster"
+	Cluster
 
 	// DynamicAccessConfig represents a DAC target
-	DynamicAccessConfig TargetType = "DynamicAccessConfig"
+	DynamicAccessConfig
 	// Web represents a Web target
-	Web TargetType = "Web"
+	Web
 	// Db represents a Db target
-	Db TargetType = "Db"
+	Db
 )

@@ -46,24 +46,6 @@ type PolicyTargetUser struct {
 	Username string `json:"userName"`
 }
 
-// PolicyType represents the type of policy
-type PolicyType string
-
-const (
-	// TargetConnect represents a target connect policy
-	TargetConnect PolicyType = "TargetConnect"
-	// OrganizationControls represents an organization controls policy
-	OrganizationControls PolicyType = "OrganizationControls"
-	// SessionRecording represents a session recording policy
-	SessionRecording PolicyType = "SessionRecording"
-	// Kubernetes represents a Kubernetes policy
-	Kubernetes PolicyType = "Kubernetes"
-	// Proxy represents a Proxy policy
-	Proxy PolicyType = "Proxy"
-	// JustInTime represents a JIT policy
-	JustInTime PolicyType = "JustInTime"
-)
-
 // ListPolicyOptions specifies the optional parameters to various List methods
 // involving policy
 type ListPolicyOptions struct {

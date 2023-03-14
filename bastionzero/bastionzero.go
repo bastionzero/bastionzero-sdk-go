@@ -10,8 +10,8 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"strings"
 
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/apierror"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/environments"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/organization"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies"
@@ -29,45 +29,6 @@ const (
 	defaultUserAgent = "bastionzero-sdk-go/" + libraryVersion
 	mediaType        = "application/json"
 )
-
-// An ErrorResponse reports the error caused by an API request
-type ErrorResponse struct {
-	// HTTP response that caused this error
-	Response *http.Response
-
-	// Error message
-	ErrorMessage string `json:"errorMsg"`
-
-	// Error type
-	ErrorType string `json:"errorType"`
-
-	// Validation errors
-	ValidationErrors map[string][]string `json:"errors"`
-}
-
-func (r *ErrorResponse) Error() string {
-	if r.ErrorType != "" {
-		// If errorType is provided, then we always have an errorMsg
-		return fmt.Sprintf("%v %v: %v: %v (%v)", r.Response.Request.Method, r.Response.Request.URL, r.Response.Status, r.ErrorMessage, r.ErrorType)
-	} else if r.ErrorMessage != "" {
-		// If we fail to decode response into valid JSON, then ErrorMessage will
-		// be set to the body of the response
-		return fmt.Sprintf("%v %v: %v: %v", r.Response.Request.Method, r.Response.Request.URL, r.Response.Status, r.ErrorMessage)
-	} else if len(r.ValidationErrors) != 0 {
-		// Model binding error on the request populates validation errors
-
-		var prettyMsg string = "Bad Request:"
-		for prop, errors := range r.ValidationErrors {
-			prettyMsg += fmt.Sprintf(" %v: %v", prop, strings.Join(errors[:], ", "))
-		}
-
-		return fmt.Sprintf("%v %v: %d %v", r.Response.Request.Method, r.Response.Request.URL, r.Response.StatusCode, prettyMsg)
-	} else {
-		// Otherwise, display HTTP status code and associated HTTP status code
-		// message
-		return fmt.Sprintf("%v %v: %v", r.Response.Request.Method, r.Response.Request.URL, r.Response.Status)
-	}
-}
 
 // Client manages communication with the BastionZero API
 type Client struct {
@@ -210,13 +171,14 @@ func (c *Client) NewRequest(ctx context.Context, method, urlStr string, body int
 // body will be silently ignored. If the body contains invalid JSON, then
 // ErrorMessage is set to the text of the response body.
 //
-// The error type will be *ErrorResponse if the response is considered an error
+// The error type will be *apierror.ErrorResponse if the response is considered
+// an error
 func checkResponse(r *http.Response) error {
 	if c := r.StatusCode; c >= 200 && c <= 299 {
 		return nil
 	}
 
-	errorResponse := &ErrorResponse{Response: r}
+	errorResponse := &apierror.ErrorResponse{Response: r}
 	data, err := ioutil.ReadAll(r.Body)
 	if err == nil && len(data) > 0 {
 		err := json.Unmarshal(data, errorResponse)

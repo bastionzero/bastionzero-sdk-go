@@ -268,3 +268,11 @@ func WithRequestHeaders(headers map[string]string) ClientOpt {
 func PtrTo[T any](v T) *T {
 	return &v
 }
+
+func ToStringSlice[T ~string](elems []T) []string {
+	result := make([]string, len(elems))
+	for i, v := range elems {
+		result[i] = string(v)
+	}
+	return result
+}

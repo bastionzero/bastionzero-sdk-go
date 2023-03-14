@@ -141,20 +141,20 @@ func (c *Client) Do(req *http.Request, v interface{}) (*http.Response, error) {
 		return resp, err
 	}
 
-	if v != nil {
-		if w, ok := v.(io.Writer); ok {
-			_, err = io.Copy(w, resp.Body)
-			if err != nil {
-				return nil, err
-			}
-		} else {
-			err = json.NewDecoder(resp.Body).Decode(v)
-			if err != nil {
-				return nil, err
-			}
+	switch v := v.(type) {
+	case nil:
+	case io.Writer:
+		_, err = io.Copy(v, resp.Body)
+	default:
+		decErr := json.NewDecoder(resp.Body).Decode(v)
+		if decErr == io.EOF {
+			// ignore EOF errors caused by empty response body
+			decErr = nil
+		}
+		if decErr != nil {
+			err = decErr
 		}
 	}
-
 	return resp, err
 }
 

@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies/policytype"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies/verbtype"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
@@ -17,20 +18,8 @@ const (
 
 // Verb refers to an action allowed by a target connect policy
 type Verb struct {
-	Type VerbType `json:"type"`
+	Type verbtype.VerbType `json:"type"`
 }
-
-// VerbType represents the type of target connect verb
-type VerbType string
-
-const (
-	// Shell represents the ability to make a Shell connection
-	Shell VerbType = "Shell"
-	// FileTransfer represents the ability to upload/download files
-	FileTransfer VerbType = "FileTransfer"
-	// Tunnel represents the ability to make an SSH tunnel
-	Tunnel VerbType = "Tunnel"
-)
 
 // TargetConnectPolicy represents a target connect policy. Target connect
 // policies provide access to Bzero and DynamicAccessConfig targets.

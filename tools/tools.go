@@ -3,6 +3,6 @@
 package tools
 
 import (
-	// Enum generation
-	_ "github.com/dmarkham/enumer"
+	// Enum validation generator
+	_ "github.com/lindell/string-enumer"
 )

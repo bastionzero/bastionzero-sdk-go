@@ -1,15 +1,15 @@
-package service
+package subjecttype
 
-//go:generate go run github.com/dmarkham/enumer -type=SubjectType -json
+//go:generate go run github.com/lindell/string-enumer -t SubjectType -o ./generated.go .
 
 // SubjectType represents the type of user interacting with the BastionZero API.
-type SubjectType int
+type SubjectType string
 
 const (
 	// User represents a user belonging to an IdP's organization
-	User SubjectType = iota
+	User SubjectType = "User"
 	// ApiKey represents an API key created via the BastionZero API
-	ApiKey
+	ApiKey SubjectType = "ApiKey"
 	// ServiceAccount represents a service account identity managed by some IdP
-	ServiceAccount
+	ServiceAccount SubjectType = "ServiceAccount"
 )

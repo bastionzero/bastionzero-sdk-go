@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types/targettype"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
 
@@ -45,20 +46,20 @@ type ModifyEnvironmentRequest struct {
 
 // TargetSummary describes a target associated with an environment
 type TargetSummary struct {
-	ID   string             `json:"id"`
-	Type service.TargetType `json:"targetType"`
+	ID   string                `json:"id"`
+	Type targettype.TargetType `json:"targetType"`
 }
 
 // Environment is a collection of targets
 type Environment struct {
-	ID                         string            `json:"id"`
-	OrganizationID             string            `json:"organizationId"`
-	IsDefault                  bool              `json:"isDefault"`
-	Name                       string            `json:"name"`
-	Description                string            `json:"description"`
-	TimeCreated                service.Timestamp `json:"timeCreated"`
-	OfflineCleanupTimeoutHours uint              `json:"offlineCleanupTimeoutHours"`
-	Targets                    []TargetSummary   `json:"targets"`
+	ID                         string          `json:"id"`
+	OrganizationID             string          `json:"organizationId"`
+	IsDefault                  bool            `json:"isDefault"`
+	Name                       string          `json:"name"`
+	Description                string          `json:"description"`
+	TimeCreated                types.Timestamp `json:"timeCreated"`
+	OfflineCleanupTimeoutHours uint            `json:"offlineCleanupTimeoutHours"`
+	Targets                    []TargetSummary `json:"targets"`
 }
 
 // ListEnvironments lists all environments.

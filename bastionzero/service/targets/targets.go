@@ -1,7 +1,7 @@
 package targets
 
 import (
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
 
@@ -27,10 +27,10 @@ type TargetsService client.Service
 
 // ControlChannelSummary describes a target's currently active control channel
 type ControlChannelSummary struct {
-	ControlChannelID string             `json:"controlChannelId"`
-	ConnectionNodeID string             `json:"connectionNodeId"`
-	StartTime        service.Timestamp  `json:"startTime"`
-	EndTime          *service.Timestamp `json:"endTime"`
+	ControlChannelID string           `json:"controlChannelId"`
+	ConnectionNodeID string           `json:"connectionNodeId"`
+	StartTime        types.Timestamp  `json:"startTime"`
+	EndTime          *types.Timestamp `json:"endTime"`
 }
 
 // Port describes a port number

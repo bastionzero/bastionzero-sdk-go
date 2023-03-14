@@ -1,7 +1,10 @@
 package policies
 
 import (
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies/policytype"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types/subjecttype"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types/targettype"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
 
@@ -17,8 +20,8 @@ type PoliciesService client.Service
 
 // PolicySubject refers to the subject that a policy applies to
 type PolicySubject struct {
-	ID   string              `json:"id"`
-	Type service.SubjectType `json:"type"`
+	ID   string                  `json:"id"`
+	Type subjecttype.SubjectType `json:"type"`
 }
 
 // PolicyGroup refers to the IdP group that a policy applies to
@@ -29,8 +32,8 @@ type PolicyGroup struct {
 
 // PolicyTarget refers to the BastionZero target that a policy applies to
 type PolicyTarget struct {
-	ID   string             `json:"id"`
-	Type service.TargetType `json:"type"`
+	ID   string                `json:"id"`
+	Type targettype.TargetType `json:"type"`
 }
 
 // PolicyEnvironment refers to the BastionZero environment that a policy applies
@@ -65,7 +68,7 @@ type PolicyInterface interface {
 	GetID() string
 	// GetTimeExpires returns the policy's expiration if set. Otherwise, returns
 	// nil.
-	GetTimeExpires() *service.Timestamp
+	GetTimeExpires() *types.Timestamp
 	// GetName returns the the policy's name.
 	GetName() string
 	// GetDescription returns the policy's description if set. Otherwise,
@@ -78,5 +81,5 @@ type PolicyInterface interface {
 	// set. Otherwise, returns an empty slice.
 	GetGroups() []PolicyGroup
 	// GetPolicyType returns the policy's type.
-	GetPolicyType() PolicyType
+	GetPolicyType() policytype.PolicyType
 }

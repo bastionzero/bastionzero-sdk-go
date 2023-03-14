@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies/policytype"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
 
@@ -22,7 +23,7 @@ type ProxyPolicy struct {
 
 	// User-initialized fields
 
-	TimeExpires *service.Timestamp `json:"timeExpires,omitempty"`
+	TimeExpires *types.Timestamp `json:"timeExpires,omitempty"`
 
 	// User-mutable fields
 
@@ -141,9 +142,9 @@ var (
 	_ PolicyInterface = &ProxyPolicy{}
 )
 
-func (p *ProxyPolicy) GetID() string                      { return p.ID }
-func (p *ProxyPolicy) GetTimeExpires() *service.Timestamp { return p.TimeExpires }
-func (p *ProxyPolicy) GetName() string                    { return p.Name }
+func (p *ProxyPolicy) GetID() string                    { return p.ID }
+func (p *ProxyPolicy) GetTimeExpires() *types.Timestamp { return p.TimeExpires }
+func (p *ProxyPolicy) GetName() string                  { return p.Name }
 func (p *ProxyPolicy) GetDescription() string {
 	if p.Description == nil {
 		return ""
@@ -162,4 +163,4 @@ func (p *ProxyPolicy) GetGroups() []PolicyGroup {
 	}
 	return *p.Groups
 }
-func (p *ProxyPolicy) GetPolicyType() PolicyType { return Proxy }
+func (p *ProxyPolicy) GetPolicyType() policytype.PolicyType { return policytype.Proxy }

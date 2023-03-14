@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
 
@@ -22,13 +22,13 @@ type UsersService client.Service
 
 // User is a BastionZero user belonging to an organization
 type User struct {
-	ID             string             `json:"id"`
-	OrganizationID string             `json:"organizationId"`
-	FullName       string             `json:"fullName"`
-	Email          string             `json:"email"`
-	IsAdmin        bool               `json:"isAdmin"`
-	TimeCreated    service.Timestamp  `json:"timeCreated"`
-	LastLogin      *service.Timestamp `json:"lastLogin,omitempty"`
+	ID             string           `json:"id"`
+	OrganizationID string           `json:"organizationId"`
+	FullName       string           `json:"fullName"`
+	Email          string           `json:"email"`
+	IsAdmin        bool             `json:"isAdmin"`
+	TimeCreated    types.Timestamp  `json:"timeCreated"`
+	LastLogin      *types.Timestamp `json:"lastLogin,omitempty"`
 }
 
 // ListUsers lists all users in your organization.

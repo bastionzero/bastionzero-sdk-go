@@ -1,22 +1,22 @@
-package targets
+package targetstatus
 
-//go:generate go run github.com/dmarkham/enumer -type=TargetStatus -json
+//go:generate go run github.com/lindell/string-enumer -t TargetStatus -o ./generated.go .
 
 // TargetStatus represents the status of a target
-type TargetStatus int
+type TargetStatus string
 
 const (
 	// NotActivated represents a target that has not been activated
-	NotActivated TargetStatus = iota
+	NotActivated TargetStatus = "NotActivated"
 	// Offline represents a target that is offline
-	Offline
+	Offline TargetStatus = "Offline"
 	// Online represents a target that is online
-	Online
+	Online TargetStatus = "Online"
 	// Terminated represents a target that has been deleted
-	Terminated
+	Terminated TargetStatus = "Terminated"
 	// Error represents a target that has entered an errored state
-	Error
+	Error TargetStatus = "Error"
 	// Restarting represents a target that is currently restarting due to
 	// receiving a restart request issued via the BastionZero API
-	Restarting
+	Restarting TargetStatus = "Restarting"
 )

@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/targets/targetstatus"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
 )
 
 const (
@@ -21,9 +22,9 @@ const (
 type DatabaseTarget struct {
 	ID                 string                      `json:"id"`
 	Name               string                      `json:"name"`
-	Status             TargetStatus                `json:"status"`
+	Status             targetstatus.TargetStatus   `json:"status"`
 	ProxyTargetID      string                      `json:"proxyTargetId"`
-	LastAgentUpdate    *service.Timestamp          `json:"lastAgentUpdate"`
+	LastAgentUpdate    *types.Timestamp            `json:"lastAgentUpdate"`
 	AgentVersion       string                      `json:"agentVersion"`
 	RemoteHost         string                      `json:"remoteHost"`
 	RemotePort         Port                        `json:"remotePort"`

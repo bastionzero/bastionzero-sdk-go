@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/targets/targetstatus"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
 )
 
 const (
@@ -16,19 +17,19 @@ const (
 // WebTarget is a virtual target that provides HTTP(S) access to a remote web
 // server. The connection is proxied by a Bzero or Cluster target.
 type WebTarget struct {
-	ID              string             `json:"id"`
-	Name            string             `json:"name"`
-	Status          TargetStatus       `json:"status"`
-	ProxyTargetID   string             `json:"proxyTargetId"`
-	LastAgentUpdate *service.Timestamp `json:"lastAgentUpdate"`
-	AgentVersion    string             `json:"agentVersion"`
-	RemoteHost      string             `json:"remoteHost"`
-	RemotePort      Port               `json:"remotePort"`
-	LocalPort       Port               `json:"localPort"`
-	LocalHost       string             `json:"localHost"`
-	EnvironmentID   string             `json:"environmentId"`
-	Region          string             `json:"region"`
-	AgentPublicKey  string             `json:"agentPublicKey"`
+	ID              string                    `json:"id"`
+	Name            string                    `json:"name"`
+	Status          targetstatus.TargetStatus `json:"status"`
+	ProxyTargetID   string                    `json:"proxyTargetId"`
+	LastAgentUpdate *types.Timestamp          `json:"lastAgentUpdate"`
+	AgentVersion    string                    `json:"agentVersion"`
+	RemoteHost      string                    `json:"remoteHost"`
+	RemotePort      Port                      `json:"remotePort"`
+	LocalPort       Port                      `json:"localPort"`
+	LocalHost       string                    `json:"localHost"`
+	EnvironmentID   string                    `json:"environmentId"`
+	Region          string                    `json:"region"`
+	AgentPublicKey  string                    `json:"agentPublicKey"`
 }
 
 // ListWebTargets lists all Web targets.

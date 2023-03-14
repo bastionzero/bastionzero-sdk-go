@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies/policytype"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
 
@@ -39,7 +40,7 @@ type TargetConnectPolicy struct {
 
 	// User-initialized fields
 
-	TimeExpires *service.Timestamp `json:"timeExpires,omitempty"`
+	TimeExpires *types.Timestamp `json:"timeExpires,omitempty"`
 
 	// User-mutable fields
 
@@ -159,9 +160,9 @@ var (
 	_ PolicyInterface = &TargetConnectPolicy{}
 )
 
-func (p *TargetConnectPolicy) GetID() string                      { return p.ID }
-func (p *TargetConnectPolicy) GetTimeExpires() *service.Timestamp { return p.TimeExpires }
-func (p *TargetConnectPolicy) GetName() string                    { return p.Name }
+func (p *TargetConnectPolicy) GetID() string                    { return p.ID }
+func (p *TargetConnectPolicy) GetTimeExpires() *types.Timestamp { return p.TimeExpires }
+func (p *TargetConnectPolicy) GetName() string                  { return p.Name }
 func (p *TargetConnectPolicy) GetDescription() string {
 	if p.Description == nil {
 		return ""
@@ -180,4 +181,4 @@ func (p *TargetConnectPolicy) GetGroups() []PolicyGroup {
 	}
 	return *p.Groups
 }
-func (p *TargetConnectPolicy) GetPolicyType() PolicyType { return TargetConnect }
+func (p *TargetConnectPolicy) GetPolicyType() policytype.PolicyType { return policytype.TargetConnect }

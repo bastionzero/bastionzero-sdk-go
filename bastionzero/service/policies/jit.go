@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies/policytype"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
 
@@ -18,8 +19,8 @@ const (
 type ChildPolicy struct {
 	ID string `json:"id"`
 	// Type must be one of TargetConnect, Kubernetes or Proxy
-	Type PolicyType `json:"type"`
-	Name string     `json:"name"`
+	Type policytype.PolicyType `json:"type"`
+	Name string                `json:"name"`
 }
 
 // JITPolicy represents a just in time policy. Just in time policies provide
@@ -30,7 +31,7 @@ type JITPolicy struct {
 
 	// User-initialized fields
 
-	TimeExpires *service.Timestamp `json:"timeExpires,omitempty"`
+	TimeExpires *types.Timestamp `json:"timeExpires,omitempty"`
 
 	// User-mutable fields
 
@@ -155,9 +156,9 @@ var (
 	_ PolicyInterface = &JITPolicy{}
 )
 
-func (p *JITPolicy) GetID() string                      { return p.ID }
-func (p *JITPolicy) GetTimeExpires() *service.Timestamp { return p.TimeExpires }
-func (p *JITPolicy) GetName() string                    { return p.Name }
+func (p *JITPolicy) GetID() string                    { return p.ID }
+func (p *JITPolicy) GetTimeExpires() *types.Timestamp { return p.TimeExpires }
+func (p *JITPolicy) GetName() string                  { return p.Name }
 func (p *JITPolicy) GetDescription() string {
 	if p.Description == nil {
 		return ""
@@ -176,4 +177,4 @@ func (p *JITPolicy) GetGroups() []PolicyGroup {
 	}
 	return *p.Groups
 }
-func (p *JITPolicy) GetPolicyType() PolicyType { return JustInTime }
+func (p *JITPolicy) GetPolicyType() policytype.PolicyType { return policytype.JustInTime }

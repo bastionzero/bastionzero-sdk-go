@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies/policytype"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
 
@@ -23,7 +24,7 @@ type SessionRecordingPolicy struct {
 
 	// User-initialized fields
 
-	TimeExpires *service.Timestamp `json:"timeExpires,omitempty"`
+	TimeExpires *types.Timestamp `json:"timeExpires,omitempty"`
 
 	// User-mutable fields
 
@@ -141,9 +142,9 @@ var (
 	_ PolicyInterface = &SessionRecordingPolicy{}
 )
 
-func (p *SessionRecordingPolicy) GetID() string                      { return p.ID }
-func (p *SessionRecordingPolicy) GetTimeExpires() *service.Timestamp { return p.TimeExpires }
-func (p *SessionRecordingPolicy) GetName() string                    { return p.Name }
+func (p *SessionRecordingPolicy) GetID() string                    { return p.ID }
+func (p *SessionRecordingPolicy) GetTimeExpires() *types.Timestamp { return p.TimeExpires }
+func (p *SessionRecordingPolicy) GetName() string                  { return p.Name }
 func (p *SessionRecordingPolicy) GetDescription() string {
 	if p.Description == nil {
 		return ""
@@ -162,4 +163,6 @@ func (p *SessionRecordingPolicy) GetGroups() []PolicyGroup {
 	}
 	return *p.Groups
 }
-func (p *SessionRecordingPolicy) GetPolicyType() PolicyType { return SessionRecording }
+func (p *SessionRecordingPolicy) GetPolicyType() policytype.PolicyType {
+	return policytype.SessionRecording
+}

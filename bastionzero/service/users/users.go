@@ -28,7 +28,7 @@ type User struct {
 	Email          string           `json:"email"`
 	IsAdmin        bool             `json:"isAdmin"`
 	TimeCreated    types.Timestamp  `json:"timeCreated"`
-	LastLogin      *types.Timestamp `json:"lastLogin,omitempty"`
+	LastLogin      *types.Timestamp `json:"lastLogin"`
 }
 
 // ListUsers lists all users in your organization.

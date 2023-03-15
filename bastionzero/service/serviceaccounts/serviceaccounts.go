@@ -26,17 +26,17 @@ type ServiceAccountsService client.Service
 // access tokens, and then BastionZero uses the public key within the JWKS URL
 // to validate the service account.
 type ServiceAccount struct {
-	ID             string          `json:"id"`
-	OrganizationID string          `json:"organizationId"`
-	Email          string          `json:"email"`
-	ExternalID     string          `json:"externalId"`
-	JwksURL        string          `json:"jwksUrl"`
-	JWKSURLPattern string          `json:"jwksUrlPattern"`
-	IsAdmin        bool            `json:"isAdmin"`
-	TimeCreated    types.Timestamp `json:"timeCreated"`
-	LastLogin      types.Timestamp `json:"lastLogin"`
-	CreatedBy      string          `json:"createdBy"`
-	Enabled        bool            `json:"enabled"`
+	ID             string           `json:"id"`
+	OrganizationID string           `json:"organizationId"`
+	Email          string           `json:"email"`
+	ExternalID     string           `json:"externalId"`
+	JwksURL        string           `json:"jwksUrl"`
+	JwksURLPattern string           `json:"jwksUrlPattern"`
+	IsAdmin        bool             `json:"isAdmin"`
+	TimeCreated    types.Timestamp  `json:"timeCreated"`
+	LastLogin      *types.Timestamp `json:"lastLogin"`
+	CreatedBy      string           `json:"createdBy"`
+	Enabled        bool             `json:"enabled"`
 }
 
 // ListServiceAccounts lists all service accounts for your organization.

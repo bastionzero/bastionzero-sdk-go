@@ -1,6 +1,7 @@
 package targets
 
 import (
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/targets/targetstatus"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
@@ -36,4 +37,26 @@ type ControlChannelSummary struct {
 // Port describes a port number
 type Port struct {
 	Value *int `json:"value,omitempty"`
+}
+
+// TargetInterface lets you work with common target attributes from any kind of
+// BastionZero target (excluding DAC targets)
+type TargetInterface interface {
+	// GetID returns the target's unique ID.
+	GetID() string
+	// GetName returns the the target's name.
+	GetName() string
+	// GetStatus returns the the target's status.
+	GetStatus() targetstatus.TargetStatus
+	// GetEnvironmentID returns the the target's environment's ID.
+	GetEnvironmentID() string
+	// GetLastAgentUpdate returns the target's last agent update if set.
+	// Otherwise, returns nil.
+	GetLastAgentUpdate() *types.Timestamp
+	// GetAgentVersion returns the the target's agent version.
+	GetAgentVersion() string
+	// GetRegion returns the target's region.
+	GetRegion() string
+	// GetAgentPublicKey returns the the target's agent public key.
+	GetAgentPublicKey() string
 }

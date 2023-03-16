@@ -67,3 +67,18 @@ func (s *TargetsService) GetBzeroTarget(ctx context.Context, targetID string) (*
 
 	return target, resp, nil
 }
+
+// Ensure BzeroTarget implementation satisfies the expected interfaces.
+var (
+	// BzeroTarget implements TargetInterface
+	_ TargetInterface = &BzeroTarget{}
+)
+
+func (t *BzeroTarget) GetID() string                        { return t.ID }
+func (t *BzeroTarget) GetName() string                      { return t.Name }
+func (t *BzeroTarget) GetStatus() targetstatus.TargetStatus { return t.Status }
+func (t *BzeroTarget) GetEnvironmentID() string             { return t.EnvironmentID }
+func (t *BzeroTarget) GetLastAgentUpdate() *types.Timestamp { return t.LastAgentUpdate }
+func (t *BzeroTarget) GetAgentVersion() string              { return t.AgentVersion }
+func (t *BzeroTarget) GetRegion() string                    { return t.Region }
+func (t *BzeroTarget) GetAgentPublicKey() string            { return t.AgentPublicKey }

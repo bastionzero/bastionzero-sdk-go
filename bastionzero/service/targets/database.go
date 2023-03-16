@@ -75,3 +75,18 @@ func (s *TargetsService) GetDatabaseTarget(ctx context.Context, targetID string)
 
 	return target, resp, nil
 }
+
+// Ensure DatabaseTarget implementation satisfies the expected interfaces.
+var (
+	// DatabaseTarget implements TargetInterface
+	_ TargetInterface = &DatabaseTarget{}
+)
+
+func (t *DatabaseTarget) GetID() string                        { return t.ID }
+func (t *DatabaseTarget) GetName() string                      { return t.Name }
+func (t *DatabaseTarget) GetStatus() targetstatus.TargetStatus { return t.Status }
+func (t *DatabaseTarget) GetEnvironmentID() string             { return t.EnvironmentID }
+func (t *DatabaseTarget) GetLastAgentUpdate() *types.Timestamp { return t.LastAgentUpdate }
+func (t *DatabaseTarget) GetAgentVersion() string              { return t.AgentVersion }
+func (t *DatabaseTarget) GetRegion() string                    { return t.Region }
+func (t *DatabaseTarget) GetAgentPublicKey() string            { return t.AgentPublicKey }

@@ -69,3 +69,18 @@ func (s *TargetsService) GetWebTarget(ctx context.Context, targetID string) (*We
 
 	return target, resp, nil
 }
+
+// Ensure WebTarget implementation satisfies the expected interfaces.
+var (
+	// WebTarget implements TargetInterface
+	_ TargetInterface = &WebTarget{}
+)
+
+func (t *WebTarget) GetID() string                        { return t.ID }
+func (t *WebTarget) GetName() string                      { return t.Name }
+func (t *WebTarget) GetStatus() targetstatus.TargetStatus { return t.Status }
+func (t *WebTarget) GetEnvironmentID() string             { return t.EnvironmentID }
+func (t *WebTarget) GetLastAgentUpdate() *types.Timestamp { return t.LastAgentUpdate }
+func (t *WebTarget) GetAgentVersion() string              { return t.AgentVersion }
+func (t *WebTarget) GetRegion() string                    { return t.Region }
+func (t *WebTarget) GetAgentPublicKey() string            { return t.AgentPublicKey }

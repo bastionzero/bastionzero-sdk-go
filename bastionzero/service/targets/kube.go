@@ -67,3 +67,18 @@ func (s *TargetsService) GetClusterTarget(ctx context.Context, targetID string) 
 
 	return target, resp, nil
 }
+
+// Ensure ClusterTarget implementation satisfies the expected interfaces.
+var (
+	// ClusterTarget implements TargetInterface
+	_ TargetInterface = &ClusterTarget{}
+)
+
+func (t *ClusterTarget) GetID() string                        { return t.ID }
+func (t *ClusterTarget) GetName() string                      { return t.Name }
+func (t *ClusterTarget) GetStatus() targetstatus.TargetStatus { return t.Status }
+func (t *ClusterTarget) GetEnvironmentID() string             { return t.EnvironmentID }
+func (t *ClusterTarget) GetLastAgentUpdate() *types.Timestamp { return t.LastAgentUpdate }
+func (t *ClusterTarget) GetAgentVersion() string              { return t.AgentVersion }
+func (t *ClusterTarget) GetRegion() string                    { return t.Region }
+func (t *ClusterTarget) GetAgentPublicKey() string            { return t.AgentPublicKey }

@@ -4,7 +4,9 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types/subjecttype"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
 
@@ -57,3 +59,12 @@ func (s *ServiceAccountsService) ListServiceAccounts(ctx context.Context) ([]Ser
 
 	return *serviceAccountList, resp, nil
 }
+
+// Ensure ServiceAccount implementation satisfies the expected interfaces.
+var (
+	// ServiceAccount implements SubjectInterface
+	_ service.SubjectInterface = &ServiceAccount{}
+)
+
+func (s *ServiceAccount) GetID() string                           { return s.ID }
+func (s *ServiceAccount) GetSubjectType() subjecttype.SubjectType { return subjecttype.ServiceAccount }

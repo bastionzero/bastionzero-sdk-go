@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types/subjecttype"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
 
@@ -68,3 +70,12 @@ func (s *UsersService) GetUser(ctx context.Context, userIDOrEmail string) (*User
 
 	return user, resp, nil
 }
+
+// Ensure User implementation satisfies the expected interfaces.
+var (
+	// User implements SubjectInterface
+	_ service.SubjectInterface = &User{}
+)
+
+func (u *User) GetID() string                           { return u.ID }
+func (u *User) GetSubjectType() subjecttype.SubjectType { return subjecttype.User }

@@ -2,6 +2,7 @@ package serviceaccounts
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service"
@@ -11,7 +12,8 @@ import (
 )
 
 const (
-	serviceaccountsBasePath = "api/v2/service-accounts"
+	serviceaccountsBasePath   = "api/v2/service-accounts"
+	serviceaccountsSinglePath = serviceaccountsBasePath + "/%s"
 )
 
 // ServiceAccountsService handles communication with the service accounts endpoints of
@@ -58,6 +60,25 @@ func (s *ServiceAccountsService) ListServiceAccounts(ctx context.Context) ([]Ser
 	}
 
 	return *serviceAccountList, resp, nil
+}
+
+// GetServiceAccount fetches the specified service account by ID.
+//
+// BastionZero API docs: https://cloud.bastionzero.com/api/#get-/api/v2/service-accounts/-id-
+func (s *ServiceAccountsService) GetServiceAccount(ctx context.Context, id string) (*ServiceAccount, *http.Response, error) {
+	u := fmt.Sprintf(serviceaccountsSinglePath, id)
+	req, err := s.Client.NewRequest(ctx, http.MethodGet, u, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	serviceAccount := new(ServiceAccount)
+	resp, err := s.Client.Do(req, serviceAccount)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return serviceAccount, resp, nil
 }
 
 // Ensure ServiceAccount implementation satisfies the expected interfaces.

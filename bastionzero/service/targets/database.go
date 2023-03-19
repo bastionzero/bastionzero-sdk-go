@@ -8,6 +8,7 @@ import (
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/targets/targetstatus"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types/targettype"
 )
 
 const (
@@ -90,3 +91,4 @@ func (t *DatabaseTarget) GetLastAgentUpdate() *types.Timestamp { return t.LastAg
 func (t *DatabaseTarget) GetAgentVersion() string              { return t.AgentVersion }
 func (t *DatabaseTarget) GetRegion() string                    { return t.Region }
 func (t *DatabaseTarget) GetAgentPublicKey() string            { return t.AgentPublicKey }
+func (t *DatabaseTarget) GetTargetType() targettype.TargetType { return targettype.Db }

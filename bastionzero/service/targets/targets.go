@@ -3,6 +3,7 @@ package targets
 import (
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/targets/targetstatus"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types/targettype"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
 
@@ -59,4 +60,6 @@ type TargetInterface interface {
 	GetRegion() string
 	// GetAgentPublicKey returns the the target's agent public key.
 	GetAgentPublicKey() string
+	// GetTargetType returns the target's type.
+	GetTargetType() targettype.TargetType
 }

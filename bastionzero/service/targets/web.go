@@ -7,6 +7,7 @@ import (
 
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/targets/targetstatus"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types/targettype"
 )
 
 const (
@@ -84,3 +85,4 @@ func (t *WebTarget) GetLastAgentUpdate() *types.Timestamp { return t.LastAgentUp
 func (t *WebTarget) GetAgentVersion() string              { return t.AgentVersion }
 func (t *WebTarget) GetRegion() string                    { return t.Region }
 func (t *WebTarget) GetAgentPublicKey() string            { return t.AgentPublicKey }
+func (t *WebTarget) GetTargetType() targettype.TargetType { return targettype.Web }

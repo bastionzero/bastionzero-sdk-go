@@ -75,6 +75,8 @@ func (s *TargetsService) GetWebTarget(ctx context.Context, targetID string) (*We
 var (
 	// WebTarget implements TargetInterface
 	_ TargetInterface = &WebTarget{}
+	// WebTarget implements VirtualTargetInterface
+	_ VirtualTargetInterface = &WebTarget{}
 )
 
 func (t *WebTarget) GetID() string                        { return t.ID }
@@ -86,3 +88,8 @@ func (t *WebTarget) GetAgentVersion() string              { return t.AgentVersio
 func (t *WebTarget) GetRegion() string                    { return t.Region }
 func (t *WebTarget) GetAgentPublicKey() string            { return t.AgentPublicKey }
 func (t *WebTarget) GetTargetType() targettype.TargetType { return targettype.Web }
+
+func (t *WebTarget) GetProxyTargetID() string { return t.ProxyTargetID }
+func (t *WebTarget) GetRemoteHost() string    { return t.RemoteHost }
+func (t *WebTarget) GetRemotePort() Port      { return t.RemotePort }
+func (t *WebTarget) GetLocalPort() Port       { return t.LocalPort }

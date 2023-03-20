@@ -63,3 +63,16 @@ type TargetInterface interface {
 	// GetTargetType returns the target's type.
 	GetTargetType() targettype.TargetType
 }
+
+// VirtualTargetInterface lets you work with common target attributes from any
+// kind of BastionZero virtual target (e.g. Db, Web)
+type VirtualTargetInterface interface {
+	// GetProxyTargetID returns the virtual target's proxy target's ID.
+	GetProxyTargetID() string
+	// GetRemoteHost returns the the virtual target's remote host.
+	GetRemoteHost() string
+	// GetRemotePort returns the the virtual target's remote port.
+	GetRemotePort() Port
+	// GetLocalPort returns the the virtual target's local port.
+	GetLocalPort() Port
+}

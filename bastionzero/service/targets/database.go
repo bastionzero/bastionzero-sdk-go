@@ -81,6 +81,8 @@ func (s *TargetsService) GetDatabaseTarget(ctx context.Context, targetID string)
 var (
 	// DatabaseTarget implements TargetInterface
 	_ TargetInterface = &DatabaseTarget{}
+	// DatabaseTarget implements VirtualTargetInterface
+	_ VirtualTargetInterface = &DatabaseTarget{}
 )
 
 func (t *DatabaseTarget) GetID() string                        { return t.ID }
@@ -92,3 +94,8 @@ func (t *DatabaseTarget) GetAgentVersion() string              { return t.AgentV
 func (t *DatabaseTarget) GetRegion() string                    { return t.Region }
 func (t *DatabaseTarget) GetAgentPublicKey() string            { return t.AgentPublicKey }
 func (t *DatabaseTarget) GetTargetType() targettype.TargetType { return targettype.Db }
+
+func (t *DatabaseTarget) GetProxyTargetID() string { return t.ProxyTargetID }
+func (t *DatabaseTarget) GetRemoteHost() string    { return t.RemoteHost }
+func (t *DatabaseTarget) GetRemotePort() Port      { return t.RemotePort }
+func (t *DatabaseTarget) GetLocalPort() Port       { return t.LocalPort }

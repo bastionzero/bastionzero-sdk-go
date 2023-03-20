@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/targets/dacstatus"
 )
 
 const (
@@ -40,29 +41,17 @@ type ModifyDynamicAccessConfigurationRequest struct {
 	SharedSecret  *string `json:"sharedSecret,omitempty"`
 }
 
-// DynamicAccessConfigurationStatus represents the status of a dynamic access
-// configuration
-type DynamicAccessConfigurationStatus string
-
-const (
-	// DACOffline indicates the health webhook of the DAC is responding
-	// unhealthy
-	DACOffline DynamicAccessConfigurationStatus = "Offline"
-	// DACOnline indicates the health webhook of the DAC is responding healthy
-	DACOnline DynamicAccessConfigurationStatus = "Online"
-)
-
 // DynamicAccessConfiguration configures dynamic access targets
 type DynamicAccessConfiguration struct {
-	ID                 string                           `json:"id"`
-	Name               string                           `json:"name"`
-	EnvironmentId      string                           `json:"environmentId"`
-	StartWebhook       string                           `json:"startWebhook"`
-	StopWebhook        string                           `json:"stopWebhook"`
-	HealthWebhook      string                           `json:"healthWebhook"`
-	AllowedTargetUsers []policies.PolicyTargetUser      `json:"allowedTargetUsers"`
-	AllowedVerbs       []policies.Verb                  `json:"allowedVerbs"`
-	Status             DynamicAccessConfigurationStatus `json:"status"`
+	ID                 string                                     `json:"id"`
+	Name               string                                     `json:"name"`
+	EnvironmentId      string                                     `json:"environmentId"`
+	StartWebhook       string                                     `json:"startWebhook"`
+	StopWebhook        string                                     `json:"stopWebhook"`
+	HealthWebhook      string                                     `json:"healthWebhook"`
+	AllowedTargetUsers []policies.PolicyTargetUser                `json:"allowedTargetUsers"`
+	AllowedVerbs       []policies.Verb                            `json:"allowedVerbs"`
+	Status             dacstatus.DynamicAccessConfigurationStatus `json:"status"`
 }
 
 // ListDynamicAccessConfigurations lists all dynamic access configurations.

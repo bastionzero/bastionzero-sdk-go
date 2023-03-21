@@ -19,6 +19,7 @@ import (
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/serviceaccounts"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/targets"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/users"
+	"github.com/bastionzero/bastionzero-sdk-go/internal"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
 
@@ -272,10 +273,8 @@ func PtrTo[T any](v T) *T {
 	return &v
 }
 
+// ToStringSlice returns a list of strings given any list of a type that is
+// aliased to a string.
 func ToStringSlice[T ~string](elems []T) []string {
-	result := make([]string, len(elems))
-	for i, v := range elems {
-		result[i] = string(v)
-	}
-	return result
+	return internal.MapSlice(elems, func(t T) string { return string(t) })
 }

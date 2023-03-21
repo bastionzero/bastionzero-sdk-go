@@ -7,6 +7,7 @@ import (
 
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies/policytype"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
+	"github.com/bastionzero/bastionzero-sdk-go/internal"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
 
@@ -183,3 +184,41 @@ func (p *KubernetesPolicy) GetGroups() []PolicyGroup {
 	return *p.Groups
 }
 func (p *KubernetesPolicy) GetPolicyType() policytype.PolicyType { return policytype.Kubernetes }
+
+func (p *KubernetesPolicy) GetEnvironments() []PolicyEnvironment {
+	if p.Environments == nil {
+		return []PolicyEnvironment{}
+	}
+	return *p.Environments
+}
+func (p *KubernetesPolicy) GetClusters() []Cluster {
+	if p.Clusters == nil {
+		return []Cluster{}
+	}
+	return *p.Clusters
+}
+func (p *KubernetesPolicy) GetClusterUsers() []ClusterUser {
+	if p.ClusterUsers == nil {
+		return []ClusterUser{}
+	}
+	return *p.ClusterUsers
+}
+func (p *KubernetesPolicy) GetClusterGroups() []ClusterGroup {
+	if p.ClusterGroups == nil {
+		return []ClusterGroup{}
+	}
+	return *p.ClusterGroups
+}
+
+func (p *KubernetesPolicy) GetEnvironmentsAsStringList() []string {
+	return internal.MapSlice(p.GetEnvironments(), func(e PolicyEnvironment) string { return e.ID })
+}
+func (p *KubernetesPolicy) GetClustersAsStringList() []string {
+	return internal.MapSlice(p.GetClusters(), func(e Cluster) string { return e.ID })
+}
+func (p *KubernetesPolicy) GetClusterUsersAsStringList() []string {
+	return internal.MapSlice(p.GetClusterUsers(), func(e ClusterUser) string { return e.Name })
+}
+func (p *KubernetesPolicy) GetClusterGroupsAsStringList() []string {
+	return internal.MapSlice(p.GetClusterGroups(), func(e ClusterGroup) string { return e.Name })
+}

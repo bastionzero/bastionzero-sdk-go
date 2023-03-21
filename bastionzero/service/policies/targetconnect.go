@@ -8,6 +8,7 @@ import (
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies/policytype"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies/verbtype"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
+	"github.com/bastionzero/bastionzero-sdk-go/internal"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
 
@@ -171,3 +172,38 @@ func (p *TargetConnectPolicy) GetGroups() []PolicyGroup {
 	return *p.Groups
 }
 func (p *TargetConnectPolicy) GetPolicyType() policytype.PolicyType { return policytype.TargetConnect }
+
+func (p *TargetConnectPolicy) GetEnvironments() []PolicyEnvironment {
+	if p.Environments == nil {
+		return []PolicyEnvironment{}
+	}
+	return *p.Environments
+}
+func (p *TargetConnectPolicy) GetTargets() []PolicyTarget {
+	if p.Targets == nil {
+		return []PolicyTarget{}
+	}
+	return *p.Targets
+}
+func (p *TargetConnectPolicy) GetTargetUsers() []PolicyTargetUser {
+	if p.TargetUsers == nil {
+		return []PolicyTargetUser{}
+	}
+	return *p.TargetUsers
+}
+func (p *TargetConnectPolicy) GetVerbs() []Verb {
+	if p.Verbs == nil {
+		return []Verb{}
+	}
+	return *p.Verbs
+}
+
+func (p *TargetConnectPolicy) GetEnvironmentsAsStringList() []string {
+	return internal.MapSlice(p.GetEnvironments(), func(e PolicyEnvironment) string { return e.ID })
+}
+func (p *TargetConnectPolicy) GetTargetUsersAsStringList() []string {
+	return internal.MapSlice(p.GetTargetUsers(), func(e PolicyTargetUser) string { return e.Username })
+}
+func (p *TargetConnectPolicy) GetVerbsAsStringList() []string {
+	return internal.MapSlice(p.GetVerbs(), func(e Verb) string { return string(e.Type) })
+}

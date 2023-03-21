@@ -178,3 +178,22 @@ func (p *JITPolicy) GetGroups() []PolicyGroup {
 	return *p.Groups
 }
 func (p *JITPolicy) GetPolicyType() policytype.PolicyType { return policytype.JustInTime }
+
+func (p *JITPolicy) GetChildPolicies() []ChildPolicy {
+	if p.ChildPolicies == nil {
+		return []ChildPolicy{}
+	}
+	return *p.ChildPolicies
+}
+func (p *JITPolicy) GetAutomaticallyApproved() bool {
+	if p.AutomaticallyApproved == nil {
+		return false
+	}
+	return *p.AutomaticallyApproved
+}
+func (p *JITPolicy) GetDuration() uint {
+	if p.Duration == nil {
+		return 0
+	}
+	return *p.Duration
+}

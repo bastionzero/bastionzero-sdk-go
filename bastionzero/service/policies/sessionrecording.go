@@ -166,3 +166,10 @@ func (p *SessionRecordingPolicy) GetGroups() []PolicyGroup {
 func (p *SessionRecordingPolicy) GetPolicyType() policytype.PolicyType {
 	return policytype.SessionRecording
 }
+
+func (p *SessionRecordingPolicy) GetRecordInput() bool {
+	if p.RecordInput == nil {
+		return false
+	}
+	return *p.RecordInput
+}

@@ -74,11 +74,11 @@ type PolicyInterface interface {
 	// GetDescription returns the policy's description if set. Otherwise,
 	// returns an empty string.
 	GetDescription() string
-	// GetSubjects returns the policy's list of subjects that a policy applies
+	// GetSubjects returns the policy's list of subjects that the policy applies
 	// to if set. Otherwise, returns an empty slice.
 	GetSubjects() []PolicySubject
-	// GetGroups returns the policy's list of groups that a policy applies to if
-	// set. Otherwise, returns an empty slice.
+	// GetGroups returns the policy's list of groups that the policy applies to
+	// if set. Otherwise, returns an empty slice.
 	GetGroups() []PolicyGroup
 	// GetPolicyType returns the policy's type.
 	GetPolicyType() policytype.PolicyType

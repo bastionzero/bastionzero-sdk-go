@@ -7,6 +7,7 @@ import (
 
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies/policytype"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
+	"github.com/bastionzero/bastionzero-sdk-go/internal"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
 
@@ -164,3 +165,29 @@ func (p *ProxyPolicy) GetGroups() []PolicyGroup {
 	return *p.Groups
 }
 func (p *ProxyPolicy) GetPolicyType() policytype.PolicyType { return policytype.Proxy }
+
+func (p *ProxyPolicy) GetEnvironments() []PolicyEnvironment {
+	if p.Environments == nil {
+		return []PolicyEnvironment{}
+	}
+	return *p.Environments
+}
+func (p *ProxyPolicy) GetTargets() []PolicyTarget {
+	if p.Targets == nil {
+		return []PolicyTarget{}
+	}
+	return *p.Targets
+}
+func (p *ProxyPolicy) GetTargetUsers() []PolicyTargetUser {
+	if p.TargetUsers == nil {
+		return []PolicyTargetUser{}
+	}
+	return *p.TargetUsers
+}
+
+func (p *ProxyPolicy) GetEnvironmentsAsStringList() []string {
+	return internal.MapSlice(p.GetEnvironments(), func(e PolicyEnvironment) string { return e.ID })
+}
+func (p *ProxyPolicy) GetTargetUsersAsStringList() []string {
+	return internal.MapSlice(p.GetTargetUsers(), func(e PolicyTargetUser) string { return e.Username })
+}

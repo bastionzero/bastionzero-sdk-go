@@ -28,11 +28,11 @@ type SessionRecordingPolicy struct {
 
 	// User-mutable fields
 
-	Name        string           `json:"name,omitempty"`
-	Description *string          `json:"description,omitempty"`
-	Subjects    *[]PolicySubject `json:"subjects,omitempty"`
-	Groups      *[]PolicyGroup   `json:"groups,omitempty"`
-	RecordInput *bool            `json:"recordInput,omitempty"`
+	Name        string     `json:"name,omitempty"`
+	Description *string    `json:"description,omitempty"`
+	Subjects    *[]Subject `json:"subjects,omitempty"`
+	Groups      *[]Group   `json:"groups,omitempty"`
+	RecordInput *bool      `json:"recordInput,omitempty"`
 }
 
 // ListSessionRecordingPolicies lists all session recording policies.
@@ -151,15 +151,15 @@ func (p *SessionRecordingPolicy) GetDescription() string {
 	}
 	return *p.Description
 }
-func (p *SessionRecordingPolicy) GetSubjects() []PolicySubject {
+func (p *SessionRecordingPolicy) GetSubjects() []Subject {
 	if p.Subjects == nil {
-		return []PolicySubject{}
+		return []Subject{}
 	}
 	return *p.Subjects
 }
-func (p *SessionRecordingPolicy) GetGroups() []PolicyGroup {
+func (p *SessionRecordingPolicy) GetGroups() []Group {
 	if p.Groups == nil {
-		return []PolicyGroup{}
+		return []Group{}
 	}
 	return *p.Groups
 }

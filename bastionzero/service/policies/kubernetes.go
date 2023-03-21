@@ -46,14 +46,14 @@ type KubernetesPolicy struct {
 
 	// User-mutable fields
 
-	Name          string               `json:"name,omitempty"`
-	Description   *string              `json:"description,omitempty"`
-	Subjects      *[]PolicySubject     `json:"subjects,omitempty"`
-	Groups        *[]PolicyGroup       `json:"groups,omitempty"`
-	Environments  *[]PolicyEnvironment `json:"environments,omitempty"`
-	Clusters      *[]Cluster           `json:"clusters,omitempty"`
-	ClusterUsers  *[]ClusterUser       `json:"clusterUsers,omitempty"`
-	ClusterGroups *[]ClusterGroup      `json:"clusterGroups,omitempty"`
+	Name          string          `json:"name,omitempty"`
+	Description   *string         `json:"description,omitempty"`
+	Subjects      *[]Subject      `json:"subjects,omitempty"`
+	Groups        *[]Group        `json:"groups,omitempty"`
+	Environments  *[]Environment  `json:"environments,omitempty"`
+	Clusters      *[]Cluster      `json:"clusters,omitempty"`
+	ClusterUsers  *[]ClusterUser  `json:"clusterUsers,omitempty"`
+	ClusterGroups *[]ClusterGroup `json:"clusterGroups,omitempty"`
 }
 
 // ListKubernetesPolicies lists all Kubernetes policies
@@ -171,23 +171,23 @@ func (p *KubernetesPolicy) GetDescription() string {
 	}
 	return *p.Description
 }
-func (p *KubernetesPolicy) GetSubjects() []PolicySubject {
+func (p *KubernetesPolicy) GetSubjects() []Subject {
 	if p.Subjects == nil {
-		return []PolicySubject{}
+		return []Subject{}
 	}
 	return *p.Subjects
 }
-func (p *KubernetesPolicy) GetGroups() []PolicyGroup {
+func (p *KubernetesPolicy) GetGroups() []Group {
 	if p.Groups == nil {
-		return []PolicyGroup{}
+		return []Group{}
 	}
 	return *p.Groups
 }
 func (p *KubernetesPolicy) GetPolicyType() policytype.PolicyType { return policytype.Kubernetes }
 
-func (p *KubernetesPolicy) GetEnvironments() []PolicyEnvironment {
+func (p *KubernetesPolicy) GetEnvironments() []Environment {
 	if p.Environments == nil {
-		return []PolicyEnvironment{}
+		return []Environment{}
 	}
 	return *p.Environments
 }
@@ -211,7 +211,7 @@ func (p *KubernetesPolicy) GetClusterGroups() []ClusterGroup {
 }
 
 func (p *KubernetesPolicy) GetEnvironmentsAsStringList() []string {
-	return internal.MapSlice(p.GetEnvironments(), func(e PolicyEnvironment) string { return e.ID })
+	return internal.MapSlice(p.GetEnvironments(), func(e Environment) string { return e.ID })
 }
 func (p *KubernetesPolicy) GetClustersAsStringList() []string {
 	return internal.MapSlice(p.GetClusters(), func(e Cluster) string { return e.ID })

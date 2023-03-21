@@ -35,11 +35,11 @@ type JITPolicy struct {
 
 	// User-mutable fields
 
-	Name          string           `json:"name,omitempty"`
-	Description   *string          `json:"description,omitempty"`
-	Subjects      *[]PolicySubject `json:"subjects,omitempty"`
-	Groups        *[]PolicyGroup   `json:"groups,omitempty"`
-	ChildPolicies *[]ChildPolicy   `json:"childPolicies,omitempty"`
+	Name          string         `json:"name,omitempty"`
+	Description   *string        `json:"description,omitempty"`
+	Subjects      *[]Subject     `json:"subjects,omitempty"`
+	Groups        *[]Group       `json:"groups,omitempty"`
+	ChildPolicies *[]ChildPolicy `json:"childPolicies,omitempty"`
 	// AutomaticallyApproved determines whether the creation of the policies
 	// will be automatically approved or based on request and approval from
 	// reviewers.
@@ -165,15 +165,15 @@ func (p *JITPolicy) GetDescription() string {
 	}
 	return *p.Description
 }
-func (p *JITPolicy) GetSubjects() []PolicySubject {
+func (p *JITPolicy) GetSubjects() []Subject {
 	if p.Subjects == nil {
-		return []PolicySubject{}
+		return []Subject{}
 	}
 	return *p.Subjects
 }
-func (p *JITPolicy) GetGroups() []PolicyGroup {
+func (p *JITPolicy) GetGroups() []Group {
 	if p.Groups == nil {
-		return []PolicyGroup{}
+		return []Group{}
 	}
 	return *p.Groups
 }

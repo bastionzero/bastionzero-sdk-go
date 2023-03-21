@@ -18,34 +18,34 @@ const (
 // BastionZero API docs: https://cloud.bastionzero.com/api/#tag--Policies
 type PoliciesService client.Service
 
-// PolicySubject refers to the subject that a policy applies to
-type PolicySubject struct {
+// Subject refers to the subject that a policy applies to
+type Subject struct {
 	ID   string                  `json:"id"`
 	Type subjecttype.SubjectType `json:"type"`
 }
 
-// PolicyGroup refers to the IdP group that a policy applies to
-type PolicyGroup struct {
+// Group refers to the IdP group that a policy applies to
+type Group struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
 }
 
-// PolicyTarget refers to the BastionZero target that a policy applies to
-type PolicyTarget struct {
+// Target refers to the BastionZero target that a policy applies to
+type Target struct {
 	ID   string                `json:"id"`
 	Type targettype.TargetType `json:"type"`
 }
 
-// PolicyEnvironment refers to the BastionZero environment that a policy applies
+// Environment refers to the BastionZero environment that a policy applies
 // to
-type PolicyEnvironment struct {
+type Environment struct {
 	ID string `json:"id"`
 }
 
-// PolicyTargetUser refers to the user that a policy applies to. When used in a
+// TargetUser refers to the user that a policy applies to. When used in a
 // target connect policy, it refers to a Unix username. When used in a proxy
 // policy, it refers to a database user.
-type PolicyTargetUser struct {
+type TargetUser struct {
 	Username string `json:"userName"`
 }
 
@@ -76,10 +76,10 @@ type PolicyInterface interface {
 	GetDescription() string
 	// GetSubjects returns the policy's list of subjects that the policy applies
 	// to if set. Otherwise, returns an empty slice.
-	GetSubjects() []PolicySubject
+	GetSubjects() []Subject
 	// GetGroups returns the policy's list of groups that the policy applies to
 	// if set. Otherwise, returns an empty slice.
-	GetGroups() []PolicyGroup
+	GetGroups() []Group
 	// GetPolicyType returns the policy's type.
 	GetPolicyType() policytype.PolicyType
 }

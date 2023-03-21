@@ -49,7 +49,7 @@ type DynamicAccessConfiguration struct {
 	StartWebhook       string                                     `json:"startWebhook"`
 	StopWebhook        string                                     `json:"stopWebhook"`
 	HealthWebhook      string                                     `json:"healthWebhook"`
-	AllowedTargetUsers []policies.PolicyTargetUser                `json:"allowedTargetUsers"`
+	AllowedTargetUsers []policies.TargetUser                      `json:"allowedTargetUsers"`
 	AllowedVerbs       []policies.Verb                            `json:"allowedVerbs"`
 	Status             dacstatus.DynamicAccessConfigurationStatus `json:"status"`
 }

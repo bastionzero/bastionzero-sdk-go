@@ -28,13 +28,13 @@ type ProxyPolicy struct {
 
 	// User-mutable fields
 
-	Name         string               `json:"name,omitempty"`
-	Description  *string              `json:"description,omitempty"`
-	Subjects     *[]PolicySubject     `json:"subjects,omitempty"`
-	Groups       *[]PolicyGroup       `json:"groups,omitempty"`
-	Environments *[]PolicyEnvironment `json:"environments,omitempty"`
-	Targets      *[]PolicyTarget      `json:"targets,omitempty"`
-	TargetUsers  *[]PolicyTargetUser  `json:"targetUsers,omitempty"`
+	Name         string         `json:"name,omitempty"`
+	Description  *string        `json:"description,omitempty"`
+	Subjects     *[]Subject     `json:"subjects,omitempty"`
+	Groups       *[]Group       `json:"groups,omitempty"`
+	Environments *[]Environment `json:"environments,omitempty"`
+	Targets      *[]Target      `json:"targets,omitempty"`
+	TargetUsers  *[]TargetUser  `json:"targetUsers,omitempty"`
 }
 
 // ListProxyPolicies lists all proxy policies.
@@ -152,42 +152,42 @@ func (p *ProxyPolicy) GetDescription() string {
 	}
 	return *p.Description
 }
-func (p *ProxyPolicy) GetSubjects() []PolicySubject {
+func (p *ProxyPolicy) GetSubjects() []Subject {
 	if p.Subjects == nil {
-		return []PolicySubject{}
+		return []Subject{}
 	}
 	return *p.Subjects
 }
-func (p *ProxyPolicy) GetGroups() []PolicyGroup {
+func (p *ProxyPolicy) GetGroups() []Group {
 	if p.Groups == nil {
-		return []PolicyGroup{}
+		return []Group{}
 	}
 	return *p.Groups
 }
 func (p *ProxyPolicy) GetPolicyType() policytype.PolicyType { return policytype.Proxy }
 
-func (p *ProxyPolicy) GetEnvironments() []PolicyEnvironment {
+func (p *ProxyPolicy) GetEnvironments() []Environment {
 	if p.Environments == nil {
-		return []PolicyEnvironment{}
+		return []Environment{}
 	}
 	return *p.Environments
 }
-func (p *ProxyPolicy) GetTargets() []PolicyTarget {
+func (p *ProxyPolicy) GetTargets() []Target {
 	if p.Targets == nil {
-		return []PolicyTarget{}
+		return []Target{}
 	}
 	return *p.Targets
 }
-func (p *ProxyPolicy) GetTargetUsers() []PolicyTargetUser {
+func (p *ProxyPolicy) GetTargetUsers() []TargetUser {
 	if p.TargetUsers == nil {
-		return []PolicyTargetUser{}
+		return []TargetUser{}
 	}
 	return *p.TargetUsers
 }
 
 func (p *ProxyPolicy) GetEnvironmentsAsStringList() []string {
-	return internal.MapSlice(p.GetEnvironments(), func(e PolicyEnvironment) string { return e.ID })
+	return internal.MapSlice(p.GetEnvironments(), func(e Environment) string { return e.ID })
 }
 func (p *ProxyPolicy) GetTargetUsersAsStringList() []string {
-	return internal.MapSlice(p.GetTargetUsers(), func(e PolicyTargetUser) string { return e.Username })
+	return internal.MapSlice(p.GetTargetUsers(), func(e TargetUser) string { return e.Username })
 }

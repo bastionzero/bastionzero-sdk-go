@@ -34,14 +34,14 @@ type TargetConnectPolicy struct {
 
 	// User-mutable fields
 
-	Name         string               `json:"name,omitempty"`
-	Description  *string              `json:"description,omitempty"`
-	Subjects     *[]PolicySubject     `json:"subjects,omitempty"`
-	Groups       *[]PolicyGroup       `json:"groups,omitempty"`
-	Environments *[]PolicyEnvironment `json:"environments,omitempty"`
-	Targets      *[]PolicyTarget      `json:"targets,omitempty"`
-	TargetUsers  *[]PolicyTargetUser  `json:"targetUsers,omitempty"`
-	Verbs        *[]Verb              `json:"verbs,omitempty"`
+	Name         string         `json:"name,omitempty"`
+	Description  *string        `json:"description,omitempty"`
+	Subjects     *[]Subject     `json:"subjects,omitempty"`
+	Groups       *[]Group       `json:"groups,omitempty"`
+	Environments *[]Environment `json:"environments,omitempty"`
+	Targets      *[]Target      `json:"targets,omitempty"`
+	TargetUsers  *[]TargetUser  `json:"targetUsers,omitempty"`
+	Verbs        *[]Verb        `json:"verbs,omitempty"`
 }
 
 // ListTargetConnectPolicies lists all target connect policies.
@@ -159,35 +159,35 @@ func (p *TargetConnectPolicy) GetDescription() string {
 	}
 	return *p.Description
 }
-func (p *TargetConnectPolicy) GetSubjects() []PolicySubject {
+func (p *TargetConnectPolicy) GetSubjects() []Subject {
 	if p.Subjects == nil {
-		return []PolicySubject{}
+		return []Subject{}
 	}
 	return *p.Subjects
 }
-func (p *TargetConnectPolicy) GetGroups() []PolicyGroup {
+func (p *TargetConnectPolicy) GetGroups() []Group {
 	if p.Groups == nil {
-		return []PolicyGroup{}
+		return []Group{}
 	}
 	return *p.Groups
 }
 func (p *TargetConnectPolicy) GetPolicyType() policytype.PolicyType { return policytype.TargetConnect }
 
-func (p *TargetConnectPolicy) GetEnvironments() []PolicyEnvironment {
+func (p *TargetConnectPolicy) GetEnvironments() []Environment {
 	if p.Environments == nil {
-		return []PolicyEnvironment{}
+		return []Environment{}
 	}
 	return *p.Environments
 }
-func (p *TargetConnectPolicy) GetTargets() []PolicyTarget {
+func (p *TargetConnectPolicy) GetTargets() []Target {
 	if p.Targets == nil {
-		return []PolicyTarget{}
+		return []Target{}
 	}
 	return *p.Targets
 }
-func (p *TargetConnectPolicy) GetTargetUsers() []PolicyTargetUser {
+func (p *TargetConnectPolicy) GetTargetUsers() []TargetUser {
 	if p.TargetUsers == nil {
-		return []PolicyTargetUser{}
+		return []TargetUser{}
 	}
 	return *p.TargetUsers
 }
@@ -199,10 +199,10 @@ func (p *TargetConnectPolicy) GetVerbs() []Verb {
 }
 
 func (p *TargetConnectPolicy) GetEnvironmentsAsStringList() []string {
-	return internal.MapSlice(p.GetEnvironments(), func(e PolicyEnvironment) string { return e.ID })
+	return internal.MapSlice(p.GetEnvironments(), func(e Environment) string { return e.ID })
 }
 func (p *TargetConnectPolicy) GetTargetUsersAsStringList() []string {
-	return internal.MapSlice(p.GetTargetUsers(), func(e PolicyTargetUser) string { return e.Username })
+	return internal.MapSlice(p.GetTargetUsers(), func(e TargetUser) string { return e.Username })
 }
 func (p *TargetConnectPolicy) GetVerbsAsStringList() []string {
 	return internal.MapSlice(p.GetVerbs(), func(e Verb) string { return string(e.Type) })

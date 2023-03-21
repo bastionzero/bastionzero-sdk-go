@@ -23,8 +23,8 @@ type EnvironmentsService client.Service
 
 // CreateEnvironmentRequest is used to create a new environment
 type CreateEnvironmentRequest struct {
-	Name        string  `json:"name"`
-	Description *string `json:"description,omitempty"`
+	Name        string `json:"name"`
+	Description string `json:"description,omitempty"`
 	// OfflineCleanupTimeoutHours is the amount of time (in hours) to wait until
 	// offline targets are automatically removed by BastionZero.
 	OfflineCleanupTimeoutHours uint `json:"offlineCleanupTimeoutHours"`
@@ -56,7 +56,7 @@ type Environment struct {
 	OrganizationID             string          `json:"organizationId"`
 	IsDefault                  bool            `json:"isDefault"`
 	Name                       string          `json:"name"`
-	Description                *string         `json:"description"`
+	Description                string          `json:"description"`
 	TimeCreated                types.Timestamp `json:"timeCreated"`
 	OfflineCleanupTimeoutHours uint            `json:"offlineCleanupTimeoutHours"`
 	Targets                    []TargetSummary `json:"targets"`
@@ -153,11 +153,4 @@ func (s *EnvironmentsService) ModifyEnvironment(ctx context.Context, environment
 	}
 
 	return resp, nil
-}
-
-func (e *Environment) GetDescription() string {
-	if e.Description == nil {
-		return ""
-	}
-	return *e.Description
 }

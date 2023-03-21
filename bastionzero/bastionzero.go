@@ -12,6 +12,7 @@ import (
 	"net/url"
 
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/apierror"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/autodiscoveryscripts"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/environments"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/organization"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies"
@@ -48,12 +49,13 @@ type Client struct {
 
 	// Services used for talking to different parts of the BastionZero API.
 
-	Environments    *environments.EnvironmentsService
-	Organization    *organization.OrganizationService
-	Policies        *policies.PoliciesService
-	ServiceAccounts *serviceaccounts.ServiceAccountsService
-	Targets         *targets.TargetsService
-	Users           *users.UsersService
+	AutodiscoveryScripts *autodiscoveryscripts.AutodiscoveryScriptsService
+	Environments         *environments.EnvironmentsService
+	Organization         *organization.OrganizationService
+	Policies             *policies.PoliciesService
+	ServiceAccounts      *serviceaccounts.ServiceAccountsService
+	Targets              *targets.TargetsService
+	Users                *users.UsersService
 }
 
 // NewClient returns a new BastionZero API client, using the given http.Client
@@ -73,6 +75,7 @@ func NewClient(httpClient *http.Client) *Client {
 		headers:   make(map[string]string),
 	}
 	c.common.Client = c
+	c.AutodiscoveryScripts = (*autodiscoveryscripts.AutodiscoveryScriptsService)(&c.common)
 	c.Environments = (*environments.EnvironmentsService)(&c.common)
 	c.Organization = (*organization.OrganizationService)(&c.common)
 	c.Policies = (*policies.PoliciesService)(&c.common)

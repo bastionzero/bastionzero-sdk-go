@@ -15,6 +15,20 @@ const (
 	kubeSinglePath = kubeBasePath + "/%s"
 )
 
+// ModifyClusterTargetRequest is used to modify a Cluster target
+type ModifyClusterTargetRequest struct {
+	TargetName    *string `json:"name,omitempty"`
+	EnvironmentID *string `json:"environmentId,omitempty"`
+}
+
+// ModifyClusterTargetResponse is the response returned if a Cluster target is
+// successfully modified
+type ModifyClusterTargetResponse struct {
+	ID            string `json:"id"`
+	TargetName    string `json:"name"`
+	EnvironmentID string `json:"environmentId"`
+}
+
 // ClusterTarget is a target running the Bctl agent within a Kubernetes cluster
 type ClusterTarget struct {
 	ID                   string                    `json:"id"`
@@ -67,6 +81,25 @@ func (s *TargetsService) GetClusterTarget(ctx context.Context, targetID string) 
 	}
 
 	return target, resp, nil
+}
+
+// ModifyClusterTarget updates a Cluster target.
+//
+// BastionZero API docs: https://cloud.bastionzero.com/api/#patch-/api/v2/targets/kube/-id-
+func (s *TargetsService) ModifyClusterTarget(ctx context.Context, targetID string, request *ModifyClusterTargetRequest) (*ModifyClusterTargetResponse, *http.Response, error) {
+	u := fmt.Sprintf(kubeSinglePath, targetID)
+	req, err := s.Client.NewRequest(ctx, http.MethodPatch, u, request)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	modifyResp := new(ModifyClusterTargetResponse)
+	resp, err := s.Client.Do(req, modifyResp)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return modifyResp, resp, nil
 }
 
 // Ensure ClusterTarget implementation satisfies the expected interfaces.

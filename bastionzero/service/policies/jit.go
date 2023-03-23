@@ -15,31 +15,32 @@ const (
 	jitSinglePath = jitBasePath + "/%s"
 )
 
-// ChildPolicy refers to another policy that a JIT policy applies to
-type ChildPolicy struct {
-	ID string `json:"id"`
-	// Type must be one of TargetConnect, Kubernetes or Proxy
-	Type policytype.PolicyType `json:"type"`
-	Name string                `json:"name"`
+// CreateJITPolicyRequest is used to create a new JIT policy
+type CreateJITPolicyRequest struct {
+	Name        string           `json:"name"`
+	Description string           `json:"description,omitempty"`
+	TimeExpires *types.Timestamp `json:"timeExpires,omitempty"`
+	Subjects    []Subject        `json:"subjects"`
+	Groups      []Group          `json:"groups"`
+	// ChildPolicies is a list of policy IDs that this JIT policy applies to
+	ChildPolicies []string `json:"childPolicies"`
+	// AutomaticallyApproved determines whether the creation of the policies
+	// will be automatically approved or based on request and approval from
+	// reviewers.
+	AutomaticallyApproved bool `json:"automaticallyApproved"`
+	// Duration is the amount of time (in minutes) after which the access
+	// granted by this JIT policy will expire.
+	Duration uint `json:"duration"`
 }
 
-// JITPolicy represents a just in time policy. Just in time policies provide
-// just in time access to targets.
-type JITPolicy struct {
-	// ID of the policy. Populated by the server
-	ID string `json:"id,omitempty"`
-
-	// User-initialized fields
-
-	TimeExpires *types.Timestamp `json:"timeExpires,omitempty"`
-
-	// User-mutable fields
-
-	Name          string         `json:"name,omitempty"`
-	Description   *string        `json:"description,omitempty"`
-	Subjects      *[]Subject     `json:"subjects,omitempty"`
-	Groups        *[]Group       `json:"groups,omitempty"`
-	ChildPolicies *[]ChildPolicy `json:"childPolicies,omitempty"`
+// ModifyJITPolicyRequest is used to modify a JIT policy
+type ModifyJITPolicyRequest struct {
+	Name        *string    `json:"name,omitempty"`
+	Description *string    `json:"description,omitempty"`
+	Subjects    *[]Subject `json:"subjects,omitempty"`
+	Groups      *[]Group   `json:"groups,omitempty"`
+	// ChildPolicies is a list of policy IDs that this JIT policy applies to
+	ChildPolicies *[]string `json:"childPolicies,omitempty"`
 	// AutomaticallyApproved determines whether the creation of the policies
 	// will be automatically approved or based on request and approval from
 	// reviewers.
@@ -47,6 +48,34 @@ type JITPolicy struct {
 	// Duration is the amount of time (in minutes) after which the access
 	// granted by this JIT policy will expire.
 	Duration *uint `json:"duration,omitempty"`
+}
+
+// ChildPolicy refers to another policy that a JIT policy applies to
+type ChildPolicy struct {
+	ID string `json:"id"`
+	// Type is one of TargetConnect, Kubernetes or Proxy
+	Type policytype.PolicyType `json:"type"`
+	Name string                `json:"name"`
+}
+
+// JITPolicy represents a just in time policy. Just in time policies provide
+// just in time access to targets.
+type JITPolicy struct {
+	ID          string           `json:"id"`
+	TimeExpires *types.Timestamp `json:"timeExpires"`
+	Name        string           `json:"name"`
+	Description string           `json:"description"`
+	Subjects    []Subject        `json:"subjects"`
+	Groups      []Group          `json:"groups"`
+	// ChildPolicies is a list of policies that this JIT policy applies to
+	ChildPolicies []ChildPolicy `json:"childPolicies"`
+	// AutomaticallyApproved determines whether the creation of the policies
+	// will be automatically approved or based on request and approval from
+	// reviewers.
+	AutomaticallyApproved bool `json:"automaticallyApproved"`
+	// Duration is the amount of time (in minutes) after which the access
+	// granted by this JIT policy will expire.
+	Duration uint `json:"duration"`
 }
 
 // ListJITPolicies lists all JIT policies.
@@ -77,9 +106,9 @@ func (s *PoliciesService) ListJITPolicies(ctx context.Context, opts *ListPolicyO
 // CreateJITPolicy creates a new JIT policy.
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#post-/api/v2/policies/just-in-time
-func (s *PoliciesService) CreateJITPolicy(ctx context.Context, policy *JITPolicy) (*JITPolicy, *http.Response, error) {
+func (s *PoliciesService) CreateJITPolicy(ctx context.Context, request *CreateJITPolicyRequest) (*JITPolicy, *http.Response, error) {
 	u := jitBasePath
-	req, err := s.Client.NewRequest(ctx, http.MethodPost, u, policy)
+	req, err := s.Client.NewRequest(ctx, http.MethodPost, u, request)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -130,13 +159,12 @@ func (s *PoliciesService) DeleteJITPolicy(ctx context.Context, policyID string) 
 	return resp, nil
 }
 
-// ModifyJITPolicy updates a JIT policy. All user populated
-// fields are mutable except for policy.TimeExpires.
+// ModifyJITPolicy updates a JIT policy.
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#patch-/api/v2/policies/just-in-time/-id-
-func (s *PoliciesService) ModifyJITPolicy(ctx context.Context, policyID string, policy *JITPolicy) (*JITPolicy, *http.Response, error) {
+func (s *PoliciesService) ModifyJITPolicy(ctx context.Context, policyID string, request *ModifyJITPolicyRequest) (*JITPolicy, *http.Response, error) {
 	u := fmt.Sprintf(jitSinglePath, policyID)
-	req, err := s.Client.NewRequest(ctx, http.MethodPatch, u, policy)
+	req, err := s.Client.NewRequest(ctx, http.MethodPatch, u, request)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -160,40 +188,22 @@ func (p *JITPolicy) GetID() string                    { return p.ID }
 func (p *JITPolicy) GetTimeExpires() *types.Timestamp { return p.TimeExpires }
 func (p *JITPolicy) GetName() string                  { return p.Name }
 func (p *JITPolicy) GetDescription() string {
-	if p.Description == nil {
-		return ""
-	}
-	return *p.Description
+	return p.Description
 }
 func (p *JITPolicy) GetSubjects() []Subject {
-	if p.Subjects == nil {
-		return []Subject{}
-	}
-	return *p.Subjects
+	return p.Subjects
 }
 func (p *JITPolicy) GetGroups() []Group {
-	if p.Groups == nil {
-		return []Group{}
-	}
-	return *p.Groups
+	return p.Groups
 }
 func (p *JITPolicy) GetPolicyType() policytype.PolicyType { return policytype.JustInTime }
 
 func (p *JITPolicy) GetChildPolicies() []ChildPolicy {
-	if p.ChildPolicies == nil {
-		return []ChildPolicy{}
-	}
-	return *p.ChildPolicies
+	return p.ChildPolicies
 }
 func (p *JITPolicy) GetAutomaticallyApproved() bool {
-	if p.AutomaticallyApproved == nil {
-		return false
-	}
-	return *p.AutomaticallyApproved
+	return p.AutomaticallyApproved
 }
 func (p *JITPolicy) GetDuration() uint {
-	if p.Duration == nil {
-		return 0
-	}
-	return *p.Duration
+	return p.Duration
 }

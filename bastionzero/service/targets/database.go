@@ -34,22 +34,10 @@ type ModifyDatabaseTargetRequest struct {
 // server doesn't necessarily have to be a database as under the hood it is a
 // proxied TCP connection.
 type DatabaseTarget struct {
-	ID                 string                    `json:"id"`
-	Name               string                    `json:"name"`
-	Status             targetstatus.TargetStatus `json:"status"`
-	ProxyTargetID      string                    `json:"proxyTargetId"`
-	LastAgentUpdate    *types.Timestamp          `json:"lastAgentUpdate"`
-	AgentVersion       string                    `json:"agentVersion"`
-	RemoteHost         string                    `json:"remoteHost"`
-	RemotePort         Port                      `json:"remotePort"`
-	LocalPort          Port                      `json:"localPort"`
-	LocalHost          string                    `json:"localHost"`
-	IsSplitCert        bool                      `json:"splitCert"`
-	DatabaseType       *string                   `json:"databaseType"`
-	EnvironmentID      string                    `json:"environmentId"`
-	Region             string                    `json:"region"`
-	AgentPublicKey     string                    `json:"agentPublicKey"`
-	AllowedTargetUsers []policies.TargetUser     `json:"allowedTargetUsers"`
+	*VirtualTarget
+	IsSplitCert        bool                  `json:"splitCert"`
+	DatabaseType       *string               `json:"databaseType"`
+	AllowedTargetUsers []policies.TargetUser `json:"allowedTargetUsers"`
 }
 
 // ListDatabaseTargets lists all Database targets.

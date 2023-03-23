@@ -31,18 +31,11 @@ type ModifyClusterTargetResponse struct {
 
 // ClusterTarget is a target running the Bctl agent within a Kubernetes cluster
 type ClusterTarget struct {
-	ID                   string                    `json:"id"`
-	Name                 string                    `json:"name"`
-	Status               targetstatus.TargetStatus `json:"status"`
-	EnvironmentID        string                    `json:"environmentId"`
-	LastAgentUpdate      *types.Timestamp          `json:"lastAgentUpdate"`
-	AgentVersion         string                    `json:"agentVersion"`
-	Region               string                    `json:"region"`
-	AgentPublicKey       string                    `json:"agentPublicKey"`
-	AllowedClusterUsers  []string                  `json:"allowedClusterUsers"`
-	AllowedClusterGroups []string                  `json:"allowedClusterGroups"`
-	ValidClusterUsers    []string                  `json:"validClusterUsers"`
-	ControlChannel       *ControlChannelSummary    `json:"controlChannel"`
+	*Target
+	AllowedClusterUsers  []string               `json:"allowedClusterUsers"`
+	AllowedClusterGroups []string               `json:"allowedClusterGroups"`
+	ValidClusterUsers    []string               `json:"validClusterUsers"`
+	ControlChannel       *ControlChannelSummary `json:"controlChannel"`
 }
 
 // ListClusterTargets lists all Cluster targets.

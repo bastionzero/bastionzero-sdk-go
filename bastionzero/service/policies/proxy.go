@@ -19,19 +19,7 @@ const (
 // ProxyPolicy represents a proxy policy. Proxy policies provide access to DB
 // and Web targets.
 type ProxyPolicy struct {
-	// ID of the policy. Populated by the server
-	ID string `json:"id,omitempty"`
-
-	// User-initialized fields
-
-	TimeExpires *types.Timestamp `json:"timeExpires,omitempty"`
-
-	// User-mutable fields
-
-	Name         string         `json:"name,omitempty"`
-	Description  *string        `json:"description,omitempty"`
-	Subjects     *[]Subject     `json:"subjects,omitempty"`
-	Groups       *[]Group       `json:"groups,omitempty"`
+	*Policy
 	Environments *[]Environment `json:"environments,omitempty"`
 	Targets      *[]Target      `json:"targets,omitempty"`
 	TargetUsers  *[]TargetUser  `json:"targetUsers,omitempty"`

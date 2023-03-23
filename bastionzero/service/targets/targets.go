@@ -29,10 +29,16 @@ type TargetsService client.Service
 
 // ControlChannelSummary describes a target's currently active control channel
 type ControlChannelSummary struct {
-	ControlChannelID string           `json:"controlChannelId"`
-	ConnectionNodeID string           `json:"connectionNodeId"`
-	StartTime        types.Timestamp  `json:"startTime"`
-	EndTime          *types.Timestamp `json:"endTime"`
+	// ControlChannelID is a unique ID that identifies the control channel
+	ControlChannelID string `json:"controlChannelId"`
+	// ConnectionNodeID is the ID of the connection node the control channel
+	// connected to
+	ConnectionNodeID string `json:"connectionNodeId"`
+	// StartTime is the time the control channel connection was established
+	StartTime types.Timestamp `json:"startTime"`
+	// EndTime is the time the control channel connection finished. Null if the
+	// connection is still active
+	EndTime *types.Timestamp `json:"endTime"`
 }
 
 // Port describes a port number
@@ -40,7 +46,7 @@ type Port struct {
 	Value *int `json:"value,omitempty"`
 }
 
-// TargetInterface lets you work with common target attributes from any kind of
+// TargetInterface lets you work with common attributes from any kind of
 // BastionZero target (excluding DAC targets)
 type TargetInterface interface {
 	// GetID returns the target's unique ID.
@@ -64,7 +70,7 @@ type TargetInterface interface {
 	GetTargetType() targettype.TargetType
 }
 
-// VirtualTargetInterface lets you work with common target attributes from any
+// VirtualTargetInterface lets you work with common attributes from any
 // kind of BastionZero virtual target (e.g. Db, Web)
 type VirtualTargetInterface interface {
 	// GetProxyTargetID returns the virtual target's proxy target's ID.
@@ -75,4 +81,48 @@ type VirtualTargetInterface interface {
 	GetRemotePort() Port
 	// GetLocalPort returns the the virtual target's local port.
 	GetLocalPort() Port
+}
+
+// Target abstracts common attributes from any kind of BastionZero target
+// (excluding DAC targets)
+type Target struct {
+	// ID is the unique ID of the target
+	ID string `json:"id"`
+	// Name is the name of the target
+	Name string `json:"name"`
+	// Status is the condition of the target
+	Status targetstatus.TargetStatus `json:"status"`
+	// EnvironmentID is the ID of the environment the target belongs to
+	EnvironmentID string `json:"environmentId"`
+	// LastAgentUpdate is the timestamp of the last transition change in the
+	// target's Status
+	LastAgentUpdate *types.Timestamp `json:"lastAgentUpdate"`
+	// AgentVersion is the version of the agent running on the target
+	AgentVersion string `json:"agentVersion"`
+	// Region is the the BastionZero region that this target has connected to
+	// (follows same naming convention as AWS regions)
+	Region string `json:"region"`
+	// AgentPublicKey is the public key this target's agent uses when running
+	// the MrTAP protocol
+	AgentPublicKey string `json:"agentPublicKey"`
+}
+
+// VirtualTarget abstracts common attributes from any kind of BastionZero
+// virtual target (e.g. DB, Web)
+type VirtualTarget struct {
+	*Target
+	// ProxyTargetID is the ID of the target that proxies connections made to
+	// this virtual target
+	ProxyTargetID string `json:"proxyTargetId"`
+	// RemoteHost is the IP address of the remote server that is connected to
+	// when a connection is made to this virtual target
+	RemoteHost string `json:"remoteHost"`
+	// RemotePort is the port of the remote server that is connected to when a
+	// connection is made to this virtual target
+	RemotePort Port `json:"remotePort"`
+	// LocalPort is the port of the daemon's localhost server that is spawned on
+	// the user's machine on connect. If null, then the zli chooses the port for
+	// the user on connect.
+	LocalPort Port   `json:"localPort"`
+	LocalHost string `json:"localHost"`
 }

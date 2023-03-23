@@ -29,19 +29,7 @@ type ModifyWebTargetRequest struct {
 // WebTarget is a virtual target that provides HTTP(S) access to a remote web
 // server. The connection is proxied by a Bzero or Cluster target.
 type WebTarget struct {
-	ID              string                    `json:"id"`
-	Name            string                    `json:"name"`
-	Status          targetstatus.TargetStatus `json:"status"`
-	ProxyTargetID   string                    `json:"proxyTargetId"`
-	LastAgentUpdate *types.Timestamp          `json:"lastAgentUpdate"`
-	AgentVersion    string                    `json:"agentVersion"`
-	RemoteHost      string                    `json:"remoteHost"`
-	RemotePort      Port                      `json:"remotePort"`
-	LocalPort       Port                      `json:"localPort"`
-	LocalHost       string                    `json:"localHost"`
-	EnvironmentID   string                    `json:"environmentId"`
-	Region          string                    `json:"region"`
-	AgentPublicKey  string                    `json:"agentPublicKey"`
+	*VirtualTarget
 }
 
 // ListWebTargets lists all Web targets.

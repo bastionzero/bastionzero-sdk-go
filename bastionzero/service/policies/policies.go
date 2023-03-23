@@ -83,3 +83,26 @@ type PolicyInterface interface {
 	// GetPolicyType returns the policy's type.
 	GetPolicyType() policytype.PolicyType
 }
+
+// Policy abstracts common attributes from any kind of BastionZero policy
+type Policy struct {
+	// ID of the policy. Populated by the server
+	ID string `json:"id,omitempty"`
+
+	// User-initialized fields
+	//
+	// TimeExpires is an optional timestamp of when the policy should be deleted
+	// by the server.
+	TimeExpires *types.Timestamp `json:"timeExpires,omitempty"`
+
+	// User-mutable fields
+	//
+	// Name is the name of the policy
+	Name string `json:"name,omitempty"`
+	// Description is an optional description that describes the policy
+	Description *string `json:"description,omitempty"`
+	// Subjects is a list of BastionZero subjects the policy applies to
+	Subjects *[]Subject `json:"subjects,omitempty"`
+	// Groups is a list of IdP groups the policy applies to
+	Groups *[]Group `json:"groups,omitempty"`
+}

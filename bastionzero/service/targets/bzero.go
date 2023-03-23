@@ -24,17 +24,10 @@ type ModifyBzeroTargetRequest struct {
 
 // BzeroTarget is a target running the Bzero agent
 type BzeroTarget struct {
-	ID                 string                    `json:"id"`
-	Name               string                    `json:"name"`
-	Status             targetstatus.TargetStatus `json:"status"`
-	EnvironmentID      string                    `json:"environmentId"`
-	LastAgentUpdate    *types.Timestamp          `json:"lastAgentUpdate"`
-	AgentVersion       string                    `json:"agentVersion"`
-	Region             string                    `json:"region"`
-	AgentPublicKey     string                    `json:"agentPublicKey"`
-	AllowedTargetUsers []policies.TargetUser     `json:"allowedTargetUsers"`
-	AllowedVerbs       []policies.Verb           `json:"allowedVerbs"`
-	ControlChannel     *ControlChannelSummary    `json:"controlChannel"`
+	*Target
+	AllowedTargetUsers []policies.TargetUser  `json:"allowedTargetUsers"`
+	AllowedVerbs       []policies.Verb        `json:"allowedVerbs"`
+	ControlChannel     *ControlChannelSummary `json:"controlChannel"`
 }
 
 // ListBzeroTargets lists all Bzero targets.

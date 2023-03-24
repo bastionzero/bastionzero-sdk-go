@@ -30,7 +30,7 @@ type ServiceAccountsService client.Service
 // access tokens, and then BastionZero uses the public key within the JWKS URL
 // to validate the service account.
 type ServiceAccount struct {
-	*service.Subject
+	service.Subject
 
 	OrganizationID string           `json:"organizationId"`
 	Email          string           `json:"email"`

@@ -22,7 +22,7 @@ type ModifyBzeroTargetRequest struct {
 
 // BzeroTarget is a target running the Bzero agent
 type BzeroTarget struct {
-	*Target
+	Target
 
 	AllowedTargetUsers []policies.TargetUser  `json:"allowedTargetUsers"`
 	AllowedVerbs       []policies.Verb        `json:"allowedVerbs"`

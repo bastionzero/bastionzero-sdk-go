@@ -24,7 +24,7 @@ type Verb struct {
 // TargetConnectPolicy represents a target connect policy. Target connect
 // policies provide access to Bzero and DynamicAccessConfig targets.
 type TargetConnectPolicy struct {
-	*Policy
+	Policy
 
 	Environments *[]Environment `json:"environments,omitempty"`
 	Targets      *[]Target      `json:"targets,omitempty"`

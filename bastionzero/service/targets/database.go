@@ -32,7 +32,7 @@ type ModifyDatabaseTargetRequest struct {
 // server doesn't necessarily have to be a database as under the hood it is a
 // proxied TCP connection.
 type DatabaseTarget struct {
-	*VirtualTarget
+	VirtualTarget
 
 	IsSplitCert        bool                  `json:"splitCert"`
 	DatabaseType       *string               `json:"databaseType"`

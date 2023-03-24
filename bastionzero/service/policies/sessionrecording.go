@@ -18,7 +18,7 @@ const (
 // recording policies govern whether users' I/O during shell connections are
 // recorded.
 type SessionRecordingPolicy struct {
-	*Policy
+	Policy
 
 	RecordInput *bool `json:"recordInput,omitempty"`
 }

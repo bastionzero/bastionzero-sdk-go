@@ -18,7 +18,7 @@ const (
 // ProxyPolicy represents a proxy policy. Proxy policies provide access to DB
 // and Web targets.
 type ProxyPolicy struct {
-	*Policy
+	Policy
 
 	Environments *[]Environment `json:"environments,omitempty"`
 	Targets      *[]Target      `json:"targets,omitempty"`

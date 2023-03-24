@@ -121,7 +121,7 @@ func (t *Target) GetAgentPublicKey() string            { return t.AgentPublicKey
 // VirtualTarget abstracts common attributes from any kind of BastionZero
 // virtual target (e.g. DB, Web)
 type VirtualTarget struct {
-	*Target
+	Target
 
 	// ProxyTargetID is the ID of the target that proxies connections made to
 	// this virtual target

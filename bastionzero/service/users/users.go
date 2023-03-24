@@ -24,7 +24,7 @@ type UsersService client.Service
 
 // User is a BastionZero user belonging to an organization
 type User struct {
-	*service.Subject
+	service.Subject
 
 	OrganizationID string           `json:"organizationId"`
 	FullName       string           `json:"fullName"`

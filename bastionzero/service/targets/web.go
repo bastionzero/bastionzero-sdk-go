@@ -27,7 +27,7 @@ type ModifyWebTargetRequest struct {
 // WebTarget is a virtual target that provides HTTP(S) access to a remote web
 // server. The connection is proxied by a Bzero or Cluster target.
 type WebTarget struct {
-	*VirtualTarget
+	VirtualTarget
 }
 
 // ListWebTargets lists all Web targets.

@@ -36,7 +36,7 @@ type Cluster struct {
 // KubernetesPolicy represents a Kubernetes policy. Kubernetes policies provide
 // access to Cluster targets.
 type KubernetesPolicy struct {
-	*Policy
+	Policy
 
 	Environments  *[]Environment  `json:"environments,omitempty"`
 	Clusters      *[]Cluster      `json:"clusters,omitempty"`

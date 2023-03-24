@@ -29,7 +29,7 @@ type ModifyClusterTargetResponse struct {
 
 // ClusterTarget is a target running the Bctl agent within a Kubernetes cluster
 type ClusterTarget struct {
-	*Target
+	Target
 
 	AllowedClusterUsers  []string               `json:"allowedClusterUsers"`
 	AllowedClusterGroups []string               `json:"allowedClusterGroups"`

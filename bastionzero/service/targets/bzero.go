@@ -6,8 +6,6 @@ import (
 	"net/http"
 
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies"
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/targets/targetstatus"
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types/targettype"
 )
 
@@ -25,6 +23,7 @@ type ModifyBzeroTargetRequest struct {
 // BzeroTarget is a target running the Bzero agent
 type BzeroTarget struct {
 	*Target
+
 	AllowedTargetUsers []policies.TargetUser  `json:"allowedTargetUsers"`
 	AllowedVerbs       []policies.Verb        `json:"allowedVerbs"`
 	ControlChannel     *ControlChannelSummary `json:"controlChannel"`
@@ -93,12 +92,4 @@ var (
 	_ TargetInterface = &BzeroTarget{}
 )
 
-func (t *BzeroTarget) GetID() string                        { return t.ID }
-func (t *BzeroTarget) GetName() string                      { return t.Name }
-func (t *BzeroTarget) GetStatus() targetstatus.TargetStatus { return t.Status }
-func (t *BzeroTarget) GetEnvironmentID() string             { return t.EnvironmentID }
-func (t *BzeroTarget) GetLastAgentUpdate() *types.Timestamp { return t.LastAgentUpdate }
-func (t *BzeroTarget) GetAgentVersion() string              { return t.AgentVersion }
-func (t *BzeroTarget) GetRegion() string                    { return t.Region }
-func (t *BzeroTarget) GetAgentPublicKey() string            { return t.AgentPublicKey }
 func (t *BzeroTarget) GetTargetType() targettype.TargetType { return targettype.Bzero }

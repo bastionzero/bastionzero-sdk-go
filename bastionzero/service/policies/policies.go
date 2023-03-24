@@ -106,3 +106,25 @@ type Policy struct {
 	// Groups is a list of IdP groups the policy applies to
 	Groups *[]Group `json:"groups,omitempty"`
 }
+
+func (p *Policy) GetID() string                    { return p.ID }
+func (p *Policy) GetTimeExpires() *types.Timestamp { return p.TimeExpires }
+func (p *Policy) GetName() string                  { return p.Name }
+func (p *Policy) GetDescription() string {
+	if p.Description == nil {
+		return ""
+	}
+	return *p.Description
+}
+func (p *Policy) GetSubjects() []Subject {
+	if p.Subjects == nil {
+		return []Subject{}
+	}
+	return *p.Subjects
+}
+func (p *Policy) GetGroups() []Group {
+	if p.Groups == nil {
+		return []Group{}
+	}
+	return *p.Groups
+}

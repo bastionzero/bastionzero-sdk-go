@@ -6,7 +6,6 @@ import (
 	"net/http"
 
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies/policytype"
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
 
@@ -20,6 +19,7 @@ const (
 // recorded.
 type SessionRecordingPolicy struct {
 	*Policy
+
 	RecordInput *bool `json:"recordInput,omitempty"`
 }
 
@@ -130,27 +130,6 @@ var (
 	_ PolicyInterface = &SessionRecordingPolicy{}
 )
 
-func (p *SessionRecordingPolicy) GetID() string                    { return p.ID }
-func (p *SessionRecordingPolicy) GetTimeExpires() *types.Timestamp { return p.TimeExpires }
-func (p *SessionRecordingPolicy) GetName() string                  { return p.Name }
-func (p *SessionRecordingPolicy) GetDescription() string {
-	if p.Description == nil {
-		return ""
-	}
-	return *p.Description
-}
-func (p *SessionRecordingPolicy) GetSubjects() []Subject {
-	if p.Subjects == nil {
-		return []Subject{}
-	}
-	return *p.Subjects
-}
-func (p *SessionRecordingPolicy) GetGroups() []Group {
-	if p.Groups == nil {
-		return []Group{}
-	}
-	return *p.Groups
-}
 func (p *SessionRecordingPolicy) GetPolicyType() policytype.PolicyType {
 	return policytype.SessionRecording
 }

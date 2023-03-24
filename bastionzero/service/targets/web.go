@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/targets/targetstatus"
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types/targettype"
 )
 
@@ -91,23 +89,8 @@ func (s *TargetsService) ModifyWebTarget(ctx context.Context, targetID string, r
 
 // Ensure WebTarget implementation satisfies the expected interfaces.
 var (
-	// WebTarget implements TargetInterface
-	_ TargetInterface = &WebTarget{}
 	// WebTarget implements VirtualTargetInterface
 	_ VirtualTargetInterface = &WebTarget{}
 )
 
-func (t *WebTarget) GetID() string                        { return t.ID }
-func (t *WebTarget) GetName() string                      { return t.Name }
-func (t *WebTarget) GetStatus() targetstatus.TargetStatus { return t.Status }
-func (t *WebTarget) GetEnvironmentID() string             { return t.EnvironmentID }
-func (t *WebTarget) GetLastAgentUpdate() *types.Timestamp { return t.LastAgentUpdate }
-func (t *WebTarget) GetAgentVersion() string              { return t.AgentVersion }
-func (t *WebTarget) GetRegion() string                    { return t.Region }
-func (t *WebTarget) GetAgentPublicKey() string            { return t.AgentPublicKey }
 func (t *WebTarget) GetTargetType() targettype.TargetType { return targettype.Web }
-
-func (t *WebTarget) GetProxyTargetID() string { return t.ProxyTargetID }
-func (t *WebTarget) GetRemoteHost() string    { return t.RemoteHost }
-func (t *WebTarget) GetRemotePort() Port      { return t.RemotePort }
-func (t *WebTarget) GetLocalPort() Port       { return t.LocalPort }

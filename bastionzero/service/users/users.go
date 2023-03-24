@@ -24,7 +24,8 @@ type UsersService client.Service
 
 // User is a BastionZero user belonging to an organization
 type User struct {
-	ID             string           `json:"id"`
+	*service.Subject
+
 	OrganizationID string           `json:"organizationId"`
 	FullName       string           `json:"fullName"`
 	Email          string           `json:"email"`
@@ -77,5 +78,4 @@ var (
 	_ service.SubjectInterface = &User{}
 )
 
-func (u *User) GetID() string                           { return u.ID }
 func (u *User) GetSubjectType() subjecttype.SubjectType { return subjecttype.User }

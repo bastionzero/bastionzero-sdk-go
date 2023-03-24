@@ -70,9 +70,11 @@ type TargetInterface interface {
 	GetTargetType() targettype.TargetType
 }
 
-// VirtualTargetInterface lets you work with common attributes from any
-// kind of BastionZero virtual target (e.g. Db, Web)
+// VirtualTargetInterface lets you work with common attributes from any kind of
+// BastionZero virtual target (e.g. Db, Web)
 type VirtualTargetInterface interface {
+	TargetInterface
+
 	// GetProxyTargetID returns the virtual target's proxy target's ID.
 	GetProxyTargetID() string
 	// GetRemoteHost returns the the virtual target's remote host.
@@ -107,10 +109,20 @@ type Target struct {
 	AgentPublicKey string `json:"agentPublicKey"`
 }
 
+func (t *Target) GetID() string                        { return t.ID }
+func (t *Target) GetName() string                      { return t.Name }
+func (t *Target) GetStatus() targetstatus.TargetStatus { return t.Status }
+func (t *Target) GetEnvironmentID() string             { return t.EnvironmentID }
+func (t *Target) GetLastAgentUpdate() *types.Timestamp { return t.LastAgentUpdate }
+func (t *Target) GetAgentVersion() string              { return t.AgentVersion }
+func (t *Target) GetRegion() string                    { return t.Region }
+func (t *Target) GetAgentPublicKey() string            { return t.AgentPublicKey }
+
 // VirtualTarget abstracts common attributes from any kind of BastionZero
 // virtual target (e.g. DB, Web)
 type VirtualTarget struct {
 	*Target
+
 	// ProxyTargetID is the ID of the target that proxies connections made to
 	// this virtual target
 	ProxyTargetID string `json:"proxyTargetId"`
@@ -126,3 +138,8 @@ type VirtualTarget struct {
 	LocalPort Port   `json:"localPort"`
 	LocalHost string `json:"localHost"`
 }
+
+func (t *VirtualTarget) GetProxyTargetID() string { return t.ProxyTargetID }
+func (t *VirtualTarget) GetRemoteHost() string    { return t.RemoteHost }
+func (t *VirtualTarget) GetRemotePort() Port      { return t.RemotePort }
+func (t *VirtualTarget) GetLocalPort() Port       { return t.LocalPort }

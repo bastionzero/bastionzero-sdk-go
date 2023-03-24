@@ -7,7 +7,6 @@ import (
 
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies/policytype"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies/verbtype"
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
 	"github.com/bastionzero/bastionzero-sdk-go/internal"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
@@ -26,6 +25,7 @@ type Verb struct {
 // policies provide access to Bzero and DynamicAccessConfig targets.
 type TargetConnectPolicy struct {
 	*Policy
+
 	Environments *[]Environment `json:"environments,omitempty"`
 	Targets      *[]Target      `json:"targets,omitempty"`
 	TargetUsers  *[]TargetUser  `json:"targetUsers,omitempty"`
@@ -138,27 +138,6 @@ var (
 	_ PolicyInterface = &TargetConnectPolicy{}
 )
 
-func (p *TargetConnectPolicy) GetID() string                    { return p.ID }
-func (p *TargetConnectPolicy) GetTimeExpires() *types.Timestamp { return p.TimeExpires }
-func (p *TargetConnectPolicy) GetName() string                  { return p.Name }
-func (p *TargetConnectPolicy) GetDescription() string {
-	if p.Description == nil {
-		return ""
-	}
-	return *p.Description
-}
-func (p *TargetConnectPolicy) GetSubjects() []Subject {
-	if p.Subjects == nil {
-		return []Subject{}
-	}
-	return *p.Subjects
-}
-func (p *TargetConnectPolicy) GetGroups() []Group {
-	if p.Groups == nil {
-		return []Group{}
-	}
-	return *p.Groups
-}
 func (p *TargetConnectPolicy) GetPolicyType() policytype.PolicyType { return policytype.TargetConnect }
 
 func (p *TargetConnectPolicy) GetEnvironments() []Environment {

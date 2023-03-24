@@ -17,12 +17,12 @@ const (
 // CreateDynamicAccessConfigurationRequest is used to create a new dynamic
 // access configuration
 type CreateDynamicAccessConfigurationRequest struct {
-	Name          string  `json:"name"`
-	StartWebhook  string  `json:"startWebhook"`
-	StopWebhook   string  `json:"stopWebhook"`
-	HealthWebhook string  `json:"healthWebhook"`
-	EnvironmentId string  `json:"environmentId"`
-	SharedSecret  *string `json:"sharedSecret,omitempty"`
+	Name          string `json:"name"`
+	StartWebhook  string `json:"startWebhook"`
+	StopWebhook   string `json:"stopWebhook"`
+	HealthWebhook string `json:"healthWebhook"`
+	EnvironmentId string `json:"environmentId"`
+	SharedSecret  string `json:"sharedSecret,omitempty"`
 }
 
 // CreateDynamicAccessResponse is the response returned if a dynamic access

@@ -12,3 +12,10 @@ type SubjectInterface interface {
 	// GetSubjectType returns the subject's type.
 	GetSubjectType() subjecttype.SubjectType
 }
+
+// Subject abstracts common attributes from any kind of BastionZero subject
+type Subject struct {
+	ID string `json:"id"`
+}
+
+func (s *Subject) GetID() string { return s.ID }

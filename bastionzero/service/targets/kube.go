@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/targets/targetstatus"
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types/targettype"
 )
 
@@ -32,6 +30,7 @@ type ModifyClusterTargetResponse struct {
 // ClusterTarget is a target running the Bctl agent within a Kubernetes cluster
 type ClusterTarget struct {
 	*Target
+
 	AllowedClusterUsers  []string               `json:"allowedClusterUsers"`
 	AllowedClusterGroups []string               `json:"allowedClusterGroups"`
 	ValidClusterUsers    []string               `json:"validClusterUsers"`
@@ -101,12 +100,4 @@ var (
 	_ TargetInterface = &ClusterTarget{}
 )
 
-func (t *ClusterTarget) GetID() string                        { return t.ID }
-func (t *ClusterTarget) GetName() string                      { return t.Name }
-func (t *ClusterTarget) GetStatus() targetstatus.TargetStatus { return t.Status }
-func (t *ClusterTarget) GetEnvironmentID() string             { return t.EnvironmentID }
-func (t *ClusterTarget) GetLastAgentUpdate() *types.Timestamp { return t.LastAgentUpdate }
-func (t *ClusterTarget) GetAgentVersion() string              { return t.AgentVersion }
-func (t *ClusterTarget) GetRegion() string                    { return t.Region }
-func (t *ClusterTarget) GetAgentPublicKey() string            { return t.AgentPublicKey }
 func (t *ClusterTarget) GetTargetType() targettype.TargetType { return targettype.Cluster }

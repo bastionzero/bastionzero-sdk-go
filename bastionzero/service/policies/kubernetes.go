@@ -6,7 +6,6 @@ import (
 	"net/http"
 
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies/policytype"
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
 	"github.com/bastionzero/bastionzero-sdk-go/internal"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
@@ -38,6 +37,7 @@ type Cluster struct {
 // access to Cluster targets.
 type KubernetesPolicy struct {
 	*Policy
+
 	Environments  *[]Environment  `json:"environments,omitempty"`
 	Clusters      *[]Cluster      `json:"clusters,omitempty"`
 	ClusterUsers  *[]ClusterUser  `json:"clusterUsers,omitempty"`
@@ -150,27 +150,6 @@ var (
 	_ PolicyInterface = &KubernetesPolicy{}
 )
 
-func (p *KubernetesPolicy) GetID() string                    { return p.ID }
-func (p *KubernetesPolicy) GetTimeExpires() *types.Timestamp { return p.TimeExpires }
-func (p *KubernetesPolicy) GetName() string                  { return p.Name }
-func (p *KubernetesPolicy) GetDescription() string {
-	if p.Description == nil {
-		return ""
-	}
-	return *p.Description
-}
-func (p *KubernetesPolicy) GetSubjects() []Subject {
-	if p.Subjects == nil {
-		return []Subject{}
-	}
-	return *p.Subjects
-}
-func (p *KubernetesPolicy) GetGroups() []Group {
-	if p.Groups == nil {
-		return []Group{}
-	}
-	return *p.Groups
-}
 func (p *KubernetesPolicy) GetPolicyType() policytype.PolicyType { return policytype.Kubernetes }
 
 func (p *KubernetesPolicy) GetEnvironments() []Environment {

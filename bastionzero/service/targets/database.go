@@ -6,8 +6,6 @@ import (
 	"net/http"
 
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies"
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/targets/targetstatus"
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types/targettype"
 )
 
@@ -35,6 +33,7 @@ type ModifyDatabaseTargetRequest struct {
 // proxied TCP connection.
 type DatabaseTarget struct {
 	*VirtualTarget
+
 	IsSplitCert        bool                  `json:"splitCert"`
 	DatabaseType       *string               `json:"databaseType"`
 	AllowedTargetUsers []policies.TargetUser `json:"allowedTargetUsers"`
@@ -99,23 +98,8 @@ func (s *TargetsService) ModifyDatabaseTarget(ctx context.Context, targetID stri
 
 // Ensure DatabaseTarget implementation satisfies the expected interfaces.
 var (
-	// DatabaseTarget implements TargetInterface
-	_ TargetInterface = &DatabaseTarget{}
 	// DatabaseTarget implements VirtualTargetInterface
 	_ VirtualTargetInterface = &DatabaseTarget{}
 )
 
-func (t *DatabaseTarget) GetID() string                        { return t.ID }
-func (t *DatabaseTarget) GetName() string                      { return t.Name }
-func (t *DatabaseTarget) GetStatus() targetstatus.TargetStatus { return t.Status }
-func (t *DatabaseTarget) GetEnvironmentID() string             { return t.EnvironmentID }
-func (t *DatabaseTarget) GetLastAgentUpdate() *types.Timestamp { return t.LastAgentUpdate }
-func (t *DatabaseTarget) GetAgentVersion() string              { return t.AgentVersion }
-func (t *DatabaseTarget) GetRegion() string                    { return t.Region }
-func (t *DatabaseTarget) GetAgentPublicKey() string            { return t.AgentPublicKey }
 func (t *DatabaseTarget) GetTargetType() targettype.TargetType { return targettype.Db }
-
-func (t *DatabaseTarget) GetProxyTargetID() string { return t.ProxyTargetID }
-func (t *DatabaseTarget) GetRemoteHost() string    { return t.RemoteHost }
-func (t *DatabaseTarget) GetRemotePort() Port      { return t.RemotePort }
-func (t *DatabaseTarget) GetLocalPort() Port       { return t.LocalPort }

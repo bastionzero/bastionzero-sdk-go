@@ -6,7 +6,6 @@ import (
 	"net/http"
 
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies/policytype"
-	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
 	"github.com/bastionzero/bastionzero-sdk-go/internal"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
@@ -20,6 +19,7 @@ const (
 // and Web targets.
 type ProxyPolicy struct {
 	*Policy
+
 	Environments *[]Environment `json:"environments,omitempty"`
 	Targets      *[]Target      `json:"targets,omitempty"`
 	TargetUsers  *[]TargetUser  `json:"targetUsers,omitempty"`
@@ -131,27 +131,6 @@ var (
 	_ PolicyInterface = &ProxyPolicy{}
 )
 
-func (p *ProxyPolicy) GetID() string                    { return p.ID }
-func (p *ProxyPolicy) GetTimeExpires() *types.Timestamp { return p.TimeExpires }
-func (p *ProxyPolicy) GetName() string                  { return p.Name }
-func (p *ProxyPolicy) GetDescription() string {
-	if p.Description == nil {
-		return ""
-	}
-	return *p.Description
-}
-func (p *ProxyPolicy) GetSubjects() []Subject {
-	if p.Subjects == nil {
-		return []Subject{}
-	}
-	return *p.Subjects
-}
-func (p *ProxyPolicy) GetGroups() []Group {
-	if p.Groups == nil {
-		return []Group{}
-	}
-	return *p.Groups
-}
 func (p *ProxyPolicy) GetPolicyType() policytype.PolicyType { return policytype.Proxy }
 
 func (p *ProxyPolicy) GetEnvironments() []Environment {

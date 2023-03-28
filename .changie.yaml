@@ -4,12 +4,15 @@ changelogPath: CHANGELOG.md
 versionExt: md
 versionFormat: '## {{.Version}} ({{.Time.Format "January 02, 2006"}})'
 kindFormat: '{{.Kind}}:'
-changeFormat: '* {{.Body}} ([#{{.Custom.Issue}}](https://github.com/bastionzero/bastionzero-sdk-go/issues/{{.Custom.Issue}})).'
+changeFormat: |
+  {{- $issues := splitList "," .Custom.Issues }}
+  * {{.Body}} ({{- range $i, $issue := $issues }} {{- $trimed := trim $issue }}{{- if $i}}, {{- end}}[#{{$trimed}}](https://github.com/bastionzero/bastionzero-sdk-go/issues/{{$trimed}})
+  {{- end}}).
 custom:
-  - key: Issue
-    label: Issue/PR Number
-    type: int
-    minInt: 1
+  - key: Issues
+    label: Comma separated list of issue(s)/PR number(s)
+    type: string
+    minLength: 1
 kinds:
   - label: BREAKING CHANGES
     auto: major
@@ -17,7 +20,7 @@ kinds:
     auto: minor
   - label: ENHANCEMENTS
     auto: minor
-  - label: NOTES
+  - label: NOTES/MISC
     auto: patch
   - label: BUG FIXES
     auto: patch

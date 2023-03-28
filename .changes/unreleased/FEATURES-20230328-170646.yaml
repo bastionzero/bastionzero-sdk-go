@@ -1,0 +1,5 @@
+kind: FEATURES
+body: 'serviceaccounts: Add support for GET service account by ID or list'
+time: 2023-03-28T17:06:46.866354-04:00
+custom:
+  Issues: "1"

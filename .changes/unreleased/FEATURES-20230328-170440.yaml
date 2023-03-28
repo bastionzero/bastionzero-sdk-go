@@ -1,0 +1,5 @@
+kind: FEATURES
+body: 'organization: Add support for GET list of IdP groups'
+time: 2023-03-28T17:04:40.072183-04:00
+custom:
+  Issues: "1"

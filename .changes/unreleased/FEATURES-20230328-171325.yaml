@@ -1,0 +1,5 @@
+kind: FEATURES
+body: 'targets: Add support for PATCH target by ID for all remaining target types'
+time: 2023-03-28T17:13:25.641621-04:00
+custom:
+  Issues: "1"

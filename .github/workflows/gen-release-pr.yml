@@ -1,7 +1,6 @@
 name: Generate release pull request
 
-on:
-  workflow_dispatch:
+on: [workflow_dispatch]
 
 jobs:
   generate-pr:

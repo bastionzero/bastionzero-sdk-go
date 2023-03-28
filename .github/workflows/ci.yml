@@ -30,5 +30,7 @@ jobs:
     - name: Format
       run: if [ "$(gofmt -s -l . | wc -l)" -gt 0 ]; then exit 1; fi
       if: matrix.os == 'ubuntu-latest'
+    - name: Build
+      run: go build -v ./...
     - name: Test
       run: go test -race ./...

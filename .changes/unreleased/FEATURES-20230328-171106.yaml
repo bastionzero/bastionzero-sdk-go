@@ -1,6 +1,0 @@
-kind: FEATURES
-body: 'targets/dynamicaccess: Add support for all CRUD dynamic access configuration
-  (DAC) endpoints'
-time: 2023-03-28T17:11:06.209483-04:00
-custom:
-  Issues: "1"

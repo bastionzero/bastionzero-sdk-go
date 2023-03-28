@@ -36,12 +36,12 @@ jobs:
         branch: release/${{ steps.latest.outputs.output }}
         commit-message: Release ${{ steps.latest.outputs.output }}
         body: |
-        TODO:
-        - [ ] Update [bastionzero/bastionzero.go#libraryVersion](https://github.com/bastionzero/bastionzero-sdk-go/blob/master/bastionzero/bastionzero.go) to `"${{ steps.latest.outputs.output }}"` before merging.
-        - [ ] Double check the auto-generated files included in this PR look correct, especially `CHANGELOG.md`.
+          TODO:
+          - [ ] Update [bastionzero/bastionzero.go#libraryVersion](https://github.com/bastionzero/bastionzero-sdk-go/blob/master/bastionzero/bastionzero.go) to `"${{ steps.latest.outputs.output }}"` before merging.
+          - [ ] Double check the auto-generated files included in this PR look correct, especially `CHANGELOG.md`.
         
-        Automated release PR created by [create-pull-request](https://github.com/peter-evans/create-pull-request) GitHub action.
+          Automated release PR created by [create-pull-request](https://github.com/peter-evans/create-pull-request) GitHub action.
 
-        When this PR is merged to `master`, a new draft release is created and tagged with ${{ steps.latest.outputs.output }}.
+          When this PR is merged to `master`, a new draft release is created and tagged with ${{ steps.latest.outputs.output }}.
 
-        See the `.changes/${{ steps.latest.outputs.output }}.md` file to preview the release notes.
+          See the `.changes/${{ steps.latest.outputs.output }}.md` file to preview the release notes.

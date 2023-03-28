@@ -2,6 +2,7 @@
 
 [![bastionzero-sdk-go release (latest SemVer)](https://img.shields.io/github/v/release/bastionzero/bastionzero-sdk-go?sort=semver)](https://github.com/bastionzero/bastionzero-sdk-go/releases)
 [![GoDoc](https://img.shields.io/static/v1?label=godoc&message=reference&color=blue)](https://pkg.go.dev/github.com/bastionzero/bastionzero-sdk-go)
+[![Test Status](https://github.com/bastionzero/bastionzero-sdk-go/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/bastionzero/bastionzero-sdk-go/actions?query=workflow%3Aci%20branch:master)
 
 `bastionzero-sdk-go` is a Go client library for accessing the **BastionZero API
 v2**. 

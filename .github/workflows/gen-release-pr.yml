@@ -34,6 +34,7 @@ jobs:
         title: Release ${{ steps.latest.outputs.output }}
         branch: release/${{ steps.latest.outputs.output }}
         commit-message: Release ${{ steps.latest.outputs.output }}
+        labels: release
         body: |
           TODO:
           - [ ] Update [bastionzero/bastionzero.go#libraryVersion](https://github.com/bastionzero/bastionzero-sdk-go/blob/master/bastionzero/bastionzero.go) to `"${{ steps.latest.outputs.output }}"` before merging.

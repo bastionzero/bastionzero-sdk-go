@@ -1,0 +1,5 @@
+kind: FEATURES
+body: 'users: Add support for GET user by ID/email or list'
+time: 2023-03-28T17:07:14.49187-04:00
+custom:
+  Issues: "1"

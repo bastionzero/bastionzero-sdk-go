@@ -1,0 +1,27 @@
+name: release
+
+on:
+  push:
+    branches: [ master ]
+    paths: [ CHANGELOG.md ]
+
+jobs:
+  release:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Get the latest version
+      id: latest
+      uses: miniscruff/changie-action@v1
+      with:
+        version: latest
+        args: latest
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        body_path: ".changes/${{ steps.latest.outputs.output }}.md"
+        tag_name: "${{ steps.latest.outputs.output }}"
+        draft: true

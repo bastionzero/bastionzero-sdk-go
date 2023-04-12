@@ -20,7 +20,7 @@ kinds:
     auto: minor
   - label: ENHANCEMENTS
     auto: minor
-  - label: NOTES/MISC
+  - label: NOTES
     auto: patch
   - label: BUG FIXES
     auto: patch

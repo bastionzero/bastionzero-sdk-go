@@ -13,7 +13,7 @@ Information in the changelog should be broken down into the following categories
 - **FEATURES:** These are _major_ new improvements that deserve a special highlight, such as a new API endpoint or service.
 - **ENHANCEMENTS:** Smaller features added to the project such as a new field for an already existing API service or endpoint.
 - **BUG FIXES:** Any bugs that were fixed.
-- **NOTES/MISC:** Catch-all category for changes that do not fit the categories above, such as potentially unexpected upgrade behavior, upcoming deprecations, or 3rd party library upgrades.
+- **NOTES:** Catch-all category for changes that do not fit the categories above, such as potentially unexpected upgrade behavior, upcoming deprecations, or 3rd party library upgrades.
 
 ### Changie Automation Tool
 

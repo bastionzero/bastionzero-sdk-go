@@ -5,7 +5,7 @@ This document details how to make contributions to this repo.
 ## Changelog
 
 The `CHANGELOG` file follows a format similar to HashiCorp's changelog
-specifications they recommended to use for Terraform providers found
+specifications they recommend to use for Terraform providers found
 [here](https://www.terraform.io/plugin/sdkv2/best-practices/versioning#changelog-specification).
 
 Information in the changelog should be broken down into the following categories:
@@ -36,7 +36,7 @@ Changie will then prompt for a Github issue or pull request number (note: If
 your change spans across multiple issues or PRs, you can include all of them as
 a comma separated list of numbers). _Repeat_ this process for any additional
 changes. The `.yaml` files created in the `.changes/unreleased` folder should be
-pushed the repository along with any code changes.
+pushed to the repository along with any code changes.
 
 #### Entry (`body`) format
 

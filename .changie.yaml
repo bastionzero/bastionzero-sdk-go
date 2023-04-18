@@ -20,7 +20,7 @@ kinds:
     auto: minor
   - label: ENHANCEMENTS
     auto: minor
-  - label: NOTES/MISC
+  - label: NOTES
     auto: patch
   - label: BUG FIXES
     auto: patch
@@ -28,3 +28,7 @@ newlines:
   afterKind: 1
   beforeKind: 1
   endOfVersion: 2
+replacements:
+  - path: bastionzero/bastionzero.go
+    find: 'libraryVersion = ".*"'
+    replace: 'libraryVersion = "{{.Version}}"'

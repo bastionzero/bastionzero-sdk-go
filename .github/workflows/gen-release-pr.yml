@@ -37,7 +37,7 @@ jobs:
         labels: release
         body: |
           TODO:
-          - [ ] Update [bastionzero/bastionzero.go#libraryVersion](https://github.com/bastionzero/bastionzero-sdk-go/blob/master/bastionzero/bastionzero.go) to `"${{ steps.latest.outputs.output }}"` before merging.
+          - [x] Update [bastionzero/bastionzero.go#libraryVersion](https://github.com/bastionzero/bastionzero-sdk-go/blob/master/bastionzero/bastionzero.go) to `"${{ steps.latest.outputs.output }}"` before merging.
           - [ ] Double check the auto-generated files included in this PR look correct, especially `CHANGELOG.md`.
         
           Automated release PR created by [create-pull-request](https://github.com/peter-evans/create-pull-request) GitHub action.

@@ -126,8 +126,7 @@ func (s *TargetsService) DeleteDatabaseTarget(ctx context.Context, targetID stri
 		return nil, err
 	}
 
-	target := new(DatabaseTarget)
-	resp, err := s.Client.Do(req, target)
+	resp, err := s.Client.Do(req, nil)
 	if err != nil {
 		return resp, err
 	}

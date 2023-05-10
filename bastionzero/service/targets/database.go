@@ -116,6 +116,25 @@ func (s *TargetsService) GetDatabaseTarget(ctx context.Context, targetID string)
 	return target, resp, nil
 }
 
+// DeleteDatabaseTarget deletes the specified Database target.
+//
+// BastionZero API docs: https://cloud.bastionzero.com/api/#delete-/api/v2/targets/database/-id-
+func (s *TargetsService) DeleteDatabaseTarget(ctx context.Context, targetID string) (*http.Response, error) {
+	u := fmt.Sprintf(databaseSinglePath, targetID)
+	req, err := s.Client.NewRequest(ctx, http.MethodDelete, u, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	target := new(DatabaseTarget)
+	resp, err := s.Client.Do(req, target)
+	if err != nil {
+		return resp, err
+	}
+
+	return resp, nil
+}
+
 // ModifyDatabaseTarget updates a Database target.
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#patch-/api/v2/targets/database/-id-

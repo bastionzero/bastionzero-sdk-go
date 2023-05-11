@@ -28,7 +28,7 @@ type CreateDatabaseTargetRequest struct {
 	EnvironmentName string `json:"environmentName,omitempty"`
 }
 
-// CreateDatabaseTargetRequest is the response returned if a Database target is
+// CreateDatabaseTargetResponse is the response returned if a Database target is
 // successfully created
 type CreateDatabaseTargetResponse struct {
 	TargetId string `json:"targetId"`

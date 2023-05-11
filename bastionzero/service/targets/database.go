@@ -16,10 +16,10 @@ const (
 
 // CreateDatabaseTargetRequest is used to create a new Database target
 type CreateDatabaseTargetRequest struct {
-	TargetName      string `json:"targetName,omitempty"`
-	ProxyTargetID   string `json:"proxyTargetId,omitempty"`
-	RemoteHost      string `json:"remoteHost,omitempty"`
-	RemotePort      *Port  `json:"remotePort,omitempty"`
+	TargetName      string `json:"targetName"`
+	ProxyTargetID   string `json:"proxyTargetId"`
+	RemoteHost      string `json:"remoteHost"`
+	RemotePort      Port   `json:"remotePort"`
 	LocalPort       *Port  `json:"localPort,omitempty"`
 	LocalHost       string `json:"localHost,omitempty"`
 	IsSplitCert     bool   `json:"splitCert,omitempty"`

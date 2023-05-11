@@ -1,5 +1,5 @@
-kind: ENHANCEMENTS
+kind: FEATURES
 body: 'targets: Add support for POST (Create) and DELETE Database target'
-time: 2023-05-09T15:44:52.868112-07:00
+time: 2023-05-11T09:04:55.32003-07:00
 custom:
-  Issues: '#16'
+  Issues: "16"

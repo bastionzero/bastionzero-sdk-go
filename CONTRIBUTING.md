@@ -34,9 +34,10 @@ the body in your text editor of choice).
 
 Changie will then prompt for a Github issue or pull request number (note: If
 your change spans across multiple issues or PRs, you can include all of them as
-a comma separated list of numbers). _Repeat_ this process for any additional
-changes. The `.yaml` files created in the `.changes/unreleased` folder should be
-pushed to the repository along with any code changes.
+a comma separated list of numbers). Please do not include a leading `#` when
+specifying the GitHub issue or pull request number. _Repeat_ this process for
+any additional changes. The `.yaml` files created in the `.changes/unreleased`
+folder should be pushed to the repository along with any code changes.
 
 #### Entry (`body`) format
 

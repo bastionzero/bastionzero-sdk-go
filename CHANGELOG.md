@@ -1,3 +1,11 @@
+## v0.2.0 (May 12, 2023)
+
+FEATURES:
+
+
+* targets: Add support for POST (Create) and DELETE Database target ([#16](https://github.com/bastionzero/bastionzero-sdk-go/issues/16)).
+
+
 ## v0.1.0 (March 28, 2023)
 
 FEATURES:

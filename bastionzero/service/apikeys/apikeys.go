@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types/subjecttype"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
 
@@ -41,7 +43,8 @@ type ModifyApiKeyRequest struct {
 // ApiKey is an API key that provides programmatic access to select BastionZero
 // API endpoints
 type ApiKey struct {
-	ID                string          `json:"id"`
+	service.Subject
+
 	Name              string          `json:"name"`
 	TimeCreated       types.Timestamp `json:"timeCreated"`
 	IsRegistrationKey bool            `json:"isRegistrationKey"`
@@ -140,3 +143,11 @@ func (s *ApiKeysService) ModifyApiKey(ctx context.Context, apiKeyID string, requ
 
 	return apiKey, resp, nil
 }
+
+// Ensure ApiKey implementation satisfies the expected interfaces.
+var (
+	// ApiKey implements SubjectInterface
+	_ service.SubjectInterface = &ApiKey{}
+)
+
+func (u *ApiKey) GetSubjectType() subjecttype.SubjectType { return subjecttype.ApiKey }

@@ -15,6 +15,7 @@ import (
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/apikeys"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/autodiscoveryscripts"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/environments"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/githubactions"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/organization"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/serviceaccounts"
@@ -54,6 +55,7 @@ type Client struct {
 	ApiKeys              *apikeys.ApiKeysService
 	AutodiscoveryScripts *autodiscoveryscripts.AutodiscoveryScriptsService
 	Environments         *environments.EnvironmentsService
+	GitHubActions        *githubactions.GitHubActionsService
 	Organization         *organization.OrganizationService
 	Policies             *policies.PoliciesService
 	ServiceAccounts      *serviceaccounts.ServiceAccountsService
@@ -81,6 +83,7 @@ func NewClient(httpClient *http.Client) *Client {
 	c.ApiKeys = (*apikeys.ApiKeysService)(&c.common)
 	c.AutodiscoveryScripts = (*autodiscoveryscripts.AutodiscoveryScriptsService)(&c.common)
 	c.Environments = (*environments.EnvironmentsService)(&c.common)
+	c.GitHubActions = (*githubactions.GitHubActionsService)(&c.common)
 	c.Organization = (*organization.OrganizationService)(&c.common)
 	c.Policies = (*policies.PoliciesService)(&c.common)
 	c.ServiceAccounts = (*serviceaccounts.ServiceAccountsService)(&c.common)

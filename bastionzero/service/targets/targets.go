@@ -51,20 +51,20 @@ type Port struct {
 type TargetInterface interface {
 	// GetID returns the target's unique ID.
 	GetID() string
-	// GetName returns the the target's name.
+	// GetName returns the target's name.
 	GetName() string
-	// GetStatus returns the the target's status.
+	// GetStatus returns the target's status.
 	GetStatus() targetstatus.TargetStatus
-	// GetEnvironmentID returns the the target's environment's ID.
+	// GetEnvironmentID returns the target's environment's ID.
 	GetEnvironmentID() string
 	// GetLastAgentUpdate returns the target's last agent update if set.
 	// Otherwise, returns nil.
 	GetLastAgentUpdate() *types.Timestamp
-	// GetAgentVersion returns the the target's agent version.
+	// GetAgentVersion returns the target's agent version.
 	GetAgentVersion() string
 	// GetRegion returns the target's region.
 	GetRegion() string
-	// GetAgentPublicKey returns the the target's agent public key.
+	// GetAgentPublicKey returns the target's agent public key.
 	GetAgentPublicKey() string
 	// GetTargetType returns the target's type.
 	GetTargetType() targettype.TargetType
@@ -77,11 +77,11 @@ type VirtualTargetInterface interface {
 
 	// GetProxyTargetID returns the virtual target's proxy target's ID.
 	GetProxyTargetID() string
-	// GetRemoteHost returns the the virtual target's remote host.
+	// GetRemoteHost returns the virtual target's remote host.
 	GetRemoteHost() string
-	// GetRemotePort returns the the virtual target's remote port.
+	// GetRemotePort returns the virtual target's remote port.
 	GetRemotePort() Port
-	// GetLocalPort returns the the virtual target's local port.
+	// GetLocalPort returns the virtual target's local port.
 	GetLocalPort() Port
 }
 
@@ -101,7 +101,7 @@ type Target struct {
 	LastAgentUpdate *types.Timestamp `json:"lastAgentUpdate"`
 	// AgentVersion is the version of the agent running on the target
 	AgentVersion string `json:"agentVersion"`
-	// Region is the the BastionZero region that this target has connected to
+	// Region is the BastionZero region that this target has connected to
 	// (follows same naming convention as AWS regions)
 	Region string `json:"region"`
 	// AgentPublicKey is the public key this target's agent uses when running

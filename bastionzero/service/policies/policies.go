@@ -69,7 +69,7 @@ type PolicyInterface interface {
 	// GetTimeExpires returns the policy's expiration if set. Otherwise, returns
 	// nil.
 	GetTimeExpires() *types.Timestamp
-	// GetName returns the the policy's name.
+	// GetName returns the policy's name.
 	GetName() string
 	// GetDescription returns the policy's description if set. Otherwise,
 	// returns an empty string.

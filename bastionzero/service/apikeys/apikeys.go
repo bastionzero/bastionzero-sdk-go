@@ -12,8 +12,8 @@ import (
 )
 
 const (
-	apikeysBasePath   = "api/v2/api-keys"
-	apikeysSinglePath = apikeysBasePath + "/%s"
+	apiKeysBasePath   = "api/v2/api-keys"
+	apiKeysSinglePath = apiKeysBasePath + "/%s"
 )
 
 // ApiKeysService handles communication with the api keys endpoints of the
@@ -54,7 +54,7 @@ type ApiKey struct {
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#get-/api/v2/api-keys
 func (s *ApiKeysService) ListGlobalApiKeys(ctx context.Context) ([]ApiKey, *http.Response, error) {
-	u := apikeysBasePath
+	u := apiKeysBasePath
 	req, err := s.Client.NewRequest(ctx, http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
@@ -73,7 +73,7 @@ func (s *ApiKeysService) ListGlobalApiKeys(ctx context.Context) ([]ApiKey, *http
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#post-/api/v2/api-keys
 func (s *ApiKeysService) CreateGlobalApiKey(ctx context.Context, request *CreateGlobalApiKeyRequest) (*CreateGlobalApiKeyResponse, *http.Response, error) {
-	u := apikeysBasePath
+	u := apiKeysBasePath
 	req, err := s.Client.NewRequest(ctx, http.MethodPost, u, request)
 	if err != nil {
 		return nil, nil, err
@@ -92,7 +92,7 @@ func (s *ApiKeysService) CreateGlobalApiKey(ctx context.Context, request *Create
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#get-/api/v2/api-keys/-id-
 func (s *ApiKeysService) GetApiKey(ctx context.Context, apiKeyID string) (*ApiKey, *http.Response, error) {
-	u := fmt.Sprintf(apikeysSinglePath, apiKeyID)
+	u := fmt.Sprintf(apiKeysSinglePath, apiKeyID)
 	req, err := s.Client.NewRequest(ctx, http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
@@ -111,7 +111,7 @@ func (s *ApiKeysService) GetApiKey(ctx context.Context, apiKeyID string) (*ApiKe
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#delete-/api/v2/api-keys/-id-
 func (s *ApiKeysService) DeleteApiKey(ctx context.Context, apiKeyID string) (*http.Response, error) {
-	u := fmt.Sprintf(apikeysSinglePath, apiKeyID)
+	u := fmt.Sprintf(apiKeysSinglePath, apiKeyID)
 	req, err := s.Client.NewRequest(ctx, http.MethodDelete, u, nil)
 	if err != nil {
 		return nil, err
@@ -129,7 +129,7 @@ func (s *ApiKeysService) DeleteApiKey(ctx context.Context, apiKeyID string) (*ht
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#patch-/api/v2/api-keys/-id-
 func (s *ApiKeysService) ModifyApiKey(ctx context.Context, apiKeyID string, request *ModifyApiKeyRequest) (*ApiKey, *http.Response, error) {
-	u := fmt.Sprintf(apikeysSinglePath, apiKeyID)
+	u := fmt.Sprintf(apiKeysSinglePath, apiKeyID)
 	req, err := s.Client.NewRequest(ctx, http.MethodPatch, u, request)
 	if err != nil {
 		return nil, nil, err

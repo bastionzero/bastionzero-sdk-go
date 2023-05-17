@@ -2,6 +2,7 @@ package types
 
 import (
 	"fmt"
+	"net/url"
 	"time"
 )
 
@@ -20,6 +21,11 @@ func (t Timestamp) String() string {
 func (t *Timestamp) MarshalJSON() ([]byte, error) {
 	stamp := fmt.Sprintf("\"%s\"", t.Time.UTC().Format(time.RFC3339))
 	return []byte(stamp), nil
+}
+
+func (t Timestamp) EncodeValues(key string, values *url.Values) error {
+	values.Set(key, t.Time.UTC().Format(time.RFC3339))
+	return nil
 }
 
 // Equal reports whether t and u are equal based on time.Equal

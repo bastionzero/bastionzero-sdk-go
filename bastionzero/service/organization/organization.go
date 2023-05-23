@@ -133,7 +133,7 @@ func (s *OrganizationService) ListGroups(ctx context.Context) ([]Group, *http.Re
 }
 
 // FetchGroups fetches the groups for your organization by querying the
-// configured identity providers directly.
+// configured identity provider directly.
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#post-/api/v2/organization/groups/fetch
 func (s *OrganizationService) FetchGroups(ctx context.Context) ([]Group, *http.Response, error) {
@@ -153,7 +153,7 @@ func (s *OrganizationService) FetchGroups(ctx context.Context) ([]Group, *http.R
 }
 
 // FetchUserGroups fetches the groups for the specified user by querying the
-// configured identity providers directly.
+// configured identity provider directly.
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#post-/api/v2/organization/groups-memberships/fetch/-id-
 func (s *OrganizationService) FetchUserGroups(ctx context.Context, userID string) ([]Group, *http.Response, error) {
@@ -172,7 +172,7 @@ func (s *OrganizationService) FetchUserGroups(ctx context.Context, userID string
 	return *groupList, resp, nil
 }
 
-// DeleteIdpGroupCredentials deletes the credentials metadata used to fetch groups from the Identity Provider.
+// DeleteIdpGroupCredentials deletes the credentials metadata used to fetch groups from the identity provider.
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#delete-/api/v2/organization/groups/credentials
 func (s *OrganizationService) DeleteIdpGroupCredentials(ctx context.Context) (*http.Response, error) {

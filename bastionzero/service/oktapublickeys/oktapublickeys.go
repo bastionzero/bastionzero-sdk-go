@@ -32,7 +32,7 @@ type ListOktaPublicKeysResponse struct {
 	Keys []OktaPublicKey `json:"keys"`
 }
 
-// ListOktaPublicKeys lists Okta public keys.  The list of the returned public
+// ListOktaPublicKeys lists Okta public keys. The list of the returned public
 // keys can be used to verify that the JWT client assertion was signed by
 // BastionZero. The JWT assertion is used by BastionZero in order to acquire
 // access tokens on behalf of a client. These access tokens are then used by

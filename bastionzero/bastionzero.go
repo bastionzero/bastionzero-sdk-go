@@ -19,6 +19,7 @@ import (
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/events"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/githubactions"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/mfa"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/oktapublickeys"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/organization"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/serviceaccounts"
@@ -62,6 +63,7 @@ type Client struct {
 	Events               *events.EventsService
 	GitHubActions        *githubactions.GitHubActionsService
 	MFA                  *mfa.MFAService
+	OktaPublicKeys       *oktapublickeys.OktaPublicKeysService
 	Organization         *organization.OrganizationService
 	Policies             *policies.PoliciesService
 	ServiceAccounts      *serviceaccounts.ServiceAccountsService
@@ -93,6 +95,7 @@ func NewClient(httpClient *http.Client) *Client {
 	c.Events = (*events.EventsService)(&c.common)
 	c.GitHubActions = (*githubactions.GitHubActionsService)(&c.common)
 	c.MFA = (*mfa.MFAService)(&c.common)
+	c.OktaPublicKeys = (*oktapublickeys.OktaPublicKeysService)(&c.common)
 	c.Organization = (*organization.OrganizationService)(&c.common)
 	c.Policies = (*policies.PoliciesService)(&c.common)
 	c.ServiceAccounts = (*serviceaccounts.ServiceAccountsService)(&c.common)

@@ -7,6 +7,7 @@ import (
 
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types/targettype"
+	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
 
 const (
@@ -47,6 +48,32 @@ type ModifyDatabaseTargetRequest struct {
 	EnvironmentID *string `json:"environmentId,omitempty"`
 }
 
+// ListDatabaseTargetsOptions specifies the optional parameters when querying
+// for a list of database targets
+type ListDatabaseTargetsOptions struct {
+	// TargetNames filters the list of database targets to only those that
+	// contain the specified target names.
+	TargetNames []string `url:"targetNames,omitempty"`
+	// TargetIDs filters the list of database targets to only those that contain the
+	// specified target IDs.
+	TargetIDs []string `url:"targetIds,omitempty"`
+	// EnvironmentName disambiguates conflicting targets that have the same
+	// target name when using the TargetNames option by filtering the list of
+	// database targets to those that are part of the specified environment (by
+	// name).
+	EnvironmentName string `url:"envName,omitempty"`
+	// EnvironmentID disambiguates conflicting targets that have the same target
+	// name when using the TargetNames option by filtering the list of database
+	// targets to those that are part of the specified environment (by id).
+	EnvironmentID string `url:"envId,omitempty"`
+}
+
+// ListSplitCertDatabaseTypesResponse is the response returned when querying for
+// a list of databases types that have SplitCert support.
+type ListSplitCertDatabaseTypesResponse struct {
+	Databases []string `json:"databases"`
+}
+
 // DatabaseTarget is a virtual target that provides DB access to a remote
 // database. The connection is proxied by a Bzero or Cluster target. The remote
 // server doesn't necessarily have to be a database as under the hood it is a
@@ -61,9 +88,41 @@ type DatabaseTarget struct {
 
 // ListDatabaseTargets lists all Database targets.
 //
+// Use ListDatabaseTargetsWithFilter() to pass optional filters when querying
+// for the list of targets.
+//
 // BastionZero API docs: https://cloud.bastionzero.com/api/#get-/api/v2/targets/database
 func (s *TargetsService) ListDatabaseTargets(ctx context.Context) ([]DatabaseTarget, *http.Response, error) {
 	u := databaseBasePath
+	req, err := s.Client.NewRequest(ctx, http.MethodGet, u, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	targetList := new([]DatabaseTarget)
+	resp, err := s.Client.Do(req, targetList)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return *targetList, resp, nil
+}
+
+// TODO-Yuval: Remove ListDatabaseTargetsWithFilter() and add opts parameter to
+// ListDatabaseTargets() in a batched breaking changes release.
+
+// ListDatabaseTargetsWithFilter lists all Database targets. Pass in a non-nil
+// ListDatabaseTargetsOptions struct to filter the list of database targets
+// returned.
+//
+// BastionZero API docs: https://cloud.bastionzero.com/api/#get-/api/v2/targets/database
+func (s *TargetsService) ListDatabaseTargetsWithFilter(ctx context.Context, opts *ListDatabaseTargetsOptions) ([]DatabaseTarget, *http.Response, error) {
+	u := databaseBasePath
+	u, err := client.AddOptions(u, opts)
+	if err != nil {
+		return nil, nil, err
+	}
+
 	req, err := s.Client.NewRequest(ctx, http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
@@ -151,6 +210,26 @@ func (s *TargetsService) ModifyDatabaseTarget(ctx context.Context, targetID stri
 	}
 
 	return target, resp, nil
+}
+
+// ListSplitCertDatabaseTypes lists all Database types for which SplitCert
+// access is supported.
+//
+// BastionZero API docs: https://cloud.bastionzero.com/api/#get-/api/v2/targets/database/supported-databases
+func (s *TargetsService) ListSplitCertDatabaseTypes(ctx context.Context) (*ListSplitCertDatabaseTypesResponse, *http.Response, error) {
+	u := databaseBasePath + "/supported-databases"
+	req, err := s.Client.NewRequest(ctx, http.MethodGet, u, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	listResp := new(ListSplitCertDatabaseTypesResponse)
+	resp, err := s.Client.Do(req, listResp)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return listResp, resp, nil
 }
 
 // Ensure DatabaseTarget implementation satisfies the expected interfaces.

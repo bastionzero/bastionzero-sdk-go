@@ -296,7 +296,7 @@ type AgentStatusChangeEvent struct {
 
 // ListSubjectEvents lists all subject events. The events are returned in
 // reverse chronological order (most recent first). Pass in a non-nil
-// SubjectEventOptions object to filter what kind of events are returned.
+// SubjectEventOptions struct to filter what kind of events are returned.
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#get-/api/v2/events/subject
 func (s *EventsService) ListSubjectEvents(ctx context.Context, opts *SubjectEventOptions) ([]SubjectEvent, *http.Response, error) {
@@ -322,7 +322,7 @@ func (s *EventsService) ListSubjectEvents(ctx context.Context, opts *SubjectEven
 
 // ListConnectionEvents lists all connection events. The events are returned in
 // reverse chronological order (most recent first). Pass in a non-nil
-// ConnectionEventOptions object to filter what kind of events are returned.
+// ConnectionEventOptions struct to filter what kind of events are returned.
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#get-/api/v2/events/connection
 func (s *EventsService) ListConnectionEvents(ctx context.Context, opts *ConnectionEventOptions) ([]ConnectionEvent, *http.Response, error) {
@@ -348,7 +348,7 @@ func (s *EventsService) ListConnectionEvents(ctx context.Context, opts *Connecti
 
 // ListCommandEvents lists all command events. The events are returned in
 // reverse chronological order (most recent first). Pass in a non-nil
-// CommandEventOptions object to filter what kind of events are returned.
+// CommandEventOptions struct to filter what kind of events are returned.
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#get-/api/v2/events/command
 func (s *EventsService) ListCommandEvents(ctx context.Context, opts *CommandEventOptions) ([]CommandEvent, *http.Response, error) {

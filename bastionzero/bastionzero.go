@@ -24,6 +24,7 @@ import (
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/serviceaccounts"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/sessionrecordings"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/subjects"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/targets"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/users"
 	"github.com/bastionzero/bastionzero-sdk-go/internal"
@@ -69,6 +70,7 @@ type Client struct {
 	Policies             *policies.PoliciesService
 	ServiceAccounts      *serviceaccounts.ServiceAccountsService
 	SessionRecordings    *sessionrecordings.SessionRecordingsService
+	Subjects             *subjects.SubjectsService
 	Targets              *targets.TargetsService
 	Users                *users.UsersService
 }
@@ -102,6 +104,7 @@ func NewClient(httpClient *http.Client) *Client {
 	c.Policies = (*policies.PoliciesService)(&c.common)
 	c.ServiceAccounts = (*serviceaccounts.ServiceAccountsService)(&c.common)
 	c.SessionRecordings = (*sessionrecordings.SessionRecordingsService)(&c.common)
+	c.Subjects = (*subjects.SubjectsService)(&c.common)
 	c.Targets = (*targets.TargetsService)(&c.common)
 	c.Users = (*users.UsersService)(&c.common)
 

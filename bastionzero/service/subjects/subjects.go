@@ -22,9 +22,9 @@ const (
 // BastionZero API docs: https://cloud.bastionzero.com/api/#tag--Subjects
 type SubjectsService client.Service
 
-// ModifySubjectRoleRequest is used to modify a subject's role
-type ModifySubjectRoleRequest struct {
-	Role roletype.RoleType `json:"role"`
+// ModifySubjectRequest is used to modify a subject
+type ModifySubjectRequest struct {
+	Role *roletype.RoleType `json:"role,omitempty"`
 }
 
 // Subject is the BastionZero entity that can interact with the BastionZero API
@@ -76,10 +76,10 @@ func (s *SubjectsService) GetSubject(ctx context.Context, subjectIDOrEmail strin
 	return subject, resp, nil
 }
 
-// ModifySubjectRole updates the specified subject's role.
+// ModifySubject updates the specified subject.
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#patch-/api/v2/subjects/-id-
-func (s *SubjectsService) ModifySubjectRole(ctx context.Context, id string, request *ModifySubjectRoleRequest) (*http.Response, error) {
+func (s *SubjectsService) ModifySubject(ctx context.Context, id string, request *ModifySubjectRequest) (*http.Response, error) {
 	u := fmt.Sprintf(subjectsSinglePath, id)
 	req, err := s.Client.NewRequest(ctx, http.MethodPatch, u, request)
 	if err != nil {

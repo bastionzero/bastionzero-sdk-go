@@ -23,9 +23,9 @@ const (
 // BastionZero API docs: https://cloud.bastionzero.com/api/#tag--Users
 type UsersService client.Service
 
-// ModifyUserRoleRequest is used to modify a user's role
-type ModifyUserRoleRequest struct {
-	Role roletype.RoleType `json:"role"`
+// ModifyUserRequest is used to modify a user
+type ModifyUserRequest struct {
+	Role *roletype.RoleType `json:"role,omitempty"`
 }
 
 // User is a BastionZero user belonging to an organization
@@ -96,10 +96,10 @@ func (s *UsersService) DeleteUser(ctx context.Context, id string) (*http.Respons
 	return resp, nil
 }
 
-// ModifyUserRole updates the specified user's role.
+// ModifyUser updates the specified user.
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#patch-/api/v2/users/-id-
-func (s *UsersService) ModifyUserRole(ctx context.Context, id string, request *ModifyUserRoleRequest) (*http.Response, error) {
+func (s *UsersService) ModifyUser(ctx context.Context, id string, request *ModifyUserRequest) (*http.Response, error) {
 	u := fmt.Sprintf(usersSinglePath, id)
 	req, err := s.Client.NewRequest(ctx, http.MethodPatch, u, request)
 	if err != nil {

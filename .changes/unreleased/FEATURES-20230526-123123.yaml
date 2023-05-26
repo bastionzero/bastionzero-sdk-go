@@ -1,0 +1,5 @@
+kind: FEATURES
+body: 'users: Add support for closing all connections for specific user API'
+time: 2023-05-26T12:31:23.638994-04:00
+custom:
+  Issues: "20"

@@ -1,0 +1,5 @@
+kind: FEATURES
+body: 'targets/kube: Add support for DELETE Cluster target'
+time: 2023-05-26T12:28:12.119241-04:00
+custom:
+  Issues: "20"

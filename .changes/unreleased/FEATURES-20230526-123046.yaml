@@ -1,0 +1,5 @@
+kind: FEATURES
+body: 'users: Add support for PATCH user'
+time: 2023-05-26T12:30:46.261716-04:00
+custom:
+  Issues: "20"

@@ -1,0 +1,5 @@
+kind: FEATURES
+body: 'targets/database: Add support for listing DB targets with optional filter API'
+time: 2023-05-26T12:27:06.779783-04:00
+custom:
+  Issues: "20"

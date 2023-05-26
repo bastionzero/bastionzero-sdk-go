@@ -1,0 +1,5 @@
+kind: FEATURES
+body: 'targets/kube: Add support for generate Kube agent YAML API'
+time: 2023-05-26T12:27:54.42011-04:00
+custom:
+  Issues: "20"

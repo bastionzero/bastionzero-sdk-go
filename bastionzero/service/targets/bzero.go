@@ -20,6 +20,24 @@ type ModifyBzeroTargetRequest struct {
 	EnvironmentID *string `json:"environmentId,omitempty"`
 }
 
+// RestartBzeroTargetRequest is used to restart a Bzero target
+type RestartBzeroTargetRequest struct {
+	TargetID        string `json:"targetId,omitempty"`
+	TargetName      string `json:"targetName,omitempty"`
+	EnvironmentID   string `json:"envId,omitempty"`
+	EnvironmentName string `json:"envName,omitempty"`
+}
+
+// RequestBzeroAgentLogsRequest is used to request the Bzero agent to post its
+// logs to BastionZero
+type RequestBzeroAgentLogsRequest struct {
+	TargetID            string `json:"targetId,omitempty"`
+	TargetName          string `json:"targetName,omitempty"`
+	EnvironmentID       string `json:"envId,omitempty"`
+	EnvironmentName     string `json:"envName,omitempty"`
+	UploadLogsRequestId string `json:"uploadLogsRequestId"`
+}
+
 // BzeroTarget is a target running the Bzero agent
 type BzeroTarget struct {
 	Target
@@ -67,6 +85,24 @@ func (s *TargetsService) GetBzeroTarget(ctx context.Context, targetID string) (*
 	return target, resp, nil
 }
 
+// DeleteBzeroTarget deletes the specified Bzero target.
+//
+// BastionZero API docs: https://cloud.bastionzero.com/api/#delete-/api/v2/targets/bzero/-id-
+func (s *TargetsService) DeleteBzeroTarget(ctx context.Context, targetID string) (*http.Response, error) {
+	u := fmt.Sprintf(bzeroSinglePath, targetID)
+	req, err := s.Client.NewRequest(ctx, http.MethodDelete, u, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := s.Client.Do(req, nil)
+	if err != nil {
+		return resp, err
+	}
+
+	return resp, nil
+}
+
 // ModifyBzeroTarget updates a Bzero target.
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#patch-/api/v2/targets/bzero/-id-
@@ -84,6 +120,42 @@ func (s *TargetsService) ModifyBzeroTarget(ctx context.Context, targetID string,
 	}
 
 	return target, resp, nil
+}
+
+// RestartBzeroTarget restarts a Bzero target.
+//
+// BastionZero API docs: https://cloud.bastionzero.com/api/#post-/api/v2/targets/bzero/restart
+func (s *TargetsService) RestartBzeroTarget(ctx context.Context, request *RestartBzeroTargetRequest) (*http.Response, error) {
+	u := bzeroBasePath + "/restart"
+	req, err := s.Client.NewRequest(ctx, http.MethodPost, u, request)
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := s.Client.Do(req, nil)
+	if err != nil {
+		return resp, err
+	}
+
+	return resp, nil
+}
+
+// RequestBzeroTargetLogs requests that a Bzero target's agent post its logs to BastionZero.
+//
+// BastionZero API docs: https://cloud.bastionzero.com/api/#post-/api/v2/targets/bzero/retrieve-logs
+func (s *TargetsService) RequestBzeroTargetLogs(ctx context.Context, request *RequestBzeroAgentLogsRequest) (*http.Response, error) {
+	u := bzeroBasePath + "/retrieve-logs"
+	req, err := s.Client.NewRequest(ctx, http.MethodPost, u, request)
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := s.Client.Do(req, nil)
+	if err != nil {
+		return resp, err
+	}
+
+	return resp, nil
 }
 
 // Ensure BzeroTarget implementation satisfies the expected interfaces.

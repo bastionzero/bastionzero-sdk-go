@@ -1,0 +1,5 @@
+kind: FEATURES
+body: 'targets/bzero: Add support for DELETE Bzero target'
+time: 2023-05-26T12:25:14.828248-04:00
+custom:
+  Issues: "20"

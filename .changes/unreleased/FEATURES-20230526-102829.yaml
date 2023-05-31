@@ -1,0 +1,6 @@
+kind: FEATURES
+body: 'serviceaccounts: Add support for fetching service account info of current subject
+  API'
+time: 2023-05-26T10:28:29.356065-04:00
+custom:
+  Issues: "20"

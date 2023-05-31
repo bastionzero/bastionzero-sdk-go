@@ -47,3 +47,41 @@ func (s *AutodiscoveryScriptsService) GetBzeroBashAutodiscoveryScript(ctx contex
 
 	return script, resp, nil
 }
+
+// BzeroAnsibleAutodiscoveryOptions specifies the required query-string
+// parameters in order to get a Bzero Ansible autodiscovery playbook
+type BzeroAnsibleAutodiscoveryOptions struct {
+	// EnvironmentID is the unique ID for the environment the target should
+	// associate with. Required.
+	EnvironmentID string `url:"environmentId"`
+}
+
+type BzeroAnsibleAutodiscoveryPlaybook struct {
+	Playbook string `json:"autodiscoveryScript"`
+}
+
+// GetBzeroAnsibleAutodiscoveryPlaybook gets an Ansible playbook that can be
+// used to install the latest production BastionZero agent (bzero) on your
+// targets.
+//
+// BastionZero API docs: https://cloud.bastionzero.com/api/#get-/api/v2/autodiscovery-scripts/bzero/ansible
+func (s *AutodiscoveryScriptsService) GetBzeroAnsibleAutodiscoveryPlaybook(ctx context.Context, opts *BzeroAnsibleAutodiscoveryOptions) (*BzeroAnsibleAutodiscoveryPlaybook, *http.Response, error) {
+	u := autodiscoveryScriptsBasePath + "/bzero/ansible"
+	u, err := client.AddOptions(u, opts)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	req, err := s.Client.NewRequest(ctx, http.MethodGet, u, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	playbook := new(BzeroAnsibleAutodiscoveryPlaybook)
+	resp, err := s.Client.Do(req, playbook)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return playbook, resp, nil
+}

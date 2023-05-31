@@ -12,11 +12,19 @@ import (
 	"net/url"
 
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/apierror"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/apikeys"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/autodiscoveryscripts"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/connections"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/environments"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/events"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/githubactions"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/mfa"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/oktapublickeys"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/organization"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/serviceaccounts"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/sessionrecordings"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/subjects"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/targets"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/users"
 	"github.com/bastionzero/bastionzero-sdk-go/internal"
@@ -50,11 +58,19 @@ type Client struct {
 
 	// Services used for talking to different parts of the BastionZero API.
 
+	ApiKeys              *apikeys.ApiKeysService
 	AutodiscoveryScripts *autodiscoveryscripts.AutodiscoveryScriptsService
+	Connections          *connections.ConnectionsService
 	Environments         *environments.EnvironmentsService
+	Events               *events.EventsService
+	GitHubActions        *githubactions.GitHubActionsService
+	MFA                  *mfa.MFAService
+	OktaPublicKeys       *oktapublickeys.OktaPublicKeysService
 	Organization         *organization.OrganizationService
 	Policies             *policies.PoliciesService
 	ServiceAccounts      *serviceaccounts.ServiceAccountsService
+	SessionRecordings    *sessionrecordings.SessionRecordingsService
+	Subjects             *subjects.SubjectsService
 	Targets              *targets.TargetsService
 	Users                *users.UsersService
 }
@@ -76,11 +92,19 @@ func NewClient(httpClient *http.Client) *Client {
 		headers:   make(map[string]string),
 	}
 	c.common.Client = c
+	c.ApiKeys = (*apikeys.ApiKeysService)(&c.common)
 	c.AutodiscoveryScripts = (*autodiscoveryscripts.AutodiscoveryScriptsService)(&c.common)
+	c.Connections = (*connections.ConnectionsService)(&c.common)
 	c.Environments = (*environments.EnvironmentsService)(&c.common)
+	c.Events = (*events.EventsService)(&c.common)
+	c.GitHubActions = (*githubactions.GitHubActionsService)(&c.common)
+	c.MFA = (*mfa.MFAService)(&c.common)
+	c.OktaPublicKeys = (*oktapublickeys.OktaPublicKeysService)(&c.common)
 	c.Organization = (*organization.OrganizationService)(&c.common)
 	c.Policies = (*policies.PoliciesService)(&c.common)
 	c.ServiceAccounts = (*serviceaccounts.ServiceAccountsService)(&c.common)
+	c.SessionRecordings = (*sessionrecordings.SessionRecordingsService)(&c.common)
+	c.Subjects = (*subjects.SubjectsService)(&c.common)
 	c.Targets = (*targets.TargetsService)(&c.common)
 	c.Users = (*users.UsersService)(&c.common)
 

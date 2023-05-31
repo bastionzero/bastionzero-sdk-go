@@ -2,6 +2,9 @@ package subjecttype
 
 //go:generate go run github.com/lindell/string-enumer -t SubjectType -o ./generated.go .
 
+// TODO-Yuval: Move this entire package/folder to service/subjects batched in a
+// breaking change release
+
 // SubjectType represents the type of user interacting with the BastionZero API.
 type SubjectType string
 

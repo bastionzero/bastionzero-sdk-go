@@ -1,5 +1,0 @@
-kind: FEATURES
-body: 'serviceaccounts: Add support for PATCH service account'
-time: 2023-05-26T10:28:06.400795-04:00
-custom:
-  Issues: "20"

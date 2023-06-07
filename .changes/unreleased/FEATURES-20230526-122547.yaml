@@ -1,5 +1,0 @@
-kind: FEATURES
-body: 'targets/bzero: Add support for requesting Bzero agent logs API'
-time: 2023-05-26T12:25:47.462061-04:00
-custom:
-  Issues: "20"

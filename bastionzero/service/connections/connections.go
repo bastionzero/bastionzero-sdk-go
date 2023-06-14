@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/connections/connectionstate"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies/verbtype"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types/targettype"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
@@ -93,6 +94,7 @@ type CreateUniversalConnectionRequest struct {
 	EnvironmentName string                `json:"envName,omitempty"`
 	TargetGroups    []string              `json:"targetGroups,omitempty"`
 	TargetType      targettype.TargetType `json:"targetType,omitempty"`
+	VerbType        verbtype.VerbType     `json:"verbType,omitempty"`
 }
 
 // CreateUniversalSshConnectionRequest is used to create a connection to any
@@ -114,6 +116,7 @@ type CreateUniversalConnectionResponse struct {
 	TargetName            string                `json:"targetName"`
 	TargetUser            string                `json:"targetUser"`
 	TargetType            targettype.TargetType `json:"targetType"`
+	VerbType              verbtype.VerbType     `json:"verbType"`
 	AgentPublicKey        string                `json:"agentPublicKey"`
 	AgentVersion          string                `json:"agentVersion"`
 	ConnectionAuthDetails ConnectionAuthDetails `json:"connectionAuthDetails"`

@@ -6,6 +6,8 @@ var validVerbTypeValues = map[VerbType]struct{}{
 	Shell:        {},
 	FileTransfer: {},
 	Tunnel:       {},
+	RDP:          {},
+	SQLServer:    {},
 }
 
 // Valid validates if a value is a valid VerbType
@@ -20,5 +22,7 @@ func VerbTypeValues() []VerbType {
 		Shell,
 		FileTransfer,
 		Tunnel,
+		RDP,
+		SQLServer,
 	}
 }

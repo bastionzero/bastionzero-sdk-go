@@ -12,4 +12,8 @@ const (
 	FileTransfer VerbType = "FileTransfer"
 	// Tunnel represents the ability to make an SSH tunnel
 	Tunnel VerbType = "Tunnel"
+	// RDP represents the ability to connect using the Remote Desktop Protocol
+	RDP VerbType = "RDP"
+	// SQLServer represents the ability to connect to a Windows SQL Server
+	SQLServer VerbType = "SQLServer"
 )

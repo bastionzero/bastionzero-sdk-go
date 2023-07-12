@@ -1,5 +1,0 @@
-kind: FEATURES
-body: 'connections/rdp-sqlserver: Add support for RDP and SQL Server connections'
-time: 2023-06-14T13:04:29.754752-04:00
-custom:
-  Issues: "23"

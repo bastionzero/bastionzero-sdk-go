@@ -1,3 +1,14 @@
+## v0.4.0 (July 12, 2023)
+
+FEATURES:
+
+
+* autodiscovery: Add support for PowerShell scripts / Windows agents ([#22](https://github.com/bastionzero/bastionzero-sdk-go/issues/22)).
+
+
+* connections/rdp-sqlserver: Add support for RDP and SQL Server connections ([#23](https://github.com/bastionzero/bastionzero-sdk-go/issues/23)).
+
+
 ## v0.3.0 (June 07, 2023)
 
 FEATURES:

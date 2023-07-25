@@ -38,7 +38,7 @@ type CreateEnvironmentResponse struct {
 
 // ModifyEnvironmentRequest is used to modify an environment
 type ModifyEnvironmentRequest struct {
-	Name        *string `json:"name"`
+	Name        *string `json:"name,omitempty"`
 	Description *string `json:"description,omitempty"`
 	// OfflineCleanupTimeoutHours is the amount of time (in hours) to wait until
 	// offline targets are automatically removed by BastionZero.

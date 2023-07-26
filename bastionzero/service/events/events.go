@@ -132,6 +132,9 @@ type ConnectionEventOptions struct {
 	// ConnectionEventTypes filters the list of events to only those that
 	// contain the specified event types.
 	ConnectionEventTypes []connectioneventtype.ConnectionEventType `url:"connectionEventTypes,omitempty"`
+	// ConnectionNodeIds filters the list of events to only those that
+	// contain the specified connection node ID.
+	ConnectionNodeIds []string `url:"connectionNodeIds,omitempty"`
 }
 
 // ConnectionEvent represents a connection event. A connection event describes a
@@ -158,6 +161,7 @@ type ConnectionEvent struct {
 	Timestamp           types.Timestamp                         `json:"timestamp"`
 	ConnectionEventType connectioneventtype.ConnectionEventType `json:"connectionEventType"`
 	Reason              string                                  `json:"reason"`
+	ConnectionNodeId    string                                  `json:"connectionNodeId"`
 }
 
 // CommandEventOptions specifies the optional parameters to filter the command

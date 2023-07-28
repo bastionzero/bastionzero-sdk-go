@@ -37,7 +37,7 @@ type AgentDetails struct {
 	// Agent's base64-encoded public key.
 	PublicKey string `json:"publicKey"`
 	// Information related to the agent's current control channel.
-	ControlChannel *targets.ControlChannelSummary `json:"controlChannel,omitempty"`
+	ControlChannel *targets.ControlChannelSummary `json:"controlChannel"`
 	// Unique identifier for the agent. Currently this is null for terminated agents.
 	Id string `json:"id"`
 	// Name of the agent. Currently this is null for terminated agents.

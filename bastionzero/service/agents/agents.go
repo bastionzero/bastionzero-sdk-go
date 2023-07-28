@@ -2,6 +2,8 @@ package agents
 
 import (
 	"context"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/agents/agentstatus"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/agents/agenttype"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/targets"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
@@ -12,7 +14,7 @@ const (
 	agentsBasePath = "api/v2/agents"
 )
 
-// TargetsService handles communication with the agents endpoints of the
+// AgentsService handles communication with the agents endpoints of the
 // BastionZero API.
 //
 // BastionZero API docs:
@@ -23,9 +25,9 @@ type AgentsService client.Service
 
 type AgentDetails struct {
 	// Agent type.
-	AgentType AgentType `json:"type"`
+	AgentType agenttype.AgentType `json:"type"`
 	// Last reported status of the agent.
-	AgentStatus AgentStatus `json:"status"`
+	AgentStatus agentstatus.AgentStatus `json:"status"`
 	// UTC timestamp indicating when the last agent status change event occurred.
 	LastStatusUpdate types.Timestamp `json:"lastStatusUpdate"`
 	// Version of the agent.
@@ -35,7 +37,7 @@ type AgentDetails struct {
 	// Agent's base64-encoded public key.
 	PublicKey string `json:"publicKey"`
 	// Information related to the agent's current control channel.
-	ControlChannel targets.ControlChannelSummary `json:"controlChannel,omitempty"`
+	ControlChannel *targets.ControlChannelSummary `json:"controlChannel,omitempty"`
 	// Unique identifier for the agent. Currently this is null for terminated agents.
 	Id string `json:"id"`
 	// Name of the agent. Currently this is null for terminated agents.
@@ -48,9 +50,9 @@ type AgentDetails struct {
 
 type ListAgentsOptions struct {
 	// Only return agents with these types. Defaults to all.
-	AgentTypes []AgentType `url:"agentTypes,omitempty"`
+	AgentTypes []agenttype.AgentType `url:"agentTypes,omitempty"`
 	// Only return agents with these statuses. Defaults to all except 'Terminated.'
-	AgentStatuses []AgentStatus `url:"agentStatuses,omitempty"`
+	AgentStatuses []agentstatus.AgentStatus `url:"agentStatuses,omitempty"`
 	// Only return agents whose environment contains this substring. Note that terminated agents have no environment.
 	EnvironmentName string `url:"environmentName,omitempty"`
 	// Only return agents whose name contains this substring. Note that terminated agents have no name.

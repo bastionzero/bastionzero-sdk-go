@@ -1,6 +1,6 @@
 kind: ENHANCEMENTS
-body: 'bastionzero/service: `Name` is added as an accepted field for modifying existing environments.
+body: 'environments: `Name` is added as an accepted field for modifying existing environments.
   New environment name must still be unique.'
 time: 2023-07-25T14:29:41.345311-04:00
 custom:
-  Issues: CWC-2702
+  Issues: '26'

@@ -1,6 +1,0 @@
-kind: ENHANCEMENTS
-body: 'bastionzero/service: `ConnectionNodeId` is added as a field in connection events.
-  Users can filter by `ConnectionNodeId` when listing connection events '
-time: 2023-07-17T07:00:15.185224-04:00
-custom:
-  Issues: "25"

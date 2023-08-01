@@ -1,3 +1,11 @@
+## v0.5.0 (August 01, 2023)
+
+ENHANCEMENTS:
+
+
+* bastionzero/service: `ConnectionNodeId` is added as a field in connection events. Users can filter by `ConnectionNodeId` when listing connection events  ([#25](https://github.com/bastionzero/bastionzero-sdk-go/issues/25)).
+
+
 ## v0.4.0 (July 12, 2023)
 
 FEATURES:

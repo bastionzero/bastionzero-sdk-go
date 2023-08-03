@@ -1,6 +1,6 @@
 package agenttype
 
-//go:generate go run github.com/lindell/string-enumer -t AgentStatus -o ./generated.go .
+//go:generate go run github.com/lindell/string-enumer -t AgentType -o ./generated.go .
 
 // Where the agent is running. Either a kube cluster, a linux server, or a windows server
 type AgentType string

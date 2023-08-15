@@ -10,6 +10,16 @@ const (
 	sshSinglePath = sshBasePath + "/%s"
 )
 
+// SSHConnection is an SSH connection to a Bzero target
+type SSHConnection struct {
+	Connection
+
+	TargetUser string `json:"targetUser"`
+	RemoteHost string `json:"remoteHost"`
+	RemotePort int    `json:"remotePort"`
+	ScpOnly    bool   `json:"scpOnly"`
+}
+
 // CreateSshConnectionRequest is used to create an ssh connection
 type CreateSshConnectionRequest struct {
 	TargetID   string `json:"targetId"`

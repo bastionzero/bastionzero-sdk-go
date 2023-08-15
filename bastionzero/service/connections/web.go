@@ -10,6 +10,13 @@ const (
 	webSinglePath = webBasePath + "/%s"
 )
 
+type WebConnection struct {
+	Connection
+
+	RemoteHost string `json:"remoteHost"`
+	RemotePort int    `json:"remotePort"`
+}
+
 // CreateWebConnectionRequest is used to create a web connection
 type CreateWebConnectionRequest struct {
 	TargetID string `json:"targetId"`

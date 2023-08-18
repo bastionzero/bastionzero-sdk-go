@@ -33,7 +33,7 @@ import (
 )
 
 const (
-	libraryVersion = "v0.5.0"
+	libraryVersion = "v0.6.0"
 	// DefaultBaseURL is the default BastionZero API URL the Client communicates
 	// with
 	DefaultBaseURL   = "https://cloud.bastionzero.com/"

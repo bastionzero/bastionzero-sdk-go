@@ -1,0 +1,5 @@
+kind: FEATURES
+body: 'agents: add endpoint to GET agents'
+time: 2023-07-25T17:23:55.511775-04:00
+custom:
+  Issues: "27"

@@ -12,6 +12,7 @@ import (
 	"net/url"
 
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/apierror"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/agents"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/apikeys"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/autodiscoveryscripts"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/connections"
@@ -58,6 +59,7 @@ type Client struct {
 
 	// Services used for talking to different parts of the BastionZero API.
 
+	Agents               *agents.AgentsService
 	ApiKeys              *apikeys.ApiKeysService
 	AutodiscoveryScripts *autodiscoveryscripts.AutodiscoveryScriptsService
 	Connections          *connections.ConnectionsService
@@ -92,6 +94,7 @@ func NewClient(httpClient *http.Client) *Client {
 		headers:   make(map[string]string),
 	}
 	c.common.Client = c
+	c.Agents = (*agents.AgentsService)(&c.common)
 	c.ApiKeys = (*apikeys.ApiKeysService)(&c.common)
 	c.AutodiscoveryScripts = (*autodiscoveryscripts.AutodiscoveryScriptsService)(&c.common)
 	c.Connections = (*connections.ConnectionsService)(&c.common)

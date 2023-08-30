@@ -1,3 +1,17 @@
+## v0.6.0 (August 18, 2023)
+
+FEATURES:
+
+
+* agents: add endpoint to GET agents ([#27](https://github.com/bastionzero/bastionzero-sdk-go/issues/27)).
+
+
+ENHANCEMENTS:
+
+
+* environments: `Name` is added as an accepted field for modifying existing environments. New environment name must still be unique. ([#26](https://github.com/bastionzero/bastionzero-sdk-go/issues/26)).
+
+
 ## v0.5.0 (August 01, 2023)
 
 ENHANCEMENTS:

@@ -23,11 +23,7 @@ const (
 
 type AgentsService client.Service
 
-<<<<<<< HEAD
 type AgentSummary struct {
-=======
-type AgentDetails struct {
->>>>>>> 4abeae17ef6c263508cadd137c0b294671ec6b6e
 	// Agent type.
 	AgentType agenttype.AgentType `json:"type"`
 	// Last reported status of the agent.
@@ -42,13 +38,10 @@ type AgentDetails struct {
 	PublicKey string `json:"publicKey"`
 	// Information related to the agent's current control channel.
 	ControlChannel *targets.ControlChannelSummary `json:"controlChannel"`
-<<<<<<< HEAD
 }
 
 type AgentDetails struct {
 	AgentSummary
-=======
->>>>>>> 4abeae17ef6c263508cadd137c0b294671ec6b6e
 	// Unique identifier for the agent. Currently this is null for terminated agents.
 	Id string `json:"id"`
 	// Name of the agent. Currently this is null for terminated agents.

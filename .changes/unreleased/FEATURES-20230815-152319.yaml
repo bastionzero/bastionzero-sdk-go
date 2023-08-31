@@ -1,6 +1,6 @@
 kind: FEATURES
 body: 'targets/disambiguated: Add a new service that consumes the disambiguated AllTargets
-  endpiont'
+  endpoint'
 time: 2023-08-15T15:23:19.137258-04:00
 custom:
   Issues: "30"

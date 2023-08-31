@@ -35,30 +35,6 @@ type Port struct {
 	Value *int `json:"value,omitempty"`
 }
 
-// TargetInterface lets you work with common attributes from any kind of
-// BastionZero target
-type TargetInterface interface {
-	// GetID returns the target's unique ID.
-	GetID() string
-	// GetName returns the target's name.
-	GetName() string
-	// GetStatus returns the target's status.
-	GetStatus() targetstatus.TargetStatus
-	// GetEnvironmentID returns the target's environment's ID.
-	GetEnvironmentID() string
-	// GetLastAgentUpdate returns the target's last agent update if set.
-	// Otherwise, returns nil.
-	GetLastAgentUpdate() *types.Timestamp
-	// GetAgentVersion returns the target's agent version.
-	GetAgentVersion() string
-	// GetRegion returns the target's region.
-	GetRegion() string
-	// GetAgentPublicKey returns the target's agent public key.
-	GetAgentPublicKey() string
-	// GetTargetType returns the target's type.
-	GetTargetType() targettype.TargetType
-}
-
 // Target abstracts common attributes from any kind of BastionZero target
 type Target struct {
 	// ID is the unique ID of the target
@@ -87,7 +63,7 @@ func (t *Target) GetAccessDetails() *AccessDetails     { return t.AccessDetails 
 
 type ListAllTargetsOptions struct {
 	// Each target's list of connections will include connections with only these states. Defaults to only Open.
-	ConnectionStates connectionstate.ConnectionState `url:"connectionStates,omitempty"`
+	ConnectionStates []connectionstate.ConnectionState `url:"connectionStates,omitempty"`
 	// If true, returns all targets accessible to your organization (available to admins only). Defaults to false.
 	AllTargetsInOrg bool `url:"allTargetsInOrg"`
 	// If included in an admin's request, returns targets accessible to this user.

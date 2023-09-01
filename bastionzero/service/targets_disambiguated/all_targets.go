@@ -26,7 +26,7 @@ type AllTargetsService client.Service
 
 type AccessDetails struct {
 	JIT                  bool            `json:"jit"`
-	AccessExpirationTime types.Timestamp `json:"accessExpirationTime"`
+	AccessExpirationTime *types.Timestamp `json:"accessExpirationTime"`
 }
 
 // Port describes a port number

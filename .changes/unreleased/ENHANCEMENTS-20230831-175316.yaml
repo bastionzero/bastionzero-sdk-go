@@ -1,5 +1,0 @@
-kind: ENHANCEMENTS
-body: 'agents: Add ability to filter by agent ID when listing agents'
-time: 2023-08-31T17:53:16.100273-04:00
-custom:
-  Issues: "30"

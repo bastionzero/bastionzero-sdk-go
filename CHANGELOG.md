@@ -1,3 +1,17 @@
+## v0.7.0 (September 05, 2023)
+
+FEATURES:
+
+
+* targets/disambiguated: Add a new service that consumes the disambiguated AllTargets endpoint ([#30](https://github.com/bastionzero/bastionzero-sdk-go/issues/30)).
+
+
+ENHANCEMENTS:
+
+
+* agents: Add ability to filter by agent ID when listing agents ([#30](https://github.com/bastionzero/bastionzero-sdk-go/issues/30)).
+
+
 ## v0.6.0 (August 18, 2023)
 
 FEATURES:

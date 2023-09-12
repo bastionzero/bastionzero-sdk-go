@@ -2,4 +2,4 @@ kind: FEATURES
 body: Add new endpoint that updates an agent's config for supported keys
 time: 2023-09-12T12:38:37.196317-04:00
 custom:
-  Issues: "33"
+  Issues: "34"

@@ -38,6 +38,16 @@ type RequestBzeroAgentLogsRequest struct {
 	UploadLogsRequestId string `json:"uploadLogsRequestId"`
 }
 
+// UpdateAgentConfigRequest is used to update the Bzero agent config
+type UpdateAgentConfigRequest struct {
+	TargetID        string `json:"targetId,omitempty"`
+	TargetName      string `json:"targetName,omitempty"`
+	EnvironmentID   string `json:"envId,omitempty"`
+	EnvironmentName string `json:"envName,omitempty"`
+	Key             string `json:"key"`
+	NewValue        string `json:"newValue"`
+}
+
 // BzeroTarget is a target running the Bzero agent
 type BzeroTarget struct {
 	Target
@@ -145,6 +155,24 @@ func (s *TargetsService) RestartBzeroTarget(ctx context.Context, request *Restar
 // BastionZero API docs: https://cloud.bastionzero.com/api/#post-/api/v2/targets/bzero/retrieve-logs
 func (s *TargetsService) RequestBzeroTargetLogs(ctx context.Context, request *RequestBzeroAgentLogsRequest) (*http.Response, error) {
 	u := bzeroBasePath + "/retrieve-logs"
+	req, err := s.Client.NewRequest(ctx, http.MethodPost, u, request)
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := s.Client.Do(req, nil)
+	if err != nil {
+		return resp, err
+	}
+
+	return resp, nil
+}
+
+// UpdateAgentConfig requests that the Bzero agent's config is updated.
+//
+// BastionZero API docs: https://cloud.bastionzero.com/api/#post-/api/v2/targets/bzero/update-config
+func (s *TargetsService) UpdateAgentConfig(ctx context.Context, request *UpdateAgentConfigRequest) (*http.Response, error) {
+	u := bzeroBasePath + "/update-config"
 	req, err := s.Client.NewRequest(ctx, http.MethodPost, u, request)
 	if err != nil {
 		return nil, err

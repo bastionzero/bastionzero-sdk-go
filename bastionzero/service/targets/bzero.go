@@ -45,7 +45,7 @@ type UpdateAgentConfigRequest struct {
 	EnvironmentID   string `json:"envId,omitempty"`
 	EnvironmentName string `json:"envName,omitempty"`
 	Key             string `json:"key"`
-	NewValue        string `json:"newValue"`
+	Value           string `json:"value"`
 }
 
 // BzeroTarget is a target running the Bzero agent

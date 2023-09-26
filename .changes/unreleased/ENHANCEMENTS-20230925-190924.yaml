@@ -1,4 +1,4 @@
-kind: ENHANCEMENTS
+kind: FEATURES
 body: 'policies/organizationcontrols: Add OrganizationControlsPolicy CRUD and add
   mfaDuration to the OrganizationControlsPolicy type'
 time: 2023-09-25T19:09:24.163112-04:00

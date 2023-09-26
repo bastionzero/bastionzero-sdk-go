@@ -18,8 +18,8 @@ const (
 type OrganizationControlsPolicy struct {
 	Policy
 
-	mfaEnabled  bool `json:"environments,omitempty"`
-	mfaDuration int  `json:"environments,omitempty"`
+	MFAEnabled  bool `json:"mfaEnabled,omitempty"`
+	MFADuration int  `json:"mfaDuration,omitempty"`
 }
 
 // ListOrganizationControlsPolicies lists all Organization Controls policies
@@ -132,10 +132,16 @@ func (p *OrganizationControlsPolicy) GetPolicyType() policytype.PolicyType {
 	return policytype.OrganizationControls
 }
 
-func (p *OrganizationControlsPolicy) GetMfaEnabled() bool {
-	return p.mfaEnabled
+func (p *OrganizationControlsPolicy) GetMFAEnabled() bool {
+	if p.MFAEnabled == nil {
+		return false
+	}
+	return *p.MFAEnabled
 }
 
-func (p *OrganizationControlsPolicy) GetMfaDuration() int {
-	return p.mfaDuration
+func (p *OrganizationControlsPolicy) GetMFADuration() int {
+	if p.MFADuration == 0 {
+		return 0
+	}
+	return *p.MFADuration
 }

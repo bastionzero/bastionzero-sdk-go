@@ -1,5 +1,0 @@
-kind: FEATURES
-body: 'connections: Add endpoint to close a single connection'
-time: 2023-09-27T01:20:00.79065-04:00
-custom:
-  Issues: "37"

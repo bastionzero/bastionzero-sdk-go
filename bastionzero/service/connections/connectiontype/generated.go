@@ -3,12 +3,14 @@ package connectiontype
 
 // validConnectionTypeValues contains a map of all valid ConnectionType values for easy lookup
 var validConnectionTypeValues = map[ConnectionType]struct{}{
-	Shell:   {},
-	Dynamic: {},
-	Kube:    {},
-	Web:     {},
-	Db:      {},
-	Ssh:     {},
+	Shell:     {},
+	Dynamic:   {},
+	Kube:      {},
+	Web:       {},
+	Db:        {},
+	Ssh:       {},
+	Rdp:       {},
+	SqlServer: {},
 }
 
 // Valid validates if a value is a valid ConnectionType
@@ -26,5 +28,7 @@ func ConnectionTypeValues() []ConnectionType {
 		Web,
 		Db,
 		Ssh,
+		Rdp,
+		SqlServer,
 	}
 }

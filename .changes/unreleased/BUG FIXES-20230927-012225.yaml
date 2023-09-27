@@ -1,0 +1,6 @@
+kind: BUG FIXES
+body: 'connections/connectiontype: Fix mapping of `Kube` to match expected value; it
+  now maps to `Kubernetes`'
+time: 2023-09-27T01:22:25.375712-04:00
+custom:
+  Issues: "37"

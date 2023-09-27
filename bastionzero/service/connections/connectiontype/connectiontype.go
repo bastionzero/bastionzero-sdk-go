@@ -10,12 +10,16 @@ const (
 	Shell ConnectionType = "Shell"
 	// Dynamic represents a connection to a dynamic access target (DAT)
 	Dynamic ConnectionType = "Dynamic"
-	// Kube represents a Kube connection
-	Kube ConnectionType = "Kube"
+	// Kube represents a Kubernetes connection
+	Kube ConnectionType = "Kubernetes"
 	// Web represents a Web connection
 	Web ConnectionType = "Web"
 	// Db represents a Db connection
 	Db ConnectionType = "Db"
-	// Ssh represents a ssh connection
+	// Ssh represents an ssh connection
 	Ssh ConnectionType = "Ssh"
+	// Rdp represents a RDP connection
+	Rdp ConnectionType = "Rdp"
+	// SqlServer represents a SQLServer connection
+	SqlServer ConnectionType = "SqlServer"
 )

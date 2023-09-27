@@ -2,6 +2,7 @@ package connections
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/connections/connectionstate"
@@ -169,4 +170,22 @@ func (s *ConnectionsService) CreateUniversalSshConnection(ctx context.Context, r
 	}
 
 	return createConnResponse, resp, nil
+}
+
+// CloseConnection closes a connection.
+//
+// BastionZero API docs: https://cloud.bastionzero.com/api/#patch-/api/v2/connections/-id-/close
+func (s *ConnectionsService) CloseConnection(ctx context.Context, connectionID string) (*http.Response, error) {
+	u := connectionsBasePath + fmt.Sprintf("/%s/close", connectionID)
+	req, err := s.Client.NewRequest(ctx, http.MethodPatch, u, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := s.Client.Do(req, nil)
+	if err != nil {
+		return resp, err
+	}
+
+	return resp, nil
 }

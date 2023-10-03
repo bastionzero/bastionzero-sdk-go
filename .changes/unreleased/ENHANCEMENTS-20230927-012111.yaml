@@ -1,5 +1,0 @@
-kind: ENHANCEMENTS
-body: 'connections/connectiontype: Add `Rdp` and `SqlServer`'
-time: 2023-09-27T01:21:11.494876-04:00
-custom:
-  Issues: "37"

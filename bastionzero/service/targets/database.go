@@ -17,16 +17,20 @@ const (
 
 // CreateDatabaseTargetRequest is used to create a new Database target
 type CreateDatabaseTargetRequest struct {
-	TargetName      string `json:"targetName"`
-	ProxyTargetID   string `json:"proxyTargetId"`
-	RemoteHost      string `json:"remoteHost"`
-	RemotePort      Port   `json:"remotePort"`
-	LocalPort       *Port  `json:"localPort,omitempty"`
-	LocalHost       string `json:"localHost,omitempty"`
-	IsSplitCert     bool   `json:"splitCert,omitempty"`
-	DatabaseType    string `json:"databaseType,omitempty"`
-	EnvironmentID   string `json:"environmentId,omitempty"`
-	EnvironmentName string `json:"environmentName,omitempty"`
+	TargetName                   string                       `json:"targetName"`
+	ProxyTargetID                string                       `json:"proxyTargetId"`
+	RemoteHost                   string                       `json:"remoteHost"`
+	// RemotePort is required for all databases except GCP-hosted ones. For GCP-hosted databases,
+	// Port.Value can be specified but will be ignored when connecting to the database.
+	// If not provided when creating a CGP database target, Port.Value will be set to 0.
+	RemotePort                   *Port                        `json:"remotePort,omitempty"`
+	LocalPort                    *Port                        `json:"localPort,omitempty"`
+	LocalHost                    string                       `json:"localHost,omitempty"`
+	IsSplitCert                  bool                         `json:"splitCert,omitempty"`
+	DatabaseType                 string                       `json:"databaseType,omitempty"`
+	EnvironmentID                string                       `json:"environmentId,omitempty"`
+	EnvironmentName              string                       `json:"environmentName,omitempty"`
+	DatabaseAuthenticationConfig DatabaseAuthenticationConfig `json:"databaseAuthenticationConfig,omitempty"`
 }
 
 // CreateDatabaseTargetResponse is the response returned if a Database target is
@@ -37,15 +41,16 @@ type CreateDatabaseTargetResponse struct {
 
 // ModifyDatabaseTargetRequest is used to modify a Database target
 type ModifyDatabaseTargetRequest struct {
-	TargetName    *string `json:"targetName,omitempty"`
-	ProxyTargetID *string `json:"proxyTargetId,omitempty"`
-	RemoteHost    *string `json:"remoteHost,omitempty"`
-	RemotePort    *Port   `json:"remotePort,omitempty"`
-	LocalPort     *Port   `json:"localPort,omitempty"`
-	LocalHost     *string `json:"localHost,omitempty"`
-	IsSplitCert   *bool   `json:"splitCert,omitempty"`
-	DatabaseType  *string `json:"databaseType,omitempty"`
-	EnvironmentID *string `json:"environmentId,omitempty"`
+	TargetName                   *string                      `json:"targetName,omitempty"`
+	ProxyTargetID                *string                      `json:"proxyTargetId,omitempty"`
+	RemoteHost                   *string                      `json:"remoteHost,omitempty"`
+	RemotePort                   *Port                        `json:"remotePort,omitempty"`
+	LocalPort                    *Port                        `json:"localPort,omitempty"`
+	LocalHost                    *string                      `json:"localHost,omitempty"`
+	IsSplitCert                  *bool                        `json:"splitCert,omitempty"`
+	DatabaseType                 *string                      `json:"databaseType,omitempty"`
+	EnvironmentID                *string                      `json:"environmentId,omitempty"`
+	DatabaseAuthenticationConfig DatabaseAuthenticationConfig `json:"databaseAuthenticationConfig,omitempty"`
 }
 
 // ListDatabaseTargetsOptions specifies the optional parameters when querying
@@ -81,9 +86,26 @@ type ListSplitCertDatabaseTypesResponse struct {
 type DatabaseTarget struct {
 	VirtualTarget
 
-	IsSplitCert        bool                  `json:"splitCert"`
-	DatabaseType       *string               `json:"databaseType"`
-	AllowedTargetUsers []policies.TargetUser `json:"allowedTargetUsers"`
+	// Deprecated: IsSplitCert exists for historical compatibility and should not be used.
+	// Set AuthenticationType in DatabaseAuthenticationConfig appropriately instead.
+	IsSplitCert                  bool                         `json:"splitCert"`
+	// Deprecated: DatabaseType exists for historical compatibility and should not be used.
+	// Set Database in DatabaseAuthenticationConfig appropriately instead.
+	DatabaseType                 *string                      `json:"databaseType"`
+	AllowedTargetUsers           []policies.TargetUser        `json:"allowedTargetUsers"`
+	DatabaseAuthenticationConfig DatabaseAuthenticationConfig `json:"databaseAuthenticationConfig"`
+}
+
+// DatabaseAuthenticationConfig defines a database authentication configuration supported
+// by BastionZero. When using a non-null DatabaseAuthenticationConfig in a request, it
+// is recommended that the supported configurations are retrieved from a GET request to
+// /api/v2/targets/database/supported-database-configs and then one of the returned
+// configurations are used in any subsequent create or update request as needed.
+type DatabaseAuthenticationConfig struct {
+	AuthenticationType   *string `json:"authenticationType"`
+	CloudServiceProvider *string `json:"cloudServiceProvider"`
+	Database             *string `json:"database"`
+	Label                *string `json:"label"`
 }
 
 // ListDatabaseTargets lists all Database targets.

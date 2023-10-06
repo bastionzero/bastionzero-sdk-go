@@ -237,6 +237,7 @@ func (s *TargetsService) ModifyDatabaseTarget(ctx context.Context, targetID stri
 // ListSplitCertDatabaseTypes lists all Database types for which SplitCert
 // access is supported.
 //
+// Deprecated: Use ListDatabaseAuthenticationConfigs
 // BastionZero API docs: https://cloud.bastionzero.com/api/#get-/api/v2/targets/database/supported-databases
 func (s *TargetsService) ListSplitCertDatabaseTypes(ctx context.Context) (*ListSplitCertDatabaseTypesResponse, *http.Response, error) {
 	u := databaseBasePath + "/supported-databases"
@@ -252,6 +253,25 @@ func (s *TargetsService) ListSplitCertDatabaseTypes(ctx context.Context) (*ListS
 	}
 
 	return listResp, resp, nil
+}
+
+// ListDatabaseAuthenticationConfigs lists all database authentication configurations supported by BasionZero.
+//
+// BastionZero API docs: https://cloud.bastionzero.com/api/#get-/api/v2/targets/database/supported-database-configs
+func (s *TargetsService) ListDatabaseAuthenticationConfigs(ctx context.Context) ([]DatabaseAuthenticationConfig, *http.Response, error) {
+	u := databaseBasePath + "/supported-database-configs"
+	req, err := s.Client.NewRequest(ctx, http.MethodGet, u, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	dbAuthConfigList := new([]DatabaseAuthenticationConfig)
+	resp, err := s.Client.Do(req, dbAuthConfigList)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return *dbAuthConfigList, resp, nil
 }
 
 // Ensure DatabaseTarget implementation satisfies the expected interfaces.

@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/targets/dbauthconfig"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types/targettype"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
@@ -17,20 +18,20 @@ const (
 
 // CreateDatabaseTargetRequest is used to create a new Database target
 type CreateDatabaseTargetRequest struct {
-	TargetName                   string                       `json:"targetName"`
-	ProxyTargetID                string                       `json:"proxyTargetId"`
-	RemoteHost                   string                       `json:"remoteHost"`
+	TargetName    string `json:"targetName"`
+	ProxyTargetID string `json:"proxyTargetId"`
+	RemoteHost    string `json:"remoteHost"`
 	// RemotePort is required for all databases except GCP-hosted ones. For GCP-hosted databases,
 	// Port.Value can be specified but will be ignored when connecting to the database.
 	// If not provided when creating a CGP database target, Port.Value will be set to 0.
-	RemotePort                   *Port                        `json:"remotePort,omitempty"`
-	LocalPort                    *Port                        `json:"localPort,omitempty"`
-	LocalHost                    string                       `json:"localHost,omitempty"`
-	IsSplitCert                  bool                         `json:"splitCert,omitempty"`
-	DatabaseType                 string                       `json:"databaseType,omitempty"`
-	EnvironmentID                string                       `json:"environmentId,omitempty"`
-	EnvironmentName              string                       `json:"environmentName,omitempty"`
-	DatabaseAuthenticationConfig DatabaseAuthenticationConfig `json:"databaseAuthenticationConfig,omitempty"`
+	RemotePort                   *Port                                     `json:"remotePort,omitempty"`
+	LocalPort                    *Port                                     `json:"localPort,omitempty"`
+	LocalHost                    string                                    `json:"localHost,omitempty"`
+	IsSplitCert                  bool                                      `json:"splitCert,omitempty"`
+	DatabaseType                 string                                    `json:"databaseType,omitempty"`
+	EnvironmentID                string                                    `json:"environmentId,omitempty"`
+	EnvironmentName              string                                    `json:"environmentName,omitempty"`
+	DatabaseAuthenticationConfig dbauthconfig.DatabaseAuthenticationConfig `json:"databaseAuthenticationConfig,omitempty"`
 }
 
 // CreateDatabaseTargetResponse is the response returned if a Database target is
@@ -41,16 +42,16 @@ type CreateDatabaseTargetResponse struct {
 
 // ModifyDatabaseTargetRequest is used to modify a Database target
 type ModifyDatabaseTargetRequest struct {
-	TargetName                   *string                      `json:"targetName,omitempty"`
-	ProxyTargetID                *string                      `json:"proxyTargetId,omitempty"`
-	RemoteHost                   *string                      `json:"remoteHost,omitempty"`
-	RemotePort                   *Port                        `json:"remotePort,omitempty"`
-	LocalPort                    *Port                        `json:"localPort,omitempty"`
-	LocalHost                    *string                      `json:"localHost,omitempty"`
-	IsSplitCert                  *bool                        `json:"splitCert,omitempty"`
-	DatabaseType                 *string                      `json:"databaseType,omitempty"`
-	EnvironmentID                *string                      `json:"environmentId,omitempty"`
-	DatabaseAuthenticationConfig DatabaseAuthenticationConfig `json:"databaseAuthenticationConfig,omitempty"`
+	TargetName                   *string                                   `json:"targetName,omitempty"`
+	ProxyTargetID                *string                                   `json:"proxyTargetId,omitempty"`
+	RemoteHost                   *string                                   `json:"remoteHost,omitempty"`
+	RemotePort                   *Port                                     `json:"remotePort,omitempty"`
+	LocalPort                    *Port                                     `json:"localPort,omitempty"`
+	LocalHost                    *string                                   `json:"localHost,omitempty"`
+	IsSplitCert                  *bool                                     `json:"splitCert,omitempty"`
+	DatabaseType                 *string                                   `json:"databaseType,omitempty"`
+	EnvironmentID                *string                                   `json:"environmentId,omitempty"`
+	DatabaseAuthenticationConfig dbauthconfig.DatabaseAuthenticationConfig `json:"databaseAuthenticationConfig,omitempty"`
 }
 
 // ListDatabaseTargetsOptions specifies the optional parameters when querying
@@ -88,24 +89,12 @@ type DatabaseTarget struct {
 
 	// Deprecated: IsSplitCert exists for historical compatibility and should not be used.
 	// Set AuthenticationType in DatabaseAuthenticationConfig appropriately instead.
-	IsSplitCert                  bool                         `json:"splitCert"`
+	IsSplitCert bool `json:"splitCert"`
 	// Deprecated: DatabaseType exists for historical compatibility and should not be used.
 	// Set Database in DatabaseAuthenticationConfig appropriately instead.
-	DatabaseType                 *string                      `json:"databaseType"`
-	AllowedTargetUsers           []policies.TargetUser        `json:"allowedTargetUsers"`
-	DatabaseAuthenticationConfig DatabaseAuthenticationConfig `json:"databaseAuthenticationConfig"`
-}
-
-// DatabaseAuthenticationConfig defines a database authentication configuration supported
-// by BastionZero. When using a non-null DatabaseAuthenticationConfig in a request, it
-// is recommended that the supported configurations are retrieved from a GET request to
-// /api/v2/targets/database/supported-database-configs and then one of the returned
-// configurations are used in any subsequent create or update request as needed.
-type DatabaseAuthenticationConfig struct {
-	AuthenticationType   *string `json:"authenticationType"`
-	CloudServiceProvider *string `json:"cloudServiceProvider"`
-	Database             *string `json:"database"`
-	Label                *string `json:"label"`
+	DatabaseType                 *string                                   `json:"databaseType"`
+	AllowedTargetUsers           []policies.TargetUser                     `json:"allowedTargetUsers"`
+	DatabaseAuthenticationConfig dbauthconfig.DatabaseAuthenticationConfig `json:"databaseAuthenticationConfig"`
 }
 
 // ListDatabaseTargets lists all Database targets.
@@ -258,14 +247,14 @@ func (s *TargetsService) ListSplitCertDatabaseTypes(ctx context.Context) (*ListS
 // ListDatabaseAuthenticationConfigs lists all database authentication configurations supported by BasionZero.
 //
 // BastionZero API docs: https://cloud.bastionzero.com/api/#get-/api/v2/targets/database/supported-database-configs
-func (s *TargetsService) ListDatabaseAuthenticationConfigs(ctx context.Context) ([]DatabaseAuthenticationConfig, *http.Response, error) {
+func (s *TargetsService) ListDatabaseAuthenticationConfigs(ctx context.Context) ([]dbauthconfig.DatabaseAuthenticationConfig, *http.Response, error) {
 	u := databaseBasePath + "/supported-database-configs"
 	req, err := s.Client.NewRequest(ctx, http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	dbAuthConfigList := new([]DatabaseAuthenticationConfig)
+	dbAuthConfigList := new([]dbauthconfig.DatabaseAuthenticationConfig)
 	resp, err := s.Client.Do(req, dbAuthConfigList)
 	if err != nil {
 		return nil, resp, err

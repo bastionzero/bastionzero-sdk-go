@@ -124,8 +124,8 @@ type CreateUniversalConnectionResponse struct {
 	SshScpOnly            bool                  `json:"sshScpOnly"`
 	// Deprecated: SplitCert exist for historical compatibility and should not be used.
 	// Use IsPasswordless instead.
-	SplitCert             bool                  `json:"splitCert"`
-	IsPasswordless        bool                  `json:"isPasswordless"`
+	SplitCert      bool `json:"splitCert"`
+	IsPasswordless bool `json:"isPasswordless"`
 }
 
 // ConnectionAuthDetails contains details needed to connect to a connection node

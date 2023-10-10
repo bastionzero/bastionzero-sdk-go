@@ -24,14 +24,18 @@ type CreateDatabaseTargetRequest struct {
 	// RemotePort is required for all databases except GCP-hosted ones. For GCP-hosted databases,
 	// Port.Value can be specified but will be ignored when connecting to the database.
 	// If not provided when creating a CGP database target, Port.Value will be set to 0.
-	RemotePort                   *Port                                     `json:"remotePort,omitempty"`
-	LocalPort                    *Port                                     `json:"localPort,omitempty"`
-	LocalHost                    string                                    `json:"localHost,omitempty"`
-	IsSplitCert                  bool                                      `json:"splitCert,omitempty"`
-	DatabaseType                 string                                    `json:"databaseType,omitempty"`
-	EnvironmentID                string                                    `json:"environmentId,omitempty"`
-	EnvironmentName              string                                    `json:"environmentName,omitempty"`
-	DatabaseAuthenticationConfig dbauthconfig.DatabaseAuthenticationConfig `json:"databaseAuthenticationConfig,omitempty"`
+	RemotePort *Port  `json:"remotePort,omitempty"`
+	LocalPort  *Port  `json:"localPort,omitempty"`
+	LocalHost  string `json:"localHost,omitempty"`
+	// Deprecated: IsSplitCert exists for historical compatibility and should not be used.
+	// Set AuthenticationType in DatabaseAuthenticationConfig appropriately instead.
+	IsSplitCert bool `json:"splitCert,omitempty"`
+	// Deprecated: DatabaseType exists for historical compatibility and should not be used.
+	// Set Database in DatabaseAuthenticationConfig appropriately instead.
+	DatabaseType                 string                                     `json:"databaseType,omitempty"`
+	EnvironmentID                string                                     `json:"environmentId,omitempty"`
+	EnvironmentName              string                                     `json:"environmentName,omitempty"`
+	DatabaseAuthenticationConfig *dbauthconfig.DatabaseAuthenticationConfig `json:"databaseAuthenticationConfig,omitempty"`
 }
 
 // CreateDatabaseTargetResponse is the response returned if a Database target is
@@ -42,16 +46,20 @@ type CreateDatabaseTargetResponse struct {
 
 // ModifyDatabaseTargetRequest is used to modify a Database target
 type ModifyDatabaseTargetRequest struct {
-	TargetName                   *string                                   `json:"targetName,omitempty"`
-	ProxyTargetID                *string                                   `json:"proxyTargetId,omitempty"`
-	RemoteHost                   *string                                   `json:"remoteHost,omitempty"`
-	RemotePort                   *Port                                     `json:"remotePort,omitempty"`
-	LocalPort                    *Port                                     `json:"localPort,omitempty"`
-	LocalHost                    *string                                   `json:"localHost,omitempty"`
-	IsSplitCert                  *bool                                     `json:"splitCert,omitempty"`
-	DatabaseType                 *string                                   `json:"databaseType,omitempty"`
-	EnvironmentID                *string                                   `json:"environmentId,omitempty"`
-	DatabaseAuthenticationConfig dbauthconfig.DatabaseAuthenticationConfig `json:"databaseAuthenticationConfig,omitempty"`
+	TargetName    *string `json:"targetName,omitempty"`
+	ProxyTargetID *string `json:"proxyTargetId,omitempty"`
+	RemoteHost    *string `json:"remoteHost,omitempty"`
+	RemotePort    *Port   `json:"remotePort,omitempty"`
+	LocalPort     *Port   `json:"localPort,omitempty"`
+	LocalHost     *string `json:"localHost,omitempty"`
+	// Deprecated: IsSplitCert exists for historical compatibility and should not be used.
+	// Set AuthenticationType in DatabaseAuthenticationConfig appropriately instead.
+	IsSplitCert *bool `json:"splitCert,omitempty"`
+	// Deprecated: DatabaseType exists for historical compatibility and should not be used.
+	// Set Database in DatabaseAuthenticationConfig appropriately instead.
+	DatabaseType                 *string                                    `json:"databaseType,omitempty"`
+	EnvironmentID                *string                                    `json:"environmentId,omitempty"`
+	DatabaseAuthenticationConfig *dbauthconfig.DatabaseAuthenticationConfig `json:"databaseAuthenticationConfig,omitempty"`
 }
 
 // ListDatabaseTargetsOptions specifies the optional parameters when querying

@@ -1,6 +1,5 @@
 kind: FEATURES
-body: 'targets/database: Add new field DatabaseAuthenticationConfig and deprecate
-  SplitCert and DatabaseType'
+body: 'targets/database: Add support for GET list of database authentication configs'
 time: 2023-10-06T13:57:21.309141752-05:00
 custom:
   Issues: "40"

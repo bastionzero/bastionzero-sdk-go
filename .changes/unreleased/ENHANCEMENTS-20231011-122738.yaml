@@ -1,0 +1,6 @@
+kind: ENHANCEMENTS
+body: 'targets/database: Add new field DatabaseAuthenticationConfig and deprecate
+  SplitCert and DatabaseType'
+time: 2023-10-11T12:27:38.297052484-05:00
+custom:
+  Issues: "40"

@@ -21,9 +21,11 @@ type CreateDatabaseTargetRequest struct {
 	TargetName    string `json:"targetName"`
 	ProxyTargetID string `json:"proxyTargetId"`
 	RemoteHost    string `json:"remoteHost"`
+	// TODO: To match REST API, change to: RemotePort *Port  `json:"remotePort,omitempty"`
+	// and update the comment below in a batched breaking changes release
+
 	// RemotePort is required for all databases; however, for GCP-hosted databases, the
 	// value specified for Port.Value will be ignored when connecting to the database.
-	// TODO: To match REST API, change to: RemotePort *Port  `json:"remotePort,omitempty"` (to be combined with other breaking changes)
 	RemotePort Port   `json:"remotePort"`
 	LocalPort  *Port  `json:"localPort,omitempty"`
 	LocalHost  string `json:"localHost,omitempty"`

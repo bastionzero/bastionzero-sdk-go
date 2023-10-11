@@ -21,10 +21,10 @@ type CreateDatabaseTargetRequest struct {
 	TargetName    string `json:"targetName"`
 	ProxyTargetID string `json:"proxyTargetId"`
 	RemoteHost    string `json:"remoteHost"`
-	// RemotePort is required for all databases except GCP-hosted ones. For GCP-hosted databases,
-	// Port.Value can be specified but will be ignored when connecting to the database.
-	// If not provided when creating a CGP database target, Port.Value will be set to 0.
-	RemotePort *Port  `json:"remotePort,omitempty"`
+	// RemotePort is required for all databases; however, for GCP-hosted databases, the
+	// value specified for Port.Value will be ignored when connecting to the database.
+	// TODO: To match REST API, change to: RemotePort *Port  `json:"remotePort,omitempty"` (to be combined with other breaking changes)
+	RemotePort Port   `json:"remotePort"`
 	LocalPort  *Port  `json:"localPort,omitempty"`
 	LocalHost  string `json:"localHost,omitempty"`
 	// Deprecated: IsSplitCert exists for historical compatibility and should not be used.

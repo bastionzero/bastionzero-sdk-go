@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/policies"
+	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/service/targets/dbauthconfig"
 	"github.com/bastionzero/bastionzero-sdk-go/bastionzero/types/targettype"
 	"github.com/bastionzero/bastionzero-sdk-go/internal/client"
 )
@@ -17,16 +18,26 @@ const (
 
 // CreateDatabaseTargetRequest is used to create a new Database target
 type CreateDatabaseTargetRequest struct {
-	TargetName      string `json:"targetName"`
-	ProxyTargetID   string `json:"proxyTargetId"`
-	RemoteHost      string `json:"remoteHost"`
-	RemotePort      Port   `json:"remotePort"`
-	LocalPort       *Port  `json:"localPort,omitempty"`
-	LocalHost       string `json:"localHost,omitempty"`
-	IsSplitCert     bool   `json:"splitCert,omitempty"`
-	DatabaseType    string `json:"databaseType,omitempty"`
-	EnvironmentID   string `json:"environmentId,omitempty"`
-	EnvironmentName string `json:"environmentName,omitempty"`
+	TargetName    string `json:"targetName"`
+	ProxyTargetID string `json:"proxyTargetId"`
+	RemoteHost    string `json:"remoteHost"`
+	// TODO: To match REST API, change to: RemotePort *Port  `json:"remotePort,omitempty"`
+	// and update the comment below in a batched breaking changes release
+
+	// RemotePort is required for all databases; however, for GCP-hosted databases, the
+	// value specified for Port.Value will be ignored when connecting to the database.
+	RemotePort Port   `json:"remotePort"`
+	LocalPort  *Port  `json:"localPort,omitempty"`
+	LocalHost  string `json:"localHost,omitempty"`
+	// Deprecated: IsSplitCert exists for historical compatibility and should not be used.
+	// Set AuthenticationType in DatabaseAuthenticationConfig appropriately instead.
+	IsSplitCert bool `json:"splitCert,omitempty"`
+	// Deprecated: DatabaseType exists for historical compatibility and should not be used.
+	// Set Database in DatabaseAuthenticationConfig appropriately instead.
+	DatabaseType                 string                                     `json:"databaseType,omitempty"`
+	EnvironmentID                string                                     `json:"environmentId,omitempty"`
+	EnvironmentName              string                                     `json:"environmentName,omitempty"`
+	DatabaseAuthenticationConfig *dbauthconfig.DatabaseAuthenticationConfig `json:"databaseAuthenticationConfig,omitempty"`
 }
 
 // CreateDatabaseTargetResponse is the response returned if a Database target is
@@ -43,9 +54,14 @@ type ModifyDatabaseTargetRequest struct {
 	RemotePort    *Port   `json:"remotePort,omitempty"`
 	LocalPort     *Port   `json:"localPort,omitempty"`
 	LocalHost     *string `json:"localHost,omitempty"`
-	IsSplitCert   *bool   `json:"splitCert,omitempty"`
-	DatabaseType  *string `json:"databaseType,omitempty"`
-	EnvironmentID *string `json:"environmentId,omitempty"`
+	// Deprecated: IsSplitCert exists for historical compatibility and should not be used.
+	// Set AuthenticationType in DatabaseAuthenticationConfig appropriately instead.
+	IsSplitCert *bool `json:"splitCert,omitempty"`
+	// Deprecated: DatabaseType exists for historical compatibility and should not be used.
+	// Set Database in DatabaseAuthenticationConfig appropriately instead.
+	DatabaseType                 *string                                    `json:"databaseType,omitempty"`
+	EnvironmentID                *string                                    `json:"environmentId,omitempty"`
+	DatabaseAuthenticationConfig *dbauthconfig.DatabaseAuthenticationConfig `json:"databaseAuthenticationConfig,omitempty"`
 }
 
 // ListDatabaseTargetsOptions specifies the optional parameters when querying
@@ -81,9 +97,14 @@ type ListSplitCertDatabaseTypesResponse struct {
 type DatabaseTarget struct {
 	VirtualTarget
 
-	IsSplitCert        bool                  `json:"splitCert"`
-	DatabaseType       *string               `json:"databaseType"`
-	AllowedTargetUsers []policies.TargetUser `json:"allowedTargetUsers"`
+	// Deprecated: IsSplitCert exists for historical compatibility and should not be used.
+	// Set AuthenticationType in DatabaseAuthenticationConfig appropriately instead.
+	IsSplitCert bool `json:"splitCert"`
+	// Deprecated: DatabaseType exists for historical compatibility and should not be used.
+	// Set Database in DatabaseAuthenticationConfig appropriately instead.
+	DatabaseType                 *string                                   `json:"databaseType"`
+	AllowedTargetUsers           []policies.TargetUser                     `json:"allowedTargetUsers"`
+	DatabaseAuthenticationConfig dbauthconfig.DatabaseAuthenticationConfig `json:"databaseAuthenticationConfig"`
 }
 
 // ListDatabaseTargets lists all Database targets.
@@ -215,6 +236,7 @@ func (s *TargetsService) ModifyDatabaseTarget(ctx context.Context, targetID stri
 // ListSplitCertDatabaseTypes lists all Database types for which SplitCert
 // access is supported.
 //
+// Deprecated: Use ListDatabaseAuthenticationConfigs
 // BastionZero API docs: https://cloud.bastionzero.com/api/#get-/api/v2/targets/database/supported-databases
 func (s *TargetsService) ListSplitCertDatabaseTypes(ctx context.Context) (*ListSplitCertDatabaseTypesResponse, *http.Response, error) {
 	u := databaseBasePath + "/supported-databases"
@@ -230,6 +252,25 @@ func (s *TargetsService) ListSplitCertDatabaseTypes(ctx context.Context) (*ListS
 	}
 
 	return listResp, resp, nil
+}
+
+// ListDatabaseAuthenticationConfigs lists all database authentication configurations supported by BasionZero.
+//
+// BastionZero API docs: https://cloud.bastionzero.com/api/#get-/api/v2/targets/database/supported-database-configs
+func (s *TargetsService) ListDatabaseAuthenticationConfigs(ctx context.Context) ([]dbauthconfig.DatabaseAuthenticationConfig, *http.Response, error) {
+	u := databaseBasePath + "/supported-database-configs"
+	req, err := s.Client.NewRequest(ctx, http.MethodGet, u, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	dbAuthConfigList := new([]dbauthconfig.DatabaseAuthenticationConfig)
+	resp, err := s.Client.Do(req, dbAuthConfigList)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return *dbAuthConfigList, resp, nil
 }
 
 // Ensure DatabaseTarget implementation satisfies the expected interfaces.

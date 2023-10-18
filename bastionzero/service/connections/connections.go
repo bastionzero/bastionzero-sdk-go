@@ -122,7 +122,10 @@ type CreateUniversalConnectionResponse struct {
 	AgentVersion          string                `json:"agentVersion"`
 	ConnectionAuthDetails ConnectionAuthDetails `json:"connectionAuthDetails"`
 	SshScpOnly            bool                  `json:"sshScpOnly"`
-	SplitCert             bool                  `json:"splitCert"`
+	// Deprecated: SplitCert exists for historical compatibility and should not be used.
+	// Use IsPasswordless instead.
+	SplitCert      bool `json:"splitCert"`
+	IsPasswordless bool `json:"isPasswordless"`
 }
 
 // ConnectionAuthDetails contains details needed to connect to a connection node

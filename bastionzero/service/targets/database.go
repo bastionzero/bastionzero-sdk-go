@@ -18,9 +18,10 @@ const (
 
 // CreateDatabaseTargetRequest is used to create a new Database target
 type CreateDatabaseTargetRequest struct {
-	TargetName    string `json:"targetName"`
-	ProxyTargetID string `json:"proxyTargetId"`
-	RemoteHost    string `json:"remoteHost"`
+	TargetName         string `json:"targetName"`
+	ProxyTargetID      string `json:"proxyTargetId,omitempty"`
+	ProxyEnvironmentID string `json:"proxyEnvironmentId,omitempty"`
+	RemoteHost         string `json:"remoteHost"`
 	// TODO: To match REST API, change to: RemotePort *Port  `json:"remotePort,omitempty"`
 	// and update the comment below in a batched breaking changes release
 
@@ -48,12 +49,13 @@ type CreateDatabaseTargetResponse struct {
 
 // ModifyDatabaseTargetRequest is used to modify a Database target
 type ModifyDatabaseTargetRequest struct {
-	TargetName    *string `json:"targetName,omitempty"`
-	ProxyTargetID *string `json:"proxyTargetId,omitempty"`
-	RemoteHost    *string `json:"remoteHost,omitempty"`
-	RemotePort    *Port   `json:"remotePort,omitempty"`
-	LocalPort     *Port   `json:"localPort,omitempty"`
-	LocalHost     *string `json:"localHost,omitempty"`
+	TargetName         *string `json:"targetName,omitempty"`
+	ProxyTargetID      *string `json:"proxyTargetId,omitempty"`
+	ProxyEnvironmentID string  `json:"proxyEnvironmentId,omitempty"`
+	RemoteHost         *string `json:"remoteHost,omitempty"`
+	RemotePort         *Port   `json:"remotePort,omitempty"`
+	LocalPort          *Port   `json:"localPort,omitempty"`
+	LocalHost          *string `json:"localHost,omitempty"`
 	// Deprecated: IsSplitCert exists for historical compatibility and should not be used.
 	// Set AuthenticationType in DatabaseAuthenticationConfig appropriately instead.
 	IsSplitCert *bool `json:"splitCert,omitempty"`

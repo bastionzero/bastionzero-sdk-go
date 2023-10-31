@@ -15,13 +15,14 @@ const (
 
 // CreateWebTargetRequest is used to create a new Web target
 type CreateWebTargetRequest struct {
-	TargetName      string `json:"targetName"`
-	RemotePort      Port   `json:"remotePort"`
-	ProxyTargetID   string `json:"proxyTargetId"`
-	LocalPort       *Port  `json:"localPort,omitempty"`
-	LocalHost       string `json:"localHost,omitempty"`
-	EnvironmentID   string `json:"environmentId,omitempty"`
-	EnvironmentName string `json:"environmentName,omitempty"`
+	TargetName         string `json:"targetName"`
+	RemotePort         Port   `json:"remotePort"`
+	ProxyTargetID      string `json:"proxyTargetId,omitempty"`
+	ProxyEnvironmentID string `json:"proxyEnvironmentId,omitempty"`
+	LocalPort          *Port  `json:"localPort,omitempty"`
+	LocalHost          string `json:"localHost,omitempty"`
+	EnvironmentID      string `json:"environmentId,omitempty"`
+	EnvironmentName    string `json:"environmentName,omitempty"`
 	// RemoteHost is the URL of the web server. It must start with the scheme
 	// (http:// or https://) that the host is expecting.
 	RemoteHost string `json:"remoteHost"`
@@ -38,13 +39,14 @@ type CreateWebTargetResponse struct {
 
 // ModifyWebTargetRequest is used to modify a Web target
 type ModifyWebTargetRequest struct {
-	TargetName    *string `json:"targetName,omitempty"`
-	ProxyTargetID *string `json:"proxyTargetId,omitempty"`
-	RemoteHost    *string `json:"remoteHost,omitempty"`
-	RemotePort    *Port   `json:"remotePort,omitempty"`
-	LocalPort     *Port   `json:"localPort,omitempty"`
-	LocalHost     *string `json:"localHost,omitempty"`
-	EnvironmentID *string `json:"environmentId,omitempty"`
+	TargetName         *string `json:"targetName,omitempty"`
+	ProxyTargetID      *string `json:"proxyTargetId,omitempty"`
+	ProxyEnvironmentID string  `json:"proxyEnvironmentId,omitempty"`
+	RemoteHost         *string `json:"remoteHost,omitempty"`
+	RemotePort         *Port   `json:"remotePort,omitempty"`
+	LocalPort          *Port   `json:"localPort,omitempty"`
+	LocalHost          *string `json:"localHost,omitempty"`
+	EnvironmentID      *string `json:"environmentId,omitempty"`
 }
 
 // WebTarget is a virtual target that provides HTTP(S) access to a remote web

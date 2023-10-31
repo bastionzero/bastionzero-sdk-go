@@ -77,6 +77,8 @@ type VirtualTargetInterface interface {
 
 	// GetProxyTargetID returns the virtual target's proxy target's ID.
 	GetProxyTargetID() string
+	// GetProxyEnvironmentID returns the virtual target's proxy environment's ID.
+	GetProxyEnvironmentID() string
 	// GetRemoteHost returns the virtual target's remote host.
 	GetRemoteHost() string
 	// GetRemotePort returns the virtual target's remote port.
@@ -125,7 +127,12 @@ type VirtualTarget struct {
 
 	// ProxyTargetID is the ID of the target that proxies connections made to
 	// this virtual target
+	// One of either ProxyTargetID or ProxyEnvironmentID must be specified when creating a target
 	ProxyTargetID string `json:"proxyTargetId"`
+	// ProxyEnvironmentID is the ID of the environemnt that proxies connections made to
+	// this virtual target by assigning a base target from within that environment.
+	// One of either ProxyTargetID or ProxyEnvironmentID must be specified when creating a target
+	ProxyEnvironmentID string `json:"proxyEnvironmentId"`
 	// RemoteHost is the IP address of the remote server that is connected to
 	// when a connection is made to this virtual target
 	RemoteHost string `json:"remoteHost"`
@@ -139,7 +146,8 @@ type VirtualTarget struct {
 	LocalHost string `json:"localHost"`
 }
 
-func (t *VirtualTarget) GetProxyTargetID() string { return t.ProxyTargetID }
-func (t *VirtualTarget) GetRemoteHost() string    { return t.RemoteHost }
-func (t *VirtualTarget) GetRemotePort() Port      { return t.RemotePort }
-func (t *VirtualTarget) GetLocalPort() Port       { return t.LocalPort }
+func (t *VirtualTarget) GetProxyTargetID() string      { return t.ProxyTargetID }
+func (t *VirtualTarget) GetProxyEnvironmentID() string { return t.ProxyEnvironmentID }
+func (t *VirtualTarget) GetRemoteHost() string         { return t.RemoteHost }
+func (t *VirtualTarget) GetRemotePort() Port           { return t.RemotePort }
+func (t *VirtualTarget) GetLocalPort() Port            { return t.LocalPort }

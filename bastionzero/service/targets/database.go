@@ -51,7 +51,7 @@ type CreateDatabaseTargetResponse struct {
 type ModifyDatabaseTargetRequest struct {
 	TargetName         *string `json:"targetName,omitempty"`
 	ProxyTargetID      *string `json:"proxyTargetId,omitempty"`
-	ProxyEnvironmentID string  `json:"proxyEnvironmentId,omitempty"`
+	ProxyEnvironmentID *string `json:"proxyEnvironmentId,omitempty"`
 	RemoteHost         *string `json:"remoteHost,omitempty"`
 	RemotePort         *Port   `json:"remotePort,omitempty"`
 	LocalPort          *Port   `json:"localPort,omitempty"`

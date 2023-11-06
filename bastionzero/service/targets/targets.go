@@ -129,7 +129,7 @@ type VirtualTarget struct {
 	// this virtual target
 	// One of either ProxyTargetID or ProxyEnvironmentID must be specified when creating a target
 	ProxyTargetID string `json:"proxyTargetId"`
-	// ProxyEnvironmentID is the ID of the environemnt that proxies connections made to
+	// ProxyEnvironmentID is the ID of the environment that proxies connections made to
 	// this virtual target by assigning a base target from within that environment.
 	// One of either ProxyTargetID or ProxyEnvironmentID must be specified when creating a target
 	ProxyEnvironmentID string `json:"proxyEnvironmentId"`

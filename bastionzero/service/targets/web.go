@@ -14,6 +14,7 @@ const (
 )
 
 // CreateWebTargetRequest is used to create a new Web target
+// One of either ProxyTargetID or ProxyEnvironmentID must be specified
 type CreateWebTargetRequest struct {
 	TargetName         string `json:"targetName"`
 	RemotePort         Port   `json:"remotePort"`

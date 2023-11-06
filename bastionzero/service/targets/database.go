@@ -17,6 +17,7 @@ const (
 )
 
 // CreateDatabaseTargetRequest is used to create a new Database target
+// One of either ProxyTargetID or ProxyEnvironmentID must be specified
 type CreateDatabaseTargetRequest struct {
 	TargetName         string `json:"targetName"`
 	ProxyTargetID      string `json:"proxyTargetId,omitempty"`

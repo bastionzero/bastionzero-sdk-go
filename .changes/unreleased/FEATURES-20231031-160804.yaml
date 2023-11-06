@@ -1,6 +1,5 @@
-kind: FEATURES
-body: 'targets: Add ProxyEnvironmentId for create and edit requests for db and web
-  targets'
+kind: ENHANCEMENTS
+body: 'targets, targets_disambiguated: Add `ProxyEnvironmentId` for create/edit requests and get/list responses for db and web targets; when creating/editing these targets, one of either `ProxyEnvironmentId` or `ProxyTargetId`'
 time: 2023-10-31T16:08:04.458333-04:00
 custom:
   Issues: "42"

@@ -1,3 +1,11 @@
+## v0.10.0 (November 15, 2023)
+
+ENHANCEMENTS:
+
+
+* targets, targets_disambiguated: Add `ProxyEnvironmentId` for create/edit requests and get/list responses for db and web targets; when creating/editing these targets, one of either `ProxyEnvironmentId` or `ProxyTargetId` is required ([#42](https://github.com/bastionzero/bastionzero-sdk-go/issues/42)).
+
+
 ## v0.9.0 (October 18, 2023)
 
 FEATURES:

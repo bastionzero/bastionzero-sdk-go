@@ -11,6 +11,7 @@ type DatabaseTarget struct {
 
 	ProxyAgentId                 string                                    `json:"proxyAgentId"`
 	ProxyAgentName               string                                    `json:"proxyAgentName"`
+	ProxyEnvironmentId           string                                    `json:"proxyEnvironmentId"`
 	RemoteHost                   string                                    `json:"remoteHost"`
 	RemotePort                   Port                                      `json:"remotePort"`
 	LocalHost                    string                                    `json:"localHost"`

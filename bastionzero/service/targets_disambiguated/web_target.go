@@ -7,11 +7,12 @@ import (
 type WebTarget struct {
 	Target
 
-	ProxyAgentId   string                      `json:"proxyAgentId"`
-	ProxyAgentName string                      `json:"proxyAgentName"`
-	RemoteHost     string                      `json:"remoteHost"`
-	RemotePort     Port                        `json:"remotePort"`
-	LocalHost      string                      `json:"localHost"`
-	LocalPort      *Port                       `json:"localPort"`
-	Connections    []connections.WebConnection `json:"connections"`
+	ProxyAgentId       string                      `json:"proxyAgentId"`
+	ProxyAgentName     string                      `json:"proxyAgentName"`
+	ProxyEnvironmentId string                      `json:"proxyEnvironmentId"`
+	RemoteHost         string                      `json:"remoteHost"`
+	RemotePort         Port                        `json:"remotePort"`
+	LocalHost          string                      `json:"localHost"`
+	LocalPort          *Port                       `json:"localPort"`
+	Connections        []connections.WebConnection `json:"connections"`
 }

@@ -90,4 +90,5 @@ closely as we can for tagging releases of the package.
 ## License
 
 This library is distributed under the Apache License 2.0 license found in the
-[LICENSE](./LICENSE) file.
+[LICENSE](./LICENSE) file and includes [open source software](https://docs.bastionzero.com/docs/credits/go-sdk)
+under a variety of other licenses.
